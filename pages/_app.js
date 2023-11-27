@@ -1,11 +1,10 @@
 import "../styles/globals.css";
+import Layout from "../components/Layout";
 
 export default function App({ Component, pageProps }) {
   return (
-    <div>
-      {/* 여기에 ceos로고같은거? */}
-      "CEOS 7주차 과제: REDDI 팀"
+    <Layout>
       <Component {...pageProps} />
-    </div>
+    </Layout>
   );
 }
