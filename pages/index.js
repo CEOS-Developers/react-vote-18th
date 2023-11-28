@@ -10,7 +10,7 @@ export default function Home() {
       <Link href="/login">
         <button className={styles.buttons}>로그인하기</button>
       </Link>
-      <Link href="/register">
+      <Link href="/signup">
         <button className={styles.buttons}>회원가입하기</button>
       </Link>
     </div>
