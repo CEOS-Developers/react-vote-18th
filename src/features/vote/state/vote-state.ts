@@ -7,6 +7,7 @@ export interface VoteSelectionProps {
 }
 
 export interface VoteResultProps {
+  type: SELECT_TYPE;
   mainText: string;
   subText: string;
   rank: number;

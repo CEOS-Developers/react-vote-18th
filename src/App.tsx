@@ -1,25 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import VoteResult from "./features/vote/components/voteResult/VoteResult";
+import { SELECT_TYPE } from "./features/vote/constants/select-vote-type";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <VoteResult
+      type={SELECT_TYPE.PartLeader}
+      mainText="김현민"
+      subText="LocalMood"
+      rank={2}
+      voteNum={1}
+    />
   );
 }
 

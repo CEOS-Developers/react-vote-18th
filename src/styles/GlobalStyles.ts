@@ -22,9 +22,6 @@ const GlobalStyles = createGlobalStyle`
         line-height: 1;
         font-family: 'Noto Sans KR', sans-serif;
         background-color: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         height: 100vh;
     }
     ol, ul{
@@ -37,17 +34,17 @@ const GlobalStyles = createGlobalStyle`
     }
 
     html {
-    font-size: 14px; /* Default font size */
+        font-size: 10px; /* Default font size */
 
     /* Media query for tablet */
-    @media (min-width: 768px) and (max-width: 1023px) {
-        font-size: 12px;
-    }
+        @media (min-width: 768px) and (max-width: 1023px) {
+            font-size: 8px;
+        }
 
-    /* Media query for mobile */
-    @media (max-width: 768px) {
-        font-size: 10px;
-    }
+        /* Media query for mobile */
+        @media (max-width: 768px) {
+            font-size: 6px;
+        }
     }
 
 `;
