@@ -41,6 +41,11 @@ const VoteSelectWrapper = styled.div<{ $type: SELECT_TYPE }>`
       : props.$type === SELECT_TYPE.PartLeader
       ? "11.7rem"
       : "14.5rem"};
+  &:hover {
+    background-color: ${(props) => props.theme.colors.mainColor};
+    color: ${(props) => props.theme.colors.white};
+    cursor: pointer;
+  }
 `;
 
 const VoteMainText = styled.span<{ $type: SELECT_TYPE }>`
