@@ -4,7 +4,7 @@ import { VoteSelectionProps } from "../../state/vote-state";
 import { SELECT_TYPE } from "../../constants/select-vote-type";
 
 export default {
-  title: "Components/VoteSelect",
+  title: "Components/vote/VoteSelect",
   component: VoteSelect,
 } as Meta;
 

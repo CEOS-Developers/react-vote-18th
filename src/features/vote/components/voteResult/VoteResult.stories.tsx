@@ -4,7 +4,7 @@ import { SELECT_TYPE } from "../../constants/select-vote-type";
 import VoteResult from "./VoteResult";
 
 export default {
-  title: "Components/VoteResult",
+  title: "Components/vote/VoteResult",
   component: VoteResult,
 } as Meta;
 
