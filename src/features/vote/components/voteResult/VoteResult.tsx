@@ -18,11 +18,15 @@ export default function VoteResult({
           alignItems: "center",
         }}
       >
-        <Ranking $rank={rank}>{rank}</Ranking>
+        <Ranking $type={type} $rank={rank}>
+          {rank}
+        </Ranking>
         <MainText $rank={rank}>{mainText}</MainText>
         <SubText $rank={rank}>{subText}</SubText>
       </div>
-      <VoteNum $rank={rank}>{voteNum}</VoteNum>
+      <VoteNum $type={type} $rank={rank}>
+        {voteNum}
+      </VoteNum>
     </VoteResultWrapper>
   );
 }
@@ -43,8 +47,9 @@ const VoteResultWrapper = styled.div<{ $type: SELECT_TYPE; $rank: number }>`
   padding: 1.3rem 2.2rem;
 `;
 
-const Ranking = styled.div<{ $rank: number }>`
-  width: 5.5rem;
+const Ranking = styled.div<{ $type: SELECT_TYPE; $rank: number }>`
+  width: ${(props) =>
+    props.$type === SELECT_TYPE.PartLeader ? "5.5rem" : "8.6rem"};
   height: 5.5rem;
   display: flex;
   justify-content: center;
@@ -76,8 +81,9 @@ const SubText = styled.div<{ $rank: number }>`
   ${(props) => props.theme.fontStyles.body0};
 `;
 
-const VoteNum = styled.div<{ $rank: number }>`
-  margin-right: 2rem;
+const VoteNum = styled.div<{ $type: SELECT_TYPE; $rank: number }>`
+  margin-right: ${(props) =>
+    props.$type === SELECT_TYPE.PartLeader ? "2rem" : "4rem"};
   color: ${(props) =>
     props.$rank === 1
       ? props.theme.colors.white
