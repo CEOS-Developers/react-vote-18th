@@ -1,4 +1,3 @@
-import "./App.css";
 import VoteResult from "./features/vote/components/voteResult/VoteResult";
 import { SELECT_TYPE } from "./features/vote/constants/select-vote-type";
 

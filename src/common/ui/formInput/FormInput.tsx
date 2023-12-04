@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export interface FormInputProps {
   placeholder: string;
-  disabled?: boolean;
-  errorMsg?: string;
+  disabled: boolean;
+  errorMsg: string;
 }
 
 export default function FormInput({
   placeholder,
-  disabled = false,
+  disabled,
   errorMsg,
 }: FormInputProps) {
   return (
@@ -29,7 +29,7 @@ const FormInputLayout = styled.input<{ $disabled: boolean }>`
   padding: 1rem 2rem;
   border: 1px solid ${(props) => props.theme.colors.mainColor};
   border-bottom: ${(props) =>
-    props.$disabled ? `3px solid ${props.theme.colors.error}` : null};
+    props.$disabled ? `2px solid ${props.theme.colors.error}` : null};
   border-radius: 2rem;
   ${(props) => props.theme.fontStyles.body1};
 `;
@@ -37,6 +37,6 @@ const FormInputLayout = styled.input<{ $disabled: boolean }>`
 const ErrorMsg = styled.div`
   position: absolute;
   bottom: -2.3rem;
-  left: 1rem;
-  ${(props) => props.theme.fontStyles.sub0}
+  left: 1.5rem;
+  ${(props) => props.theme.fontStyles.sub0};
 `;
