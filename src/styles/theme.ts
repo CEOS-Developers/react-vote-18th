@@ -4,6 +4,7 @@ const theme = {
     lightMainColor: "#38408480",
     white: "#FFFFFF",
     black: "#000000",
+    error: "#ED6161",
   },
   fontStyles: {
     headLine0: `
@@ -30,6 +31,22 @@ const theme = {
         line-height:normal;
         text-align: left;
       `,
+    body1: `
+      font-family: "Pretendard Variable", sans-serif;
+      font-size: 2.5rem;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height:normal;
+      text-align: left;
+    `,
+    sub0: `
+      font-family: "Pretendard Variable", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height:normal;
+      text-align: left;
+    `,
   },
 };
 

@@ -1,5 +1,13 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
-import { ButtonProps } from "../../state/button-props";
+
+export interface ButtonProps {
+  width: string;
+  height: string;
+  bgColor: string;
+  children: ReactNode;
+  addClass?: string;
+}
 
 export default function Button({
   width,
