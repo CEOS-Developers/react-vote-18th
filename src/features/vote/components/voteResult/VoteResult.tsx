@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { VoteResultProps } from "../../state/vote-state";
 import { SELECT_TYPE } from "../../constants/select-vote-type";

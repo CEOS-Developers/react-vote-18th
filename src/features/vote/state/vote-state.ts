@@ -7,7 +7,7 @@ export interface VoteSelectionProps {
 }
 
 export interface VoteResultProps {
-  type: SELECT_TYPE;
+  type: SELECT_TYPE.PartLeader | SELECT_TYPE.Demoday;
   mainText: string;
   subText: string;
   rank: number;
