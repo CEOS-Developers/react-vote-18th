@@ -5,5 +5,6 @@ export const GlobalStyles = createGlobalStyle`
     ${reset}
     body{
         font-family: 'Pretendard';
+        width : 100%;
     }
 `;
