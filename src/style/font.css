@@ -1,5 +1,11 @@
 @font-face {
   font-family: 'Pretendard';
+  src: url(../assets/fonts/Pretendard-Bold.woff) format('woff2');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Pretendard';
   src: url(../assets/fonts/Pretendard-SemiBold.woff) format('woff2');
   font-weight: 600;
 }
