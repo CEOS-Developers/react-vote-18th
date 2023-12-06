@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { InputStatus } from 'utils/type';
 
 interface InputProps {
   width?: string;
   height?: string;
-  status?: 'active' | 'default' | 'inactive' | 'error';
+  status?: InputStatus;
   fontSize?: string;
   fontWeight?: string;
   value?: string;
