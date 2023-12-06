@@ -41,7 +41,7 @@ const Input = ({
   height = 'auto',
   status = 'default',
   fontSize = '1.25rem',
-  fontWeight = '400',
+  fontWeight = '500',
   value,
   placeholder,
   onChange,
