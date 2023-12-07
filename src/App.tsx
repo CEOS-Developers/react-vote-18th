@@ -1,15 +1,13 @@
-import VoteResult from "./features/vote/components/voteResult/VoteResult";
-import { SELECT_TYPE } from "./features/vote/constants/select-vote-type";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Register from "./pages/Register";
 
 function App() {
   return (
-    <VoteResult
-      type={SELECT_TYPE.PartLeader}
-      mainText="김현민"
-      subText="LocalMood"
-      rank={2}
-      voteNum={1}
-    />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Register />} />
+      </Routes>
+    </Router>
   );
 }
 
