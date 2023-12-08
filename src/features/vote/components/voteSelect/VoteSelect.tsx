@@ -6,9 +6,10 @@ export default function VoteSelect({
   type,
   mainText,
   subText,
+  addClass,
 }: VoteSelectionProps) {
   return (
-    <VoteSelectWrapper $type={type}>
+    <VoteSelectWrapper $type={type} $addClass={addClass}>
       {type === SELECT_TYPE.PartLeader && <VoteSubText>{subText}</VoteSubText>}
       <VoteMainText $type={type}>{mainText}</VoteMainText>
       {type === SELECT_TYPE.Demoday && <VoteSubText>{subText}</VoteSubText>}
@@ -16,7 +17,10 @@ export default function VoteSelect({
   );
 }
 
-const VoteSelectWrapper = styled.div<{ $type: SELECT_TYPE }>`
+const VoteSelectWrapper = styled.div<{
+  $type: SELECT_TYPE;
+  $addClass: string | undefined;
+}>`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -25,7 +29,7 @@ const VoteSelectWrapper = styled.div<{ $type: SELECT_TYPE }>`
   border-radius: 2rem;
   padding: ${(props) =>
     props.$type === SELECT_TYPE.Category
-      ? "12.2rem 5rem"
+      ? "12.2rem 6.5rem"
       : props.$type === SELECT_TYPE.PartLeader
       ? "2rem 3rem"
       : "1.1rem 4.9rem"};
@@ -41,6 +45,7 @@ const VoteSelectWrapper = styled.div<{ $type: SELECT_TYPE }>`
       : props.$type === SELECT_TYPE.PartLeader
       ? "11.7rem"
       : "14.5rem"};
+  ${(props) => props.$addClass}
   &:hover {
     background-color: ${(props) => props.theme.colors.mainColor};
     color: ${(props) => props.theme.colors.white};
