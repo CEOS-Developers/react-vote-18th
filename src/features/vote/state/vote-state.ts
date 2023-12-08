@@ -4,6 +4,7 @@ export interface VoteSelectionProps {
   type: SELECT_TYPE;
   mainText: string;
   subText?: string;
+  addClass?: string;
 }
 
 export interface VoteResultProps {

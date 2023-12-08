@@ -27,6 +27,9 @@ export default function Header() {
 }
 
 const HeaderLayout = styled.header`
+  position: fixed;
+  background-color: white;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   font-size: 2rem;
