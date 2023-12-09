@@ -23,6 +23,13 @@ const theme = {
         line-height:7rem;
         text-align: left;
       `,
+    headLine2: `
+        font-family: "Pretendard Variable", sans-serif;
+        font-size: 3rem;
+        font-weight: 500;
+        line-height:normal;
+        text-align: left;
+      `,
     body0: `
         font-family: "Pretendard Variable", sans-serif;
         font-size: 2rem;

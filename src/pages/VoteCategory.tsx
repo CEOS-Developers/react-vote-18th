@@ -3,12 +3,12 @@ import { SELECT_TYPE } from "@/features/vote/constants/select-vote-type";
 import MediaQuery from "@/styles/mediaQuery";
 import { styled } from "styled-components";
 
-export default function VoteMain() {
+export default function VoteCategory() {
   const { isSmallMobile } = MediaQuery();
   return (
     <VoteMainContainer>
       <VoteText>파트장 / 데모데이 투표</VoteText>
-      <VoteSelectContainer $isSmallMobile={isSmallMobile}>
+      <CategorySelectContainer $isSmallMobile={isSmallMobile}>
         <VoteSelect
           type={SELECT_TYPE.Category}
           mainText="파트장 투표 바로가기"
@@ -18,7 +18,7 @@ export default function VoteMain() {
           type={SELECT_TYPE.Category}
           mainText="데모데이 투표 바로가기"
         />
-      </VoteSelectContainer>
+      </CategorySelectContainer>
     </VoteMainContainer>
   );
 }
@@ -37,7 +37,7 @@ const VoteText = styled.div`
   ${(props) => props.theme.fontStyles.headLine0}
 `;
 
-const VoteSelectContainer = styled.div<{ $isSmallMobile: boolean }>`
+const CategorySelectContainer = styled.div<{ $isSmallMobile: boolean }>`
   width: 100%;
   max-width: 1100px;
   display: flex;

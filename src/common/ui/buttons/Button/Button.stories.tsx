@@ -11,8 +11,8 @@ type Story = StoryObj<typeof Button>;
 
 export const ButtonLayout: Story = {
   args: {
-    width: "20rem",
-    height: "7rem",
-    bgColor: "skyblue",
+    width: "",
+    height: "",
+    bgColor: "",
   },
 };

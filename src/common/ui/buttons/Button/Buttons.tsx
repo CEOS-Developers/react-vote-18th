@@ -1,45 +1,21 @@
-import { ReactNode } from "react";
+import { ButtonProps } from "@/common/state/button-state";
 import styled from "styled-components";
 
-export interface ButtonProps {
-  width: string;
-  height: string;
-  bgColor: string;
-  children: ReactNode;
-  addClass?: string;
-}
-
-export default function Button({
-  width,
-  height,
-  bgColor,
-  children,
-  addClass,
-}: ButtonProps) {
-  return (
-    <ButtonWrapper
-      $width={width}
-      $height={height}
-      $bgColor={bgColor}
-      $addClass={addClass}
-    >
-      {children}
-    </ButtonWrapper>
-  );
+export default function Button({ children, addClass }: Partial<ButtonProps>) {
+  return <ButtonWrapper $addClass={addClass}>{children}</ButtonWrapper>;
 }
 
 const ButtonWrapper = styled.div<{
-  $width: string;
-  $height: string;
-  $bgColor: string;
   $addClass: string | undefined;
 }>`
-  width: ${(props) => props.$width};
-  height: ${(props) => props.$height};
-  background-color: ${(props) => props.$bgColor};
+  width: 29.1rem;
+  height: 8.2rem;
+  background-color: ${(props) => props.theme.colors.lightMainColor};
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 1rem;
-  ${(props) => props.$addClass}
+  border-radius: 2rem;
+  cursor: pointer;
+  ${(props) => props.theme.fontStyles.headLine2};
+  ${(props) => props.$addClass};
 `;
