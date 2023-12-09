@@ -1,6 +1,13 @@
 import styled from "styled-components";
-import { VoteResultProps } from "../../state/vote-state";
 import { SELECT_TYPE } from "../../constants/select-vote-type";
+
+interface VoteResultProps {
+  type: SELECT_TYPE.PartLeader | SELECT_TYPE.Demoday;
+  mainText: string;
+  subText: string;
+  rank: number;
+  voteNum: number;
+}
 
 export default function VoteResult({
   type,
