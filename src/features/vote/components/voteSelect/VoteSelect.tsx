@@ -6,10 +6,11 @@ export default function VoteSelect({
   type,
   mainText,
   subText,
+  onClick,
   addClass,
 }: VoteSelectionProps) {
   return (
-    <VoteSelectWrapper $type={type} $addClass={addClass}>
+    <VoteSelectWrapper $type={type} $addClass={addClass} onClick={onClick}>
       {type === SELECT_TYPE.PartLeader && <VoteSubText>{subText}</VoteSubText>}
       <VoteMainText $type={type}>{mainText}</VoteMainText>
       {type === SELECT_TYPE.Demoday && <VoteSubText>{subText}</VoteSubText>}

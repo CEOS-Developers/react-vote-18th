@@ -4,6 +4,7 @@ export interface VoteSelectionProps {
   type: SELECT_TYPE;
   mainText: string;
   subText?: string;
+  onClick?: () => void;
   addClass?: string;
 }
 
