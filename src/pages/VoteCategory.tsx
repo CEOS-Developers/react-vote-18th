@@ -1,24 +1,28 @@
+import PageMainText from "@/common/ui/text/PageMainText/PageMainText";
 import VoteSelect from "@/features/vote/components/voteSelect/VoteSelect";
 import { SELECT_TYPE } from "@/features/vote/constants/select-vote-type";
 import MediaQuery from "@/styles/mediaQuery";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-export default function VoteMain() {
+export default function VoteCategory() {
   const { isSmallMobile } = MediaQuery();
+  const navigate = useNavigate();
   return (
     <VoteMainContainer>
-      <VoteText>파트장 / 데모데이 투표</VoteText>
-      <VoteSelectContainer $isSmallMobile={isSmallMobile}>
+      <PageMainText text="파트장 / 데모데이 투표" />
+      <CategorySelectContainer $isSmallMobile={isSmallMobile}>
         <VoteSelect
           type={SELECT_TYPE.Category}
           mainText="파트장 투표 바로가기"
           addClass={`margin-bottom:${isSmallMobile ? "5rem" : 0};`}
+          onClick={() => navigate("/select-part")}
         />
         <VoteSelect
           type={SELECT_TYPE.Category}
           mainText="데모데이 투표 바로가기"
         />
-      </VoteSelectContainer>
+      </CategorySelectContainer>
     </VoteMainContainer>
   );
 }
@@ -32,12 +36,7 @@ const VoteMainContainer = styled.div`
   min-width: 375px;
 `;
 
-const VoteText = styled.div`
-  margin-bottom: 8.2rem;
-  ${(props) => props.theme.fontStyles.headLine0}
-`;
-
-const VoteSelectContainer = styled.div<{ $isSmallMobile: boolean }>`
+const CategorySelectContainer = styled.div<{ $isSmallMobile: boolean }>`
   width: 100%;
   max-width: 1100px;
   display: flex;

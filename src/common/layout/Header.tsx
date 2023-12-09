@@ -10,15 +10,11 @@ export default function Header() {
         <HeaderButton
           width="9.6rem"
           bgColor={theme.colors.white}
-          addClass={`border:1px solid ${theme.colors.mainColor}; margin-right:2rem;`}
+          addClass="margin-right:2rem;"
         >
           로그인
         </HeaderButton>
-        <HeaderButton
-          width="11.4rem"
-          bgColor={theme.colors.mainColor}
-          addClass={`border:1px solid ${theme.colors.white}; color:${theme.colors.white}`}
-        >
+        <HeaderButton width="11.4rem" bgColor={theme.colors.mainColor}>
           회원가입
         </HeaderButton>
       </HeaderBtn>
@@ -34,6 +30,7 @@ const HeaderLayout = styled.header`
   justify-content: space-between;
   font-size: 2rem;
   padding: 4rem;
+  min-width: 375px;
 `;
 
 const HeaderText = styled.div`

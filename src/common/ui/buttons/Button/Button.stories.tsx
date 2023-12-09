@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Button from "./Buttons";
+import Button from "./Button";
 
 const meta: Meta<typeof Button> = {
   title: "UI/button/Button",
@@ -11,8 +11,8 @@ type Story = StoryObj<typeof Button>;
 
 export const ButtonLayout: Story = {
   args: {
-    width: "20rem",
-    height: "7rem",
-    bgColor: "skyblue",
+    width: "",
+    height: "",
+    bgColor: "",
   },
 };
