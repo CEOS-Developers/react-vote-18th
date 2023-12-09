@@ -1,3 +1,5 @@
+import Button from "@/common/ui/buttons/Button/Button";
+import PageMainText from "@/common/ui/text/PageMainText/PageMainText";
 import VoteSelect from "@/features/vote/components/voteSelect/VoteSelect";
 import { SELECT_TYPE } from "@/features/vote/constants/select-vote-type";
 import MediaQuery from "@/styles/mediaQuery";
@@ -7,24 +9,23 @@ export default function VotePartSelect() {
   const { isSmallMobile } = MediaQuery();
   return (
     <VotePartLeaderContainer>
+      <PageMainText text="파트장 투표" />
       <PartLeaderSelectContainer $isSmallMobile={isSmallMobile}>
         <VoteSelectContainer>
           <VoteSelect
             type={SELECT_TYPE.Category}
             mainText="FRONT-END
           파트장 투표"
-            addClass={`margin-bottom:${
-              isSmallMobile ? "5rem" : 0
-            }; padding:12.2rem 4.7rem;`}
           />
+          <Button addClass="margin:3.2rem;">결과 보기</Button>
         </VoteSelectContainer>
         <VoteSelectContainer>
-          {" "}
           <VoteSelect
             type={SELECT_TYPE.Category}
             mainText="BACK-END
           파트장 투표"
           />
+          <Button addClass="margin:3.2rem;">결과 보기</Button>
         </VoteSelectContainer>
       </PartLeaderSelectContainer>
     </VotePartLeaderContainer>
@@ -50,4 +51,8 @@ const PartLeaderSelectContainer = styled.div<{ $isSmallMobile: boolean }>`
   padding: 0 4rem;
 `;
 
-const VoteSelectContainer = styled.div``;
+const VoteSelectContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

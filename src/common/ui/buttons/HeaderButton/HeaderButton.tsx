@@ -38,6 +38,7 @@ const HeaderButtonContainer = styled.div<{
     props.$bgColor === props.theme.colors.mainColor
       ? props.theme.colors.white
       : null};
+  cursor: pointer;
   ${(props) => props.theme.fontStyles.body0};
   font-weight: 400;
   ${(props) => props.$addClass}

@@ -1,6 +1,13 @@
 import styled from "styled-components";
-import { VoteSelectionProps } from "../../state/vote-state";
 import { SELECT_TYPE } from "../../constants/select-vote-type";
+
+interface VoteSelectionProps {
+  type: SELECT_TYPE;
+  mainText: string;
+  subText?: string;
+  onClick?: () => void;
+  addClass?: string;
+}
 
 export default function VoteSelect({
   type,
@@ -30,7 +37,7 @@ const VoteSelectWrapper = styled.div<{
   border-radius: 2rem;
   padding: ${(props) =>
     props.$type === SELECT_TYPE.Category
-      ? "12.2rem 6.5rem"
+      ? "12.2rem 6.1rem"
       : props.$type === SELECT_TYPE.PartLeader
       ? "2rem 3rem"
       : "1.1rem 4.9rem"};

@@ -15,7 +15,11 @@ const ButtonWrapper = styled.div<{
   justify-content: center;
   align-items: center;
   border-radius: 2rem;
-  cursor: pointer;
+  color: ${(props) => props.theme.colors.white};
+  &:hover {
+    background-color: ${(props) => props.theme.colors.mainColor};
+    cursor: pointer;
+  }
   ${(props) => props.theme.fontStyles.headLine2};
   ${(props) => props.$addClass};
 `;
