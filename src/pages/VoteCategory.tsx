@@ -21,6 +21,7 @@ export default function VoteCategory() {
         <VoteSelect
           type={SELECT_TYPE.Category}
           mainText="데모데이 투표 바로가기"
+          onClick={() => navigate("/select-demoday")}
         />
       </CategorySelectContainer>
     </VoteMainContainer>

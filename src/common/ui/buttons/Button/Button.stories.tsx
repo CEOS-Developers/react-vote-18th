@@ -10,9 +10,5 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const ButtonLayout: Story = {
-  args: {
-    width: "",
-    height: "",
-    bgColor: "",
-  },
+  args: {},
 };
