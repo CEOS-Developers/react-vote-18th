@@ -5,6 +5,7 @@ export default function HeaderButton({
   width,
   bgColor,
   children,
+  onClick,
   addClass,
 }: Partial<ButtonProps> & { width: string; bgColor: string }) {
   return (
@@ -12,6 +13,7 @@ export default function HeaderButton({
       $width={width}
       $bgColor={bgColor}
       $addClass={addClass}
+      onClick={onClick}
     >
       {children}
     </HeaderButtonContainer>
