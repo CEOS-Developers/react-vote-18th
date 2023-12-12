@@ -13,3 +13,7 @@ export type MemberType = {
   team: string;
 };
 export type MemberArrayType = MemberType[];
+
+export interface PartVoteProps {
+  status: VotePageStatus;
+}

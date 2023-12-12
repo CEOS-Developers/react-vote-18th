@@ -1,21 +1,60 @@
 import styled from 'styled-components';
 import FE from 'assets/images/FE.png';
 import BE from 'assets/images/BE.png';
+import { useState } from 'react';
+import { VotePageStatus } from 'utils/type';
+import { PartVoteFront, PartVoteBack } from 'components/PartVote';
+//나중에 뒤로가기 버튼으로 교체
 export const PartVote = () => {
+  //FE, 아니면 partVote 컴포넌트
+  const [leftStatus, setLeftStatus] = useState<VotePageStatus>('default');
+  const [rightStatus, setRightStatus] = useState<VotePageStatus>('default');
   return (
     <PartPageWrapper>
-      <VoteSelect isLeft={true}>
-        <Img src={FE} />
-        <PartText>FRONTEND</PartText>
-        <SelectText>투표하기</SelectText>
-        <SelectText>결과 확인하기</SelectText>
-      </VoteSelect>
-      <VoteSelect isLeft={false}>
-        <Img src={BE} />
-        <PartText>BACKEND</PartText>
-        <SelectText>투표하기</SelectText>
-        <SelectText>결과 확인하기</SelectText>
-      </VoteSelect>
+      {leftStatus == 'default' ? (
+        <VoteSelect isLeft={true}>
+          <Img src={FE} />
+          <PartText>FRONTEND</PartText>
+          <SelectText
+            onClick={() => {
+              setRightStatus('vote');
+            }}
+          >
+            투표하기
+          </SelectText>
+          <SelectText
+            onClick={() => {
+              setRightStatus('result');
+            }}
+          >
+            결과 확인하기
+          </SelectText>
+        </VoteSelect>
+      ) : (
+        <PartVoteBack status={leftStatus} />
+      )}
+      {rightStatus == 'default' ? (
+        <VoteSelect isLeft={false}>
+          <Img src={BE} />
+          <PartText>BACKEND</PartText>
+          <SelectText
+            onClick={() => {
+              setLeftStatus('vote');
+            }}
+          >
+            투표하기
+          </SelectText>
+          <SelectText
+            onClick={() => {
+              setLeftStatus('result');
+            }}
+          >
+            결과 확인하기
+          </SelectText>
+        </VoteSelect>
+      ) : (
+        <PartVoteFront status={rightStatus} />
+      )}
     </PartPageWrapper>
   );
 };
@@ -23,7 +62,6 @@ export const PartVote = () => {
 const PartPageWrapper = styled.div`
   display: flex;
   height: 100%;
-  background-color: pink;
 `;
 const VoteSelect = styled.div<{ isLeft: boolean }>`
   width: 50%;
