@@ -176,6 +176,7 @@ const SignupWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 3rem;
 `;
 const SignupHeader = styled.div`
   font-size: 1.875rem;
