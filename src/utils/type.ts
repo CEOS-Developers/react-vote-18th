@@ -1,5 +1,5 @@
 export type InputStatus = 'active' | 'default' | 'inactive' | 'error';
-
+export type VotePageStatus = 'default' | 'vote' | 'result';
 export type GreenBorderType = {
   top: string;
   right: string;

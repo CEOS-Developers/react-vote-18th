@@ -15,12 +15,12 @@ export const FEMember: MemberArrayType = [
   { name: '김지원', team: '로컬무드' },
   { name: '김현민', team: '로컬무드' },
   { name: '노이진', team: 'Redigg' },
-  { name: '송지석', team: 'SNIFF' },
   { name: '신동현', team: 'Redigg' },
+  { name: '송지석', team: 'SNIFF' },
   { name: '오대균', team: 'SNIFF' },
   { name: '이규호', team: '셰어마인드' },
-  { name: '이은비', team: 'GOTCHA' },
   { name: '정인영', team: '셰어마인드' },
+  { name: '이은비', team: 'GOTCHA' },
   { name: '변지혜', team: 'GOTCHA' },
 ];
 export const BEMember: MemberArrayType = [
