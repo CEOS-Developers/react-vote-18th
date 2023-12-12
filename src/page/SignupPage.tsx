@@ -77,7 +77,7 @@ function SignupPage() {
         />
         <SignupSelectWrapper>
           <div className="signup-select">
-            <SignupText>팀 선택</SignupText>
+            <SignupText>파트 선택</SignupText>
             <Select
               value={partSelect.selectValue}
               onChange={partSelect.onChange}
@@ -94,7 +94,7 @@ function SignupPage() {
             </Select>
           </div>
           <div className="signup-select">
-            <SignupText>파트 선택</SignupText>
+            <SignupText>팀 선택</SignupText>
             <Select
               value={teamSelect.selectValue}
               onChange={teamSelect.onChange}
