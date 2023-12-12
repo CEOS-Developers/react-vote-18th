@@ -1,8 +1,10 @@
 import FormInput from "@/common/ui/formInput/FormInput";
 import PageMainText from "@/common/ui/text/PageMainText/PageMainText";
+import MediaQuery from "@/styles/mediaQuery";
 import { styled } from "styled-components";
 
 export default function Register() {
+  const { isMobile } = MediaQuery();
   const inputInfo = [
     {
       placeholder: "이름",
@@ -21,10 +23,10 @@ export default function Register() {
     },
   ];
   return (
-    <RegisterContainer>
+    <RegisterContainer $isMobile={isMobile}>
       <RegisterDetail>
         <PageMainText text="회원가입" addClass="margin-bottom:1rem;" />
-        <FormContainer>
+        <FormContainer $isMobile={isMobile}>
           {inputInfo.map((input, index) => (
             <FormInput
               key={input.placeholder}
@@ -40,9 +42,10 @@ export default function Register() {
   );
 }
 
-const RegisterContainer = styled.div`
+const RegisterContainer = styled.div<{ $isMobile: boolean }>`
   display: flex;
   justify-content: center;
+  align-items: ${(props) => (props.$isMobile ? null : "center")};
   padding: 15rem 0;
   font-size: 3rem;
   min-height: 100vh;
@@ -53,8 +56,9 @@ const RegisterDetail = styled.div`
   width: 85%;
 `;
 
-const FormContainer = styled.div`
-  border: 2px solid ${(props) => props.theme.mainColor};
+const FormContainer = styled.div<{ $isMobile: boolean }>`
+  border: ${(props) =>
+    props.$isMobile ? null : `2px solid ${props.theme.colors.mainColor}`};
   border-radius: 2rem;
-  padding: 5.2rem 6rem;
+  padding: ${(props) => (props.$isMobile ? null : "5.2rem 6rem")};
 `;
