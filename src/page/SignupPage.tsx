@@ -4,27 +4,19 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import Input from 'components/Common/Input';
 import { InputStatus } from 'utils/type';
+import { useCustomSelect } from 'hooks/useCustomSelect';
 function SignupPage() {
   //드롭다운 select
-  const [partSelect, setPartSelect] = useState<string>('');
-  const [teamSelect, setTeamSelect] = useState<string>('');
-  const handlePartChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setPartSelect(event.target.value);
-  };
-  const handleTeamChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setTeamSelect(event.target.value);
-  };
+  const partSelect = useCustomSelect('');
+  const teamSelect = useCustomSelect('');
   //focus 여부
   const [idFocus, setIdFocus] = useState<InputStatus>('default');
   const [nameFocus, setNameFocus] = useState<InputStatus>('default');
   const [pwFocus, setPwFocus] = useState<InputStatus>('default');
   const [pwConfirmFocus, setPwConfirmFocus] = useState<InputStatus>('default');
-  const [partFocus, setPartFocus] = useState<string>('');
-  const [teamFocus, setTeamFocus] = useState<string>('');
   const [emailFocus, setEmailFocus] = useState<InputStatus>('default');
   const [verifyNumberFocus, setVerifyNumberFocus] =
     useState<InputStatus>('default');
-  // const handleIdFocus = () => {};
   return (
     <SignupPageWrapper>
       <SignupWrapper>
@@ -33,7 +25,7 @@ function SignupPage() {
         <InputWrapper>
           <Input
             width={'22.5rem'}
-            height={'4.0625rem'}
+            height={'3.5rem'}
             placeholder="아이디를 입력해주세요."
             status={idFocus}
             onFocus={() => {
@@ -47,7 +39,7 @@ function SignupPage() {
         </InputWrapper>
         <SignupText>이름</SignupText>
         <Input
-          height={'4.0625rem'}
+          height={'3.5rem'}
           placeholder="이름을 입력해주세요."
           status={nameFocus}
           onFocus={() => {
@@ -59,7 +51,7 @@ function SignupPage() {
         />
         <SignupText>비밀번호</SignupText>
         <Input
-          height={'4.0625rem'}
+          height={'3.5rem'}
           placeholder="비밀번호를 입력해주세요.(8자 이상,특수문자 포함 필수)"
           status={pwFocus}
           onFocus={() => {
@@ -71,7 +63,7 @@ function SignupPage() {
         />
         <Space height={'1.25rem'} />
         <Input
-          height={'4.0625rem'}
+          height={'3.5rem'}
           placeholder="비밀번호를 다시 입력해주세요."
           status={pwConfirmFocus}
           onFocus={() => {
@@ -85,15 +77,11 @@ function SignupPage() {
           <div className="signup-select">
             <SignupText>팀 선택</SignupText>
             <Select
-              value={partSelect}
-              onChange={handlePartChange}
-              borderColor={partFocus}
-              onFocus={() => {
-                setPartFocus('#3172ea');
-              }}
-              onBlur={() => {
-                setPartFocus('#cccccc');
-              }}
+              value={partSelect.selectValue}
+              onChange={partSelect.onChange}
+              borderColor={partSelect.borderColor}
+              onFocus={partSelect.onFocus}
+              onBlur={partSelect.onBlur}
             >
               <option value="">선택</option>
               {Object.entries(Part).map(([key, value]) => (
@@ -106,15 +94,11 @@ function SignupPage() {
           <div className="signup-select">
             <SignupText>파트 선택</SignupText>
             <Select
-              value={teamSelect}
-              onChange={handleTeamChange}
-              borderColor={teamFocus}
-              onFocus={() => {
-                setTeamFocus('#3172ea');
-              }}
-              onBlur={() => {
-                setTeamFocus('#cccccc');
-              }}
+              value={teamSelect.selectValue}
+              onChange={teamSelect.onChange}
+              borderColor={teamSelect.borderColor}
+              onFocus={teamSelect.onFocus}
+              onBlur={teamSelect.onBlur}
             >
               <option value="">선택</option>
               {Object.entries(Team).map(([key, value]) => (
@@ -128,7 +112,7 @@ function SignupPage() {
         <SignupText>이메일 인증</SignupText>
         <InputWrapper>
           <Input
-            height={'4.0625rem'}
+            height={'3.5rem'}
             width={'22.5rem'}
             placeholder="이메일을 입력해주세요."
             status={emailFocus}
@@ -144,7 +128,7 @@ function SignupPage() {
         <SignupText>인증번호</SignupText>
         <InputWrapper>
           <Input
-            height={'4.0625rem'}
+            height={'3.5rem'}
             width={'22.5rem'}
             placeholder="인증번호를 입력해주세요."
             status={verifyNumberFocus}
@@ -161,7 +145,7 @@ function SignupPage() {
         <Button
           text={'회원가입 완료'}
           width={'34rem'}
-          height={'4.0625rem'}
+          height={'3.5rem'}
         ></Button>
       </SignupWrapper>
     </SignupPageWrapper>
@@ -170,6 +154,7 @@ function SignupPage() {
 const SignupPageWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 5rem;
 `;
 const SignupWrapper = styled.div`
   width: 34rem;
@@ -187,7 +172,7 @@ const SignupHeader = styled.div`
   color: #3e4cf7;
 `;
 const SignupText = styled.div`
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -206,16 +191,17 @@ const SignupSelectWrapper = styled.div`
 `;
 const Select = styled.select<{ borderColor: string }>`
   font-family: Pretendard;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
+  color : 
   line-height: normal;
   letter-spacing: -0.4px;
   border-radius: 0.625rem;
   height: 3.125rem;
   width: 12.5rem;
   border: 2px solid
-    ${({ borderColor }) => (borderColor ? borderColor : '#cccccc')};
+    ${({ borderColor }) => borderColor};
   padding-left: 0.625rem;
 `;
 const InputWrapper = styled.div`
