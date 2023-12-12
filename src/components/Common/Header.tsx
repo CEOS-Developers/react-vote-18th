@@ -84,6 +84,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   position: fixed;
   top: 0;
+  z-index: 100;
 `;
 const LogoWrapper = styled.div`
   display: flex;
