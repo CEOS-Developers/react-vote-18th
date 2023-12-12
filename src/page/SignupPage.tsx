@@ -156,7 +156,6 @@ function SignupPage() {
 const SignupPageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 5rem;
 `;
 const SignupWrapper = styled.div`
   width: 34rem;
@@ -164,6 +163,7 @@ const SignupWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-top: 3rem;
+  margin-bottom: 3rem;
 `;
 const SignupHeader = styled.div`
   font-size: 1.875rem;

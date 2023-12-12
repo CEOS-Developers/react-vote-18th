@@ -6,5 +6,10 @@ export type GreenBorderType = {
   bottom: string;
   left: string;
 };
-
 export type GreenBorderArrayType = GreenBorderType[];
+
+export type MemberType = {
+  name: string;
+  team: string;
+};
+export type MemberArrayType = MemberType[];
