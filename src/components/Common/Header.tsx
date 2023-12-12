@@ -4,6 +4,7 @@ import { ReactComponent as Votes } from 'assets/images/votes.svg';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { GreenBorder } from 'assets/images/GreenBorder';
+//로그아웃 or 회원가입 나중에 코드 리팩토링
 export const Header = () => {
   const navigate = useNavigate();
   //hover state
@@ -32,23 +33,43 @@ export const Header = () => {
             onMouseLeave={() => {
               setLoginHoverd(false);
             }}
+            onClick={() => {
+              navigate('/login');
+            }}
           >
             <GreenBorder isHovered={loginHoverd} />
             <Text>로그인</Text>
           </HeaderRightButton>
         )}
         <Divider />
-        <HeaderRightButton
-          onMouseEnter={() => {
-            setSignupHoverd(true);
-          }}
-          onMouseLeave={() => {
-            setSignupHoverd(false);
-          }}
-        >
-          <GreenBorder isHovered={signupHoverd} />
-          {isLogined ? <Text>로그아웃</Text> : <Text>회원가입</Text>}
-        </HeaderRightButton>
+        {isLogined ? (
+          <HeaderRightButton
+            onMouseEnter={() => {
+              setSignupHoverd(true);
+            }}
+            onMouseLeave={() => {
+              setSignupHoverd(false);
+            }}
+          >
+            <GreenBorder isHovered={signupHoverd} />
+            <Text>로그아웃</Text>
+          </HeaderRightButton>
+        ) : (
+          <HeaderRightButton
+            onMouseEnter={() => {
+              setSignupHoverd(true);
+            }}
+            onMouseLeave={() => {
+              setSignupHoverd(false);
+            }}
+            onClick={() => {
+              navigate('/signup');
+            }}
+          >
+            <GreenBorder isHovered={signupHoverd} />
+            <Text>회원가입</Text>
+          </HeaderRightButton>
+        )}
       </LoginWrapper>
     </HeaderWrapper>
   );
