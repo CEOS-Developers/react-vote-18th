@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import HeaderButton from "../ui/buttons/HeaderButton/HeaderButton";
+import AuthButton from "../ui/buttons/AuthButton/AuthButton";
 import theme from "@/styles/theme";
 import { useNavigate } from "react-router-dom";
 
@@ -9,21 +9,21 @@ export default function Header() {
     <HeaderLayout>
       <HeaderText />
       <HeaderBtn>
-        <HeaderButton
+        <AuthButton
           width="9.6rem"
           bgColor={theme.colors.white}
           addClass="margin-right:2rem;"
           onClick={() => navigate("/login")}
         >
           로그인
-        </HeaderButton>
-        <HeaderButton
+        </AuthButton>
+        <AuthButton
           width="11.4rem"
           bgColor={theme.colors.mainColor}
           onClick={() => navigate("/register")}
         >
           회원가입
-        </HeaderButton>
+        </AuthButton>
       </HeaderBtn>
     </HeaderLayout>
   );

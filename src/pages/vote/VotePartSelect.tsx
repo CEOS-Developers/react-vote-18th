@@ -6,11 +6,11 @@ import MediaQuery from "@/styles/mediaQuery";
 import { styled } from "styled-components";
 
 export default function VotePartSelect() {
-  const { isSmallMobile } = MediaQuery();
+  const { isMobile } = MediaQuery();
   return (
     <VotePartLeaderContainer>
       <PageMainText text="파트장 투표" />
-      <PartLeaderSelectContainer $isSmallMobile={isSmallMobile}>
+      <PartLeaderSelectContainer $isMobile={isMobile}>
         <VoteSelectContainer>
           <VoteSelect
             type={SELECT_TYPE.Category}
@@ -37,17 +37,18 @@ const VotePartLeaderContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 5rem;
   min-height: 100vh;
   min-width: 375px;
 `;
 
-const PartLeaderSelectContainer = styled.div<{ $isSmallMobile: boolean }>`
+const PartLeaderSelectContainer = styled.div<{ $isMobile: boolean }>`
   width: 100%;
   max-width: 1100px;
   display: flex;
   justify-content: space-around;
-  align-items: ${(props) => (props.$isSmallMobile ? "center" : null)};
-  flex-direction: ${(props) => (props.$isSmallMobile ? "column" : null)};
+  align-items: ${(props) => (props.$isMobile ? "center" : null)};
+  flex-direction: ${(props) => (props.$isMobile ? "column" : null)};
   padding: 0 4rem;
 `;
 

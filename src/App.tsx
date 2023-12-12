@@ -3,8 +3,8 @@ import Header from "./common/layout/Header";
 import VoteCategory from "./pages/vote/VoteCategory";
 import VotePartLeader from "./pages/vote/VotePartSelect";
 import VoteDemodaySelect from "./pages/vote/VoteDemodaySelect";
-import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import Login from "./pages/auth/Login";
 
 function App() {
   return (

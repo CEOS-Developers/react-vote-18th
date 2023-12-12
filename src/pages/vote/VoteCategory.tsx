@@ -6,16 +6,16 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 export default function VoteCategory() {
-  const { isSmallMobile } = MediaQuery();
+  const { isMobile } = MediaQuery();
   const navigate = useNavigate();
   return (
     <VoteMainContainer>
       <PageMainText text="파트장 / 데모데이 투표" />
-      <CategorySelectContainer $isSmallMobile={isSmallMobile}>
+      <CategorySelectContainer $isMobile={isMobile}>
         <VoteSelect
           type={SELECT_TYPE.Category}
           mainText="파트장 투표 바로가기"
-          addClass={`margin-bottom:${isSmallMobile ? "5rem" : 0};`}
+          addClass={`margin-bottom:${isMobile ? "5rem" : 0};`}
           onClick={() => navigate("/select-part")}
         />
         <VoteSelect
@@ -37,12 +37,12 @@ const VoteMainContainer = styled.div`
   min-width: 375px;
 `;
 
-const CategorySelectContainer = styled.div<{ $isSmallMobile: boolean }>`
+const CategorySelectContainer = styled.div<{ $isMobile: boolean }>`
   width: 100%;
   max-width: 1100px;
   display: flex;
   justify-content: space-around;
-  align-items: ${(props) => (props.$isSmallMobile ? "center" : null)};
-  flex-direction: ${(props) => (props.$isSmallMobile ? "column" : null)};
+  align-items: ${(props) => (props.$isMobile ? "center" : null)};
+  flex-direction: ${(props) => (props.$isMobile ? "column" : null)};
   padding: 0 4rem;
 `;
