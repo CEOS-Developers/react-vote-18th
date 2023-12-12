@@ -51,6 +51,7 @@ function SignupPage() {
         />
         <SignupText>비밀번호</SignupText>
         <Input
+          type="password"
           height={'3.5rem'}
           placeholder="비밀번호를 입력해주세요.(8자 이상,특수문자 포함 필수)"
           status={pwFocus}
@@ -63,6 +64,7 @@ function SignupPage() {
         />
         <Space height={'1.25rem'} />
         <Input
+          type="password"
           height={'3.5rem'}
           placeholder="비밀번호를 다시 입력해주세요."
           status={pwConfirmFocus}
