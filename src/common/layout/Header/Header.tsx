@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import AuthButton from "../ui/buttons/AuthButton/AuthButton";
+import AuthButton from "../../ui/buttons/AuthButton/AuthButton";
 import theme from "@/styles/theme";
 import { useNavigate } from "react-router-dom";
 

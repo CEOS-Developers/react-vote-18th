@@ -1,3 +1,4 @@
+import Form from "@/common/layout/Form/Form";
 import AuthButton from "@/common/ui/buttons/AuthButton/AuthButton";
 import FormInput from "@/common/ui/formInput/FormInput";
 import PageMainText from "@/common/ui/text/PageMainText/PageMainText";
@@ -16,10 +17,10 @@ export default function Login() {
     },
   ];
   return (
-    <RegisterContainer $isMobile={isMobile}>
+    <LoginContainer $isMobile={isMobile}>
       <RegisterDetail>
         <PageMainText text="로그인" addClass="margin-bottom:1rem;" />
-        <FormContainer $isMobile={isMobile}>
+        <Form>
           {inputInfo.map((input, index) => (
             <FormInput
               key={input.placeholder}
@@ -39,13 +40,13 @@ export default function Login() {
               로그인
             </AuthButton>
           </FormButtonContainer>
-        </FormContainer>
+        </Form>
       </RegisterDetail>
-    </RegisterContainer>
+    </LoginContainer>
   );
 }
 
-const RegisterContainer = styled.div<{ $isMobile: boolean }>`
+const LoginContainer = styled.div<{ $isMobile: boolean }>`
   display: flex;
   justify-content: center;
   align-items: ${(props) => (props.$isMobile ? null : "center")};
@@ -57,13 +58,6 @@ const RegisterContainer = styled.div<{ $isMobile: boolean }>`
 
 const RegisterDetail = styled.div`
   width: 85%;
-`;
-
-const FormContainer = styled.div<{ $isMobile: boolean }>`
-  border: ${(props) =>
-    props.$isMobile ? null : `2px solid ${props.theme.colors.mainColor}`};
-  border-radius: 2rem;
-  padding: ${(props) => (props.$isMobile ? null : "5.2rem 6rem")};
 `;
 
 const FormButtonContainer = styled.div`

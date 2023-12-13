@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./common/layout/Header";
+import Header from "./common/layout/Header/Header";
 import VoteCategory from "./pages/vote/VoteCategory";
 import VotePartLeader from "./pages/vote/VotePartSelect";
 import VoteDemodaySelect from "./pages/vote/VoteDemodaySelect";
