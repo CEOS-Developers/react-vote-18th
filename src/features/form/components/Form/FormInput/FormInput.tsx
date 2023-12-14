@@ -1,9 +1,11 @@
+import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 
 export interface FormInputProps {
   placeholder: string;
   disabled?: boolean;
   errorMsg?: string;
+  onChange?: (text: string) => void;
   addClass?: string;
 }
 
@@ -11,11 +13,23 @@ export default function FormInput({
   placeholder,
   disabled = false,
   errorMsg,
+  onChange,
   addClass,
 }: FormInputProps) {
+  const [text, setText] = useState("");
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newText = e.target.value;
+    setText(newText);
+    onChange && onChange(newText);
+  };
   return (
     <FormInputLayout $addClass={addClass}>
-      <FormInputHolder placeholder={placeholder} $disabled={disabled} />
+      <FormInputHolder
+        placeholder={placeholder}
+        $disabled={disabled}
+        value={text}
+        onChange={handleInputChange}
+      />
       {disabled && <ErrorMsg>{errorMsg}</ErrorMsg>}
     </FormInputLayout>
   );

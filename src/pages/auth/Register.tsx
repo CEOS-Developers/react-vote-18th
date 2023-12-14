@@ -1,6 +1,6 @@
-import Form from "@/common/layout/Form/Form";
+import FormLayout from "@/features/form/components/Form/FormLayout/FormLayout";
 import AuthButton from "@/common/ui/buttons/AuthButton/AuthButton";
-import FormInput from "@/common/ui/formInput/FormInput";
+import FormInput from "@/features/form/components/Form/FormInput/FormInput";
 import PageMainText from "@/common/ui/text/PageMainText/PageMainText";
 import MediaQuery from "@/styles/mediaQuery";
 import theme from "@/styles/theme";
@@ -8,7 +8,7 @@ import { styled } from "styled-components";
 
 export default function Register() {
   const { isMobile } = MediaQuery();
-  const inputInfo = [
+  const RegisterInputInfo = [
     {
       placeholder: "이름",
     },
@@ -26,13 +26,15 @@ export default function Register() {
     <RegisterContainer $isMobile={isMobile}>
       <RegisterDetail>
         <PageMainText text="회원가입" addClass="margin-bottom:1rem;" />
-        <Form>
-          {inputInfo.map((input, index) => (
+        <FormLayout>
+          {RegisterInputInfo.map((input, index) => (
             <FormInput
               key={input.placeholder}
               placeholder={input.placeholder}
               addClass={
-                index === inputInfo.length - 1 ? "" : "margin-bottom:3.5rem;"
+                index === RegisterInputInfo.length - 1
+                  ? ""
+                  : "margin-bottom:3.5rem;"
               }
             />
           ))}
@@ -46,7 +48,7 @@ export default function Register() {
               가입하기
             </AuthButton>
           </FormButtonContainer>
-        </Form>
+        </FormLayout>
       </RegisterDetail>
     </RegisterContainer>
   );

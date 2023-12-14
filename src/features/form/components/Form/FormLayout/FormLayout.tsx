@@ -6,12 +6,12 @@ interface FormProps {
   children?: ReactNode;
 }
 
-export default function Form({ children }: FormProps) {
+export default function FormLayout({ children }: FormProps) {
   const { isMobile } = MediaQuery();
   return <FormContainer $isMobile={isMobile}>{children}</FormContainer>;
 }
 
-const FormContainer = styled.div<{ $isMobile: boolean }>`
+const FormContainer = styled.form<{ $isMobile: boolean }>`
   border: ${(props) =>
     props.$isMobile ? null : `2px solid ${props.theme.colors.mainColor}`};
   border-radius: 2rem;

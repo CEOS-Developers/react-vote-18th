@@ -1,0 +1,49 @@
+import { useState } from "react";
+import { FORM_TYPE } from "./constant/form-type";
+import { LoginFormState, RegisterFormState } from "./states/form-data-state";
+
+export default function useForm({ type }: { type: FORM_TYPE }) {
+  const [loginFormData, setLoginFormData] = useState<LoginFormState>({
+    id: "",
+    password: "",
+  });
+  const [registerFormData, setRegisterFormData] = useState<RegisterFormState>({
+    name: "",
+    id: "",
+    password: "",
+    check_password: "",
+  });
+
+  const handleNameChange = (text: string) => {
+    setRegisterFormData({ ...registerFormData, name: text });
+  };
+
+  const handleIdChange = (text: string) => {
+    if (type === FORM_TYPE.LOGIN) {
+      setLoginFormData({ ...loginFormData, id: text });
+    } else if (type === FORM_TYPE.REGISTER) {
+      setRegisterFormData({ ...registerFormData, id: text });
+    } else return;
+  };
+
+  const handlePasswordChange = (text: string) => {
+    if (type === FORM_TYPE.LOGIN) {
+      setLoginFormData({ ...loginFormData, password: text });
+    } else if (type === FORM_TYPE.REGISTER) {
+      setRegisterFormData({ ...registerFormData, password: text });
+    } else return;
+  };
+
+  const handleCheckPasswordChange = (text: string) => {
+    setRegisterFormData({ ...registerFormData, check_password: text });
+  };
+
+  return {
+    handlers: {
+      handleNameChange,
+      handleIdChange,
+      handlePasswordChange,
+      handleCheckPasswordChange,
+    },
+  };
+}
