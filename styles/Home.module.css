@@ -66,9 +66,53 @@
   color: #242957;
   font-weight: 600;
   line-height: 166%;
+  margin-bottom: 32px;
 }
 
 .voteButton:hover {
-  background: #384084;
+  background-color: #384084;
   color: #fff;
+}
+
+.resultButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 291px;
+  height: 82px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(56, 64, 132, 0.5);
+
+  color: #fffdfd;
+  font-size: 30px;
+}
+
+.resultButton:hover {
+  background-color: #384084;
+}
+
+.partBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.teamBox {
+  margin-top: 143px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.voteButton2 {
+  width: 291px;
+  height: 82px;
+  border-radius: 20px;
+  border: 3px solid #384084;
+  background: #384084;
+  margin-bottom: 42px;
+
+  color: #fffdfd;
+  font-size: 30px;
 }
