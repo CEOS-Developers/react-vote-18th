@@ -7,7 +7,22 @@ export default function Home() {
   return (
     <div className={styles.homeContainer}>
       <HeadFunction title="Home" />
-      <h1>파트장 / 데모데이 투표</h1>
+      <h1 className={styles.title}>파트장 / 데모데이 투표</h1>
+      <div className={styles.voteBox}>
+        <Link href="/vote/part">
+          <button className={styles.voteButton}>
+            파트장 투표 <br />
+            바로가기
+          </button>
+        </Link>
+        <Link href="/vote/team">
+          <button className={styles.voteButton}>
+            데모데이 투표
+            <br />
+            바로가기
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }
