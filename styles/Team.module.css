@@ -1,0 +1,97 @@
+.teamContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  color: #242957;
+  font-size: 48px;
+  margin-top: 125px;
+}
+
+.partList {
+  height: 360px;
+  width: 1350px;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 43px;
+}
+
+.teamBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 380px;
+  height: 145px;
+  border-radius: 20px;
+  border: 3px solid #384084;
+  background-color: #fff;
+  margin: 0 25.5px 32px 25.5px;
+}
+
+.teamBox:hover {
+  background-color: #384084;
+}
+
+.teamName {
+  display: flex;
+  color: #000;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.teamExp {
+  display: flex;
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 13px;
+}
+
+.clicked {
+  background-color: #384084;
+}
+
+.clickedText {
+  color: #fff;
+}
+
+.resultButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 291px;
+  height: 82px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(56, 64, 132, 0.5);
+
+  color: #fffdfd;
+  font-size: 30px;
+}
+
+.resultButton:hover {
+  background-color: #384084;
+}
+
+.voteButton {
+  width: 291px;
+  height: 82px;
+  border-radius: 20px;
+  border: 3px solid #384084;
+  background: #384084;
+  margin-right: 13px;
+
+  color: #fffdfd;
+  font-size: 30px;
+}
+
+.voteButton:hover {
+  background-color: rgba(56, 64, 132, 0.5);
+  border: none;
+}
