@@ -85,7 +85,9 @@ export default function Home() {
           <Link href="/vote/team">
             <button className={styles.voteButton2}>투표하기</button>
           </Link>
-          <button className={styles.resultButton}>결과보기</button>
+          <Link href="/result">
+            <button className={styles.resultButton}>결과보기</button>
+          </Link>
         </div>
       ) : null}
     </div>

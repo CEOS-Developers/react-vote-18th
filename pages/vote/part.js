@@ -24,18 +24,38 @@ export default function votePart() {
     },
     {
       id: 4,
-      team: "SNIFF",
-      name: "송지석",
+      team: "gotcha",
+      name: "이은비",
     },
     {
       id: 5,
       team: "SNIFF",
-      name: "오대균",
+      name: "송지석",
     },
     {
       id: 6,
+      team: "SNIFF",
+      name: "오대균",
+    },
+    {
+      id: 7,
       team: "셰어마인드",
       name: "이규호",
+    },
+    {
+      id: 8,
+      team: "셰어마인드",
+      name: "정인영",
+    },
+    {
+      id: 9,
+      team: "로컬무드",
+      name: "김지원",
+    },
+    {
+      id: 10,
+      team: "로컬무드",
+      name: "김현민",
     },
   ];
 

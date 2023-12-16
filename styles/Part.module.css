@@ -14,10 +14,8 @@
   height: 415px;
   width: 1080px;
   display: flex;
-  display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  overflow-y: auto;
   margin-top: 43px;
 }
 
@@ -31,11 +29,23 @@
   border-radius: 20px;
   border: 3px solid #384084;
   background-color: #fff;
-  margin: 0 27px;
+  margin: 0 27px 43px 27px;
+}
+
+.partBox:hover {
+  background-color: #384084;
+}
+
+.partBox:hover .teamName {
+  color: #fff;
+}
+
+.partBox:hover .name {
+  color: #fff;
 }
 
 .teamName {
-  height: 18px;
+  display: flex;
   color: #000;
   font-size: 20px;
   font-weight: 500;
@@ -43,12 +53,12 @@
 }
 
 .name {
-  height: 66px;
+  display: flex;
   color: #000;
   text-align: center;
   font-size: 40px;
-  line-height: 200%;
   font-weight: 600;
+  margin-top: 8px;
 }
 
 .resultButton {

@@ -37,6 +37,14 @@
   background-color: #384084;
 }
 
+.teamBox:hover .teamName {
+  color: #fff;
+}
+
+.teamBox:hover .teamExp {
+  color: #fff;
+}
+
 .teamName {
   display: flex;
   color: #000;

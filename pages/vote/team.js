@@ -3,8 +3,9 @@
 import { useState } from "react";
 import HeadFunction from "../../components/HeadFunction";
 import styles from "../../styles/Team.module.css";
+import Link from "next/link";
 
-const peopleList = [
+const teamList = [
   {
     id: 1,
     name: "REDDI",
@@ -32,28 +33,32 @@ const peopleList = [
   },
 ];
 export default function VoteTeam() {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState({});
 
   return (
     <div className={styles.teamContainer}>
       <HeadFunction title="데모데이 투표" />
       <h1 className={styles.title}>데모데이 투표</h1>
       <div className={styles.partList}>
-        {peopleList.map((list) => (
+        {teamList.map((list) => (
           <button
-            className={`${styles.teamBox} ${isClicked ? styles.clicked : ""}`}
-            onClick={() => setIsClicked(!isClicked)}
+            className={`${styles.teamBox} ${
+              isClicked[list.id] ? styles.clicked : ""
+            }`}
+            onClick={() =>
+              setIsClicked({ ...isClicked, [list.id]: !isClicked[list.id] })
+            }
           >
             <div
               className={`${styles.teamName} ${
-                isClicked ? styles.clickedText : ""
+                isClicked[list.id] ? styles.clickedText : ""
               }`}
             >
               {list.name}
             </div>
             <div
               className={`${styles.teamExp} ${
-                isClicked ? styles.clickedText : ""
+                isClicked[list.id] ? styles.clickedText : ""
               }`}
             >
               {list.exp}
@@ -63,7 +68,9 @@ export default function VoteTeam() {
       </div>
       <div style={{ display: "flex", marginTop: 117 }}>
         <button className={styles.voteButton}>투표하기</button>
-        <button className={styles.resultButton}>결과보기</button>
+        <Link href="/result">
+          <button className={styles.resultButton}>결과보기</button>
+        </Link>
       </div>
     </div>
   );
