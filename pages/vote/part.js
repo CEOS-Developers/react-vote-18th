@@ -2,6 +2,8 @@
 import { useState } from "react";
 import HeadFunction from "../../components/HeadFunction";
 import styles from "../../styles/Part.module.css";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function votePart() {
   const [isFront, setIsFront] = useState(true);
@@ -59,6 +61,18 @@ export default function votePart() {
     },
   ];
 
+  const router = useRouter();
+
+  const goToResult = () => {
+    router.push({
+      pathname: "/result",
+      query: {
+        isFront: isFront,
+        isTeam: false,
+      },
+    });
+  };
+
   return (
     <div className={styles.partContainer}>
       <HeadFunction title="파트장 투표" />
@@ -73,9 +87,11 @@ export default function votePart() {
           </button>
         ))}
       </div>
-      <div style={{ display: "flex", marginTop: 101 }}>
+      <div style={{ display: "flex", marginTop: 101, marginBottom: 120 }}>
         <button className={styles.voteButton}>투표하기</button>
-        <button className={styles.resultButton}>결과보기</button>
+        <button className={styles.resultButton} onClick={goToResult}>
+          결과보기
+        </button>
       </div>
     </div>
   );

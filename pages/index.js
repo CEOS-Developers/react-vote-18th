@@ -3,6 +3,7 @@ import Link from "next/link";
 import HeadFunction from "../components/HeadFunction";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/router";
 //예시 기본 홈페이지 -> 처음 접속하면 로그인이나 회원가입 받게하기
 export default function Home() {
   const [isPart, setIsPart] = useState(false);
@@ -16,6 +17,18 @@ export default function Home() {
   const teamClicked = () => {
     setIsTeam(true);
     setIsPart(false);
+  };
+
+  const router = useRouter();
+
+  const goToResult = () => {
+    router.push({
+      pathname: "/result",
+      query: {
+        isFront: false,
+        isTeam: true,
+      },
+    });
   };
 
   return (
@@ -85,9 +98,9 @@ export default function Home() {
           <Link href="/vote/team">
             <button className={styles.voteButton2}>투표하기</button>
           </Link>
-          <Link href="/result">
-            <button className={styles.resultButton}>결과보기</button>
-          </Link>
+          <button className={styles.resultButton} onClick={goToResult}>
+            결과보기
+          </button>
         </div>
       ) : null}
     </div>

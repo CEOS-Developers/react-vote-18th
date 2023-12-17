@@ -1,6 +1,7 @@
 import styles from "../styles/Result.module.css";
 import HeadFunction from "../components/HeadFunction";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Result() {
   const peopleList = [
@@ -55,10 +56,22 @@ export default function Result() {
       name: "김현민",
     },
   ];
+
+  const router = useRouter();
+  const { isFront, isTeam } = router.query;
+  const isFrontResult = isFront === "true";
+  const isTeamResult = isTeam === "true";
+
   return (
     <div className={styles.resultContainer}>
       <HeadFunction title="투표 결과" />
-      <h1 className={styles.title}>FE 파트장 투표 결과</h1>
+      <h1 className={styles.title}>
+        {isFrontResult
+          ? "FE 파트장 투표 결과"
+          : isTeamResult
+          ? "데모데이 투표 결과"
+          : "BE 파트장 투표 결과"}
+      </h1>
       <div className={styles.resultList}>
         {peopleList.map((list) => (
           <div className={styles.resultBox}>

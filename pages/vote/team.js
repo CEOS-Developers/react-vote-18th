@@ -4,6 +4,7 @@ import { useState } from "react";
 import HeadFunction from "../../components/HeadFunction";
 import styles from "../../styles/Team.module.css";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const teamList = [
   {
@@ -34,6 +35,18 @@ const teamList = [
 ];
 export default function VoteTeam() {
   const [isClicked, setIsClicked] = useState({});
+
+  const router = useRouter();
+
+  const goToResult = () => {
+    router.push({
+      pathname: "/result",
+      query: {
+        isFront: false,
+        isTeam: true,
+      },
+    });
+  };
 
   return (
     <div className={styles.teamContainer}>
@@ -68,9 +81,9 @@ export default function VoteTeam() {
       </div>
       <div style={{ display: "flex", marginTop: 117 }}>
         <button className={styles.voteButton}>투표하기</button>
-        <Link href="/result">
-          <button className={styles.resultButton}>결과보기</button>
-        </Link>
+        <button className={styles.resultButton} onClick={goToResult}>
+          결과보기
+        </button>
       </div>
     </div>
   );
