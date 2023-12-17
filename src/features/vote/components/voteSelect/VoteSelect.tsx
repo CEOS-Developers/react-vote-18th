@@ -39,7 +39,7 @@ const VoteSelectWrapper = styled.div<{
     props.$type === SELECT_TYPE.Category
       ? "12.2rem 6.1rem"
       : props.$type === SELECT_TYPE.PartLeader
-      ? "2rem 3rem"
+      ? "4rem 3rem 3rem 3rem"
       : "1.1rem 4.9rem"};
   width: ${(props) =>
     props.$type === SELECT_TYPE.Category

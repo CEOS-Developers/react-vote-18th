@@ -9,6 +9,6 @@ export default function PageMainText({ text }: PageMainTextProps) {
 }
 
 const MainTextContainer = styled.div`
-  margin-bottom: 8.2rem;
+  margin-bottom: 7.5rem;
   ${(props) => props.theme.fontStyles.headLine0}
 `;
