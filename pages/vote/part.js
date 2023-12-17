@@ -6,8 +6,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function votePart() {
-  const [isFront, setIsFront] = useState(true);
-
   const peopleList = [
     {
       id: 1,
@@ -62,7 +60,10 @@ export default function votePart() {
   ];
 
   const router = useRouter();
+  const { isFront } = router.query;
+  const isFrontVote = isFront === "true";
 
+  console.log(isFront);
   const goToResult = () => {
     router.push({
       pathname: "/result",
@@ -72,12 +73,13 @@ export default function votePart() {
       },
     });
   };
+  console.log(isFront);
 
   return (
     <div className={styles.partContainer}>
       <HeadFunction title="파트장 투표" />
       <h1 className={styles.title}>
-        {isFront ? "FE 파트장 투표" : "BE 파트장 투표"}
+        {isFrontVote ? "FE 파트장 투표" : "BE 파트장 투표"}
       </h1>
       <div className={styles.partList}>
         {peopleList.map((list) => (
