@@ -62,14 +62,14 @@ export default function Result() {
       <div className={styles.resultList}>
         {peopleList.map((list) => (
           <div className={styles.resultBox}>
+            <div className={styles.numberBox}>{list.id}</div>
             <div
-              style={{ display: "flex", alignItems: "baseline", width: 450 }}
+              style={{ display: "flex", alignItems: "baseline", width: 300 }}
             >
-              <div className={styles.numberBox}>{list.id}</div>
               <div className={styles.name}>{list.name}</div>
               <div className={styles.teamName}>{list.team}</div>
-              <div className={styles.voteNumber}>3</div>
             </div>
+            <div className={styles.voteNumber}>3</div>
           </div>
         ))}
       </div>
