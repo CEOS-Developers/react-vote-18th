@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 import FormInput from "../FormInput/FormInput";
 import AuthButton from "@/common/ui/buttons/AuthButton/AuthButton";
 import theme from "@/styles/theme";
+import useForm from "@/features/form/useForm";
 
 interface FormProps {
   type: FORM_TYPE;
@@ -11,14 +12,32 @@ interface FormProps {
 
 export default function FormLayout({ type }: FormProps) {
   const { isMobile } = MediaQuery();
+  const { formData, handlers } = useForm({ type });
   return (
     <FormContainer $isMobile={isMobile}>
       {type === FORM_TYPE.REGISTER && (
-        <FormInput placeholder="이름" addClass="margin-bottom:3.5rem" />
+        <FormInput
+          placeholder="이름"
+          onChange={handlers.nameChange}
+          addClass="margin-bottom:3.5rem"
+        />
       )}
-      <FormInput placeholder="아이디" addClass="margin-bottom:3.5rem" />
-      <FormInput placeholder="비밀번호" addClass="margin-bottom:3.5rem" />
-      {type === FORM_TYPE.REGISTER && <FormInput placeholder="비밀번호 확인" />}
+      <FormInput
+        placeholder="아이디"
+        onChange={handlers.idChange}
+        addClass="margin-bottom:3.5rem"
+      />
+      <FormInput
+        placeholder="비밀번호"
+        onChange={handlers.passwordChange}
+        addClass="margin-bottom:3.5rem"
+      />
+      {type === FORM_TYPE.REGISTER && (
+        <FormInput
+          placeholder="비밀번호 확인"
+          onChange={handlers.checkPasswordChange}
+        />
+      )}
       <FormButtonContainer>
         <AuthButton
           width="20.2rem"

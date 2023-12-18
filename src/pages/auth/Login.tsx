@@ -8,10 +8,10 @@ export default function Login() {
   const { isMobile } = MediaQuery();
   return (
     <LoginContainer $isMobile={isMobile}>
-      <RegisterDetail>
+      <LoginDetail>
         <PageMainText text="로그인" addClass="margin-bottom:1rem;" />
         <FormLayout type={FORM_TYPE.LOGIN} />
-      </RegisterDetail>
+      </LoginDetail>
     </LoginContainer>
   );
 }
@@ -26,12 +26,6 @@ const LoginContainer = styled.div<{ $isMobile: boolean }>`
   min-width: 375px;
 `;
 
-const RegisterDetail = styled.div`
+const LoginDetail = styled.div`
   width: 85%;
-`;
-
-const FormButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 7rem;
 `;
