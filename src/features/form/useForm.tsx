@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { FORM_TYPE } from "./constant/form-type";
 import { LoginFormState, RegisterFormState } from "./states/form-data-state";
 
@@ -38,12 +38,23 @@ export default function useForm({ type }: { type: FORM_TYPE }) {
     setRegisterFormData({ ...registerFormData, check_password: text });
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return {
+    formData:
+      type === FORM_TYPE.LOGIN
+        ? loginFormData
+        : type === FORM_TYPE.REGISTER
+        ? registerFormData
+        : null,
     handlers: {
-      handleNameChange,
-      handleIdChange,
-      handlePasswordChange,
-      handleCheckPasswordChange,
+      nameChange: handleNameChange,
+      idChange: handleIdChange,
+      passwordChange: handlePasswordChange,
+      checkPasswordChange: handleCheckPasswordChange,
+      submit: handleSubmit,
     },
   };
 }
