@@ -1,11 +1,11 @@
 export const theme = {
   colors: {
-    key: '#FD505B',
-    sub: '#FFA5AA',
-    black: '#292525',
-    white: '#FBFBFB',
-    gray: '#989292',
-    lightgray: '#ECEAEA',
-    kakao: '#FBE93D',
+    green: '#01D1A8',
+    skyblue: '#5ED8FF',
+    yellow: '#FFC466',
+    blue: '#3E4CF7',
+    lightgray: '#F4F6F9',
+    gray: '#ABADAF',
+    black: '#303030',
   },
 };
