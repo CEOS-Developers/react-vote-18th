@@ -22,7 +22,7 @@ const VoteLeader = () => {
 
   return (
     <VoteLeaderContainer>
-      <PageMainText text="FE 파트장 투표" />
+      <PageMainText text="FE 파트장 투표" addClass="margin-bottom:3.2rem;" />
       <LeaderContainer $isMobile={isMobile}>
         {leaders.map((leader, index) => (
           <VoteSelect
@@ -33,7 +33,7 @@ const VoteLeader = () => {
           />
         ))}
       </LeaderContainer>
-      <VoteLeaderButtonContainer>
+      <VoteLeaderButtonContainer $isMobile={isMobile}>
         <Button addClass="margin:3.2rem;">투표하기</Button>
         <Button addClass="margin:3.2rem;">결과보기</Button>
       </VoteLeaderButtonContainer>
@@ -48,6 +48,7 @@ const VoteLeaderContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 15rem 0;
   min-height: 100vh;
   min-width: 375px;
 `;
@@ -57,14 +58,12 @@ const LeaderContainer = styled.div<{ $isMobile: boolean }>`
   max-width: 1200px;
   display: flex;
   justify-content: center;
-  align-items: ${(props) => (props.$isMobile ? "center" : null)};
-  flex-direction: ${(props) => (props.$isMobile ? "column" : null)};
-  padding: 0 8rem;
+  padding: 5rem 8rem;
   gap: 4rem;
   flex-wrap: wrap;
 `;
 
-const VoteLeaderButtonContainer = styled.div`
+const VoteLeaderButtonContainer = styled.div<{ $isMobile: boolean }>`
   display: flex;
-  padding-top: 5rem;
+  flex-direction: ${(props) => (props.$isMobile ? "column" : null)};
 `;
