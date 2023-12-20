@@ -2,11 +2,12 @@ import { styled } from "styled-components";
 import AuthButton from "../../ui/buttons/AuthButton/AuthButton";
 import theme from "@/styles/theme";
 import { useNavigate } from "react-router-dom";
-
+import useBlurWhenScroll from "@/common/hooks/useBlurWhenScroll";
 export default function Header() {
   const navigate = useNavigate();
+  const { ref } = useBlurWhenScroll();
   return (
-    <HeaderLayout>
+    <HeaderLayout ref={ref}>
       <HeaderText />
       <HeaderBtn>
         <AuthButton
@@ -45,6 +46,7 @@ const HeaderText = styled.div`
   height: 7.3rem;
   background-image: url("/img/headerText.jpg");
   background-size: cover;
+  cursor: pointer;
 `;
 
 const HeaderBtn = styled.div`
