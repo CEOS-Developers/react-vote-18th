@@ -40,7 +40,6 @@ export default function VoteResult({
 const VoteResultWrapper = styled.div<{ $type: SELECT_TYPE; $rank: number }>`
   width: ${(props) =>
     props.$type === SELECT_TYPE.PartLeader ? "49.2rem" : "77.4rem"};
-  height: 8.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,15 +80,12 @@ const MainText = styled.div<{ $rank: number }>`
 `;
 
 const SubText = styled.div<{ $rank: number }>`
-  margin-top: 1rem;
   color: ${(props) =>
     props.$rank === 1 ? props.theme.colors.white : props.theme.colors.black};
   ${(props) => props.theme.fontStyles.body0};
 `;
 
 const VoteNum = styled.div<{ $type: SELECT_TYPE; $rank: number }>`
-  margin-right: ${(props) =>
-    props.$type === SELECT_TYPE.PartLeader ? "2rem" : "4rem"};
   color: ${(props) =>
     props.$rank === 1
       ? props.theme.colors.white

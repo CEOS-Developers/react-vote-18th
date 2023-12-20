@@ -18,17 +18,36 @@ export default function VotePartSelect() {
             type={SELECT_TYPE.Category}
             mainText="FRONT-END
           파트장 투표"
-            onClick={() => navigate("/select-leader")}
+            onClick={() => navigate("/vote-leader", { state: "FE" })}
           />
-          <Button addClass="margin:3.2rem;">결과 보기</Button>
+          <Button
+            addClass="margin:3.2rem;"
+            onClick={() =>
+              navigate("/vote-results", {
+                state: { type: "leader", part: "FE" },
+              })
+            }
+          >
+            결과 보기
+          </Button>
         </VoteSelectContainer>
         <VoteSelectContainer>
           <VoteSelect
             type={SELECT_TYPE.Category}
             mainText="BACK-END
           파트장 투표"
+            onClick={() => navigate("/vote-leader", { state: "BE" })}
           />
-          <Button addClass="margin:3.2rem;">결과 보기</Button>
+          <Button
+            addClass="margin:3.2rem;"
+            onClick={() =>
+              navigate("/vote-results", {
+                state: { type: "leader", part: "BE" },
+              })
+            }
+          >
+            결과 보기
+          </Button>
         </VoteSelectContainer>
       </PartLeaderSelectContainer>
     </VotePartLeaderContainer>

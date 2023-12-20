@@ -4,9 +4,13 @@ import VoteSelect from "@/features/vote/components/voteSelect/VoteSelect";
 import MediaQuery from "@/styles/mediaQuery";
 import { SELECT_TYPE } from "@/features/vote/constants/select-vote-type";
 import { styled } from "styled-components";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const VoteLeader = () => {
   const { isMobile } = MediaQuery();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const part = location.state;
   const leaders = [
     { mainText: "김현민", subText: "LocalMood" },
     { mainText: "김지원", subText: "LocalMood" },
@@ -35,7 +39,14 @@ const VoteLeader = () => {
       </LeaderContainer>
       <VoteLeaderButtonContainer $isMobile={isMobile}>
         <Button addClass="margin:3.2rem;">투표하기</Button>
-        <Button addClass="margin:3.2rem;">결과보기</Button>
+        <Button
+          addClass="margin:3.2rem;"
+          onClick={() =>
+            navigate("/vote-results", { state: { type: "leader", part } })
+          }
+        >
+          결과보기
+        </Button>
       </VoteLeaderButtonContainer>
     </VoteLeaderContainer>
   );

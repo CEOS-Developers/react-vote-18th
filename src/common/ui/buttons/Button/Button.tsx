@@ -1,8 +1,16 @@
 import { ButtonProps } from "@/common/state/button-state";
 import styled from "styled-components";
 
-export default function Button({ children, addClass }: Partial<ButtonProps>) {
-  return <ButtonWrapper $addClass={addClass}>{children}</ButtonWrapper>;
+export default function Button({
+  children,
+  onClick,
+  addClass,
+}: Partial<ButtonProps>) {
+  return (
+    <ButtonWrapper onClick={onClick} $addClass={addClass}>
+      {children}
+    </ButtonWrapper>
+  );
 }
 
 const ButtonWrapper = styled.div<{

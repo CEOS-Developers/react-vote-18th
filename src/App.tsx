@@ -6,6 +6,8 @@ import VoteDemodaySelect from "./pages/vote/VoteDemodaySelect";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import VoteLeader from "./pages/vote/VoteLeader";
+import VoteResults from "./pages/vote/VoteResults";
+import VoteDemoday from "./pages/vote/VoteDemoday";
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
         <Route path="/select-part" element={<VotePartLeader />} />
         <Route path="/select-demoday" element={<VoteDemodaySelect />} />
         <Route path="/select-leader" element={<VoteLeader />} />
+        <Route path="/vote-leader" element={<VoteLeader />} />
+        <Route path="/vote-demoday" element={<VoteDemoday />} />
+        <Route path="/vote-results" element={<VoteResults />} />
       </Routes>
     </Router>
   );
