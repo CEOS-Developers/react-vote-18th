@@ -5,6 +5,7 @@ import VotePartLeader from "./pages/vote/VotePartSelect";
 import VoteDemodaySelect from "./pages/vote/VoteDemodaySelect";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
+import VoteLeader from "./pages/vote/VoteLeader";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/select-part" element={<VotePartLeader />} />
         <Route path="/select-demoday" element={<VoteDemodaySelect />} />
+        <Route path="/select-leader" element={<VoteLeader />} />
       </Routes>
     </Router>
   );
