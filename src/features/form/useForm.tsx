@@ -1,6 +1,9 @@
 import { FormEvent, useState } from "react";
 import { FORM_TYPE } from "./constant/form-type";
 import { FormState } from "./states/form-data-state";
+import { validateForm } from "@/common/utils/validateForm";
+
+const FIELD = ["id", "password", "name", "check_password"];
 
 export default function useForm({
   type,
@@ -19,6 +22,10 @@ export default function useForm({
     password: "",
     check_password: "",
   });
+  const [showError, setShowError] = useState(false);
+  const [errorMessage] = validateForm(
+    type === FORM_TYPE.LOGIN ? loginFormData : registerFormData
+  );
 
   const handleNameChange = (text: string) => {
     setRegisterFormData({ ...registerFormData, name: text });
@@ -46,12 +53,32 @@ export default function useForm({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowError(true);
 
-    onSubmit(type === FORM_TYPE.LOGIN ? loginFormData : registerFormData);
+    if (!hasAnyError()) {
+      onSubmit(type === FORM_TYPE.LOGIN ? loginFormData : registerFormData);
+    } else {
+      for (const field of FIELD) {
+        alert(errorMessage[field]);
+        break;
+      }
+    }
+  };
+
+  const hasAnyError = () => {
+    let hasError = false;
+    Object.values(errorMessage).forEach((value) => {
+      if (value) {
+        hasError = true;
+      }
+    });
+    return hasError;
   };
 
   return {
     formData: type === FORM_TYPE.LOGIN ? loginFormData : registerFormData,
+    showError,
+    errorMessage,
     handlers: {
       nameChange: handleNameChange,
       idChange: handleIdChange,
