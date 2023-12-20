@@ -23,6 +23,7 @@ const VoteLeader = () => {
     { mainText: "오대균", subText: "Sniff" },
     { mainText: "송지석", subText: "Sniff" },
   ]; //API 연결
+
   const navigateLeaderVoteResults = () => {
     navigate("/vote-results", { state: { type: "leader", part } });
   };

@@ -14,29 +14,39 @@ interface FormProps {
 
 export default function FormLayout({ type, onSubmit }: FormProps) {
   const { isMobile } = MediaQuery();
-  const { handlers } = useForm({ type, onSubmit });
+  const { showError, errorMessage, handlers } = useForm({
+    type,
+    onSubmit,
+  });
+  const getErrorMessage = (field: string) => {
+    return showError ? errorMessage[field] : "";
+  };
   return (
     <FormContainer $isMobile={isMobile} onSubmit={handlers.submit}>
       {type === FORM_TYPE.REGISTER && (
         <FormInput
           placeholder="이름"
+          errorMsg={getErrorMessage("name")}
           onChange={handlers.nameChange}
           addClass="margin-bottom:3.5rem"
         />
       )}
       <FormInput
         placeholder="아이디"
+        errorMsg={getErrorMessage("id")}
         onChange={handlers.idChange}
         addClass="margin-bottom:3.5rem"
       />
       <FormInput
         placeholder="비밀번호"
+        errorMsg={getErrorMessage("password")}
         onChange={handlers.passwordChange}
         addClass="margin-bottom:3.5rem"
       />
       {type === FORM_TYPE.REGISTER && (
         <FormInput
           placeholder="비밀번호 확인"
+          errorMsg={getErrorMessage("check_password")}
           onChange={handlers.checkPasswordChange}
         />
       )}

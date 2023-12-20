@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export interface FormInputProps {
   placeholder: string;
-  disabled?: boolean;
   errorMsg?: string;
   onChange?: (text: string) => void;
   addClass?: string;
@@ -11,7 +10,6 @@ export interface FormInputProps {
 
 export default function FormInput({
   placeholder,
-  disabled = false,
   errorMsg,
   onChange,
   addClass,
@@ -26,11 +24,11 @@ export default function FormInput({
     <FormInputLayout $addClass={addClass}>
       <FormInputHolder
         placeholder={placeholder}
-        $disabled={disabled}
         value={text}
+        $errorMsg={errorMsg}
         onChange={handleInputChange}
       />
-      {disabled && <ErrorMsg>{errorMsg}</ErrorMsg>}
+      {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
     </FormInputLayout>
   );
 }
@@ -39,13 +37,13 @@ const FormInputLayout = styled.div<{ $addClass: string | undefined }>`
   ${(props) => props.$addClass};
 `;
 
-const FormInputHolder = styled.input<{ $disabled: boolean }>`
+const FormInputHolder = styled.input<{ $errorMsg: string | undefined }>`
   width: 100%;
   height: 7rem;
   padding: 1rem 2rem;
   border: 2px solid ${(props) => props.theme.colors.mainColor};
   border-bottom: ${(props) =>
-    props.$disabled ? `2px solid ${props.theme.colors.error}` : null};
+    props.$errorMsg ? `2px solid ${props.theme.colors.error}` : null};
   border-radius: 2rem;
   ${(props) => props.theme.fontStyles.body1};
 `;
