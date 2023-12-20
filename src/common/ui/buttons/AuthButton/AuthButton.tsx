@@ -1,25 +1,30 @@
 import { ButtonProps } from "@/common/state/button-state";
 import { styled } from "styled-components";
 
-export default function HeaderButton({
+export default function AuthButton({
   width,
+  height,
   bgColor,
   children,
+  onClick,
   addClass,
 }: Partial<ButtonProps> & { width: string; bgColor: string }) {
   return (
-    <HeaderButtonContainer
+    <AuthButtonContainer
       $width={width}
+      $height={height}
       $bgColor={bgColor}
       $addClass={addClass}
+      onClick={onClick}
     >
       {children}
-    </HeaderButtonContainer>
+    </AuthButtonContainer>
   );
 }
 
-const HeaderButtonContainer = styled.div<{
+const AuthButtonContainer = styled.button<{
   $width: string;
+  $height: string | undefined;
   $bgColor: string;
   $addClass: string | undefined;
 }>`
@@ -27,7 +32,7 @@ const HeaderButtonContainer = styled.div<{
   justify-content: center;
   align-items: center;
   width: ${(props) => props.$width};
-  height: 4.4rem;
+  height: ${(props) => (props.$height ? props.$height : "4.4rem")};
   background-color: ${(props) => props.$bgColor};
   border-radius: 2rem;
   border: ${(props) =>
