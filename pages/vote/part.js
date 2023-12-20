@@ -84,9 +84,28 @@ export default function votePart() {
       </h1>
       <div className={styles.partList}>
         {peopleList.map((list) => (
-          <button className={styles.partBox}>
-            <div className={styles.teamName}>{list.team}</div>
-            <div className={styles.name}>{list.name}</div>
+          <button
+            className={`${styles.partBox} ${
+              isClicked[list.id] ? styles.clicked : ""
+            }`}
+            onClick={() =>
+              setIsClicked({ ...isClicked, [list.id]: !isClicked[list.id] })
+            }
+          >
+            <div
+              className={`${styles.teamName} ${
+                isClicked[list.id] ? styles.clickedText : ""
+              }`}
+            >
+              {list.team}
+            </div>
+            <div
+              className={`${styles.name} ${
+                isClicked[list.id] ? styles.clickedText : ""
+              }`}
+            >
+              {list.name}
+            </div>
           </button>
         ))}
       </div>
