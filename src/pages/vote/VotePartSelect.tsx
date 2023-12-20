@@ -4,9 +4,11 @@ import VoteSelect from "@/features/vote/components/voteSelect/VoteSelect";
 import { SELECT_TYPE } from "@/features/vote/constants/select-vote-type";
 import MediaQuery from "@/styles/mediaQuery";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function VotePartSelect() {
   const { isMobile } = MediaQuery();
+  const navigate = useNavigate();
   return (
     <VotePartLeaderContainer>
       <PageMainText text="파트장 투표" />
@@ -16,6 +18,7 @@ export default function VotePartSelect() {
             type={SELECT_TYPE.Category}
             mainText="FRONT-END
           파트장 투표"
+            onClick={() => navigate("/select-leader")}
           />
           <Button addClass="margin:3.2rem;">결과 보기</Button>
         </VoteSelectContainer>
