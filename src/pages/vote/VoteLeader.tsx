@@ -26,7 +26,10 @@ const VoteLeader = () => {
 
   return (
     <VoteLeaderContainer>
-      <PageMainText text="FE 파트장 투표" addClass="margin-bottom:3.2rem;" />
+      <PageMainText
+        text={`${part} 파트장 투표`}
+        addClass="margin-bottom:3.2rem;"
+      />
       <LeaderContainer $isMobile={isMobile}>
         {leaders.map((leader, index) => (
           <VoteSelect
