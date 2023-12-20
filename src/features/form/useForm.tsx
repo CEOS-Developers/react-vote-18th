@@ -1,13 +1,19 @@
 import { FormEvent, useState } from "react";
 import { FORM_TYPE } from "./constant/form-type";
-import { LoginFormState, RegisterFormState } from "./states/form-data-state";
+import { FormState } from "./states/form-data-state";
 
-export default function useForm({ type }: { type: FORM_TYPE }) {
-  const [loginFormData, setLoginFormData] = useState<LoginFormState>({
+export default function useForm({
+  type,
+  onSubmit,
+}: {
+  type: FORM_TYPE;
+  onSubmit: (e: FormState) => void;
+}) {
+  const [loginFormData, setLoginFormData] = useState<FormState>({
     id: "",
     password: "",
   });
-  const [registerFormData, setRegisterFormData] = useState<RegisterFormState>({
+  const [registerFormData, setRegisterFormData] = useState<FormState>({
     name: "",
     id: "",
     password: "",
@@ -21,17 +27,17 @@ export default function useForm({ type }: { type: FORM_TYPE }) {
   const handleIdChange = (text: string) => {
     if (type === FORM_TYPE.LOGIN) {
       setLoginFormData({ ...loginFormData, id: text });
-    } else if (type === FORM_TYPE.REGISTER) {
+    } else {
       setRegisterFormData({ ...registerFormData, id: text });
-    } else return;
+    }
   };
 
   const handlePasswordChange = (text: string) => {
     if (type === FORM_TYPE.LOGIN) {
       setLoginFormData({ ...loginFormData, password: text });
-    } else if (type === FORM_TYPE.REGISTER) {
+    } else {
       setRegisterFormData({ ...registerFormData, password: text });
-    } else return;
+    }
   };
 
   const handleCheckPasswordChange = (text: string) => {
@@ -40,15 +46,12 @@ export default function useForm({ type }: { type: FORM_TYPE }) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    onSubmit(type === FORM_TYPE.LOGIN ? loginFormData : registerFormData);
   };
 
   return {
-    formData:
-      type === FORM_TYPE.LOGIN
-        ? loginFormData
-        : type === FORM_TYPE.REGISTER
-        ? registerFormData
-        : null,
+    formData: type === FORM_TYPE.LOGIN ? loginFormData : registerFormData,
     handlers: {
       nameChange: handleNameChange,
       idChange: handleIdChange,

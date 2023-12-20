@@ -5,16 +5,18 @@ import FormInput from "../FormInput/FormInput";
 import AuthButton from "@/common/ui/buttons/AuthButton/AuthButton";
 import theme from "@/styles/theme";
 import useForm from "@/features/form/useForm";
+import { FormState } from "@/features/form/states/form-data-state";
 
 interface FormProps {
   type: FORM_TYPE;
+  onSubmit: (e: FormState) => void;
 }
 
-export default function FormLayout({ type }: FormProps) {
+export default function FormLayout({ type, onSubmit }: FormProps) {
   const { isMobile } = MediaQuery();
-  const { formData, handlers } = useForm({ type });
+  const { handlers } = useForm({ type, onSubmit });
   return (
-    <FormContainer $isMobile={isMobile}>
+    <FormContainer $isMobile={isMobile} onSubmit={handlers.submit}>
       {type === FORM_TYPE.REGISTER && (
         <FormInput
           placeholder="이름"

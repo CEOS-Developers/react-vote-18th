@@ -10,7 +10,7 @@ export default function AuthButton({
   addClass,
 }: Partial<ButtonProps> & { width: string; bgColor: string }) {
   return (
-    <HeaderButtonContainer
+    <AuthButtonContainer
       $width={width}
       $height={height}
       $bgColor={bgColor}
@@ -18,11 +18,11 @@ export default function AuthButton({
       onClick={onClick}
     >
       {children}
-    </HeaderButtonContainer>
+    </AuthButtonContainer>
   );
 }
 
-const HeaderButtonContainer = styled.div<{
+const AuthButtonContainer = styled.button<{
   $width: string;
   $height: string | undefined;
   $bgColor: string;
