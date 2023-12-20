@@ -23,6 +23,9 @@ const VoteLeader = () => {
     { mainText: "오대균", subText: "Sniff" },
     { mainText: "송지석", subText: "Sniff" },
   ]; //API 연결
+  const navigateLeaderVoteResults = () => {
+    navigate("/vote-results", { state: { type: "leader", part } });
+  };
 
   return (
     <VoteLeaderContainer>
@@ -42,12 +45,7 @@ const VoteLeader = () => {
       </LeaderContainer>
       <VoteLeaderButtonContainer $isMobile={isMobile}>
         <Button addClass="margin:3.2rem;">투표하기</Button>
-        <Button
-          addClass="margin:3.2rem;"
-          onClick={() =>
-            navigate("/vote-results", { state: { type: "leader", part } })
-          }
-        >
+        <Button addClass="margin:3.2rem;" onClick={navigateLeaderVoteResults}>
           결과보기
         </Button>
       </VoteLeaderButtonContainer>

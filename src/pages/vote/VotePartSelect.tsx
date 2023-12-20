@@ -9,6 +9,22 @@ import { useNavigate } from "react-router-dom";
 export default function VotePartSelect() {
   const { isMobile } = MediaQuery();
   const navigate = useNavigate();
+  const navigateFELeaderVote = () => {
+    navigate("/vote-leader", { state: "FE" });
+  };
+  const navigateBELeaderVote = () => {
+    navigate("/vote-leader", { state: "BE" });
+  };
+  const navigateFELeaderVoteResults = () => {
+    navigate("/vote-results", {
+      state: { type: "leader", part: "FE" },
+    });
+  };
+  const navigateBELeaderVoteResults = () => {
+    navigate("/vote-results", {
+      state: { type: "leader", part: "BE" },
+    });
+  };
   return (
     <VotePartLeaderContainer>
       <PageMainText text="파트장 투표" />
@@ -18,15 +34,11 @@ export default function VotePartSelect() {
             type={SELECT_TYPE.Category}
             mainText="FRONT-END
           파트장 투표"
-            onClick={() => navigate("/vote-leader", { state: "FE" })}
+            onClick={navigateFELeaderVote}
           />
           <Button
             addClass="margin:3.2rem;"
-            onClick={() =>
-              navigate("/vote-results", {
-                state: { type: "leader", part: "FE" },
-              })
-            }
+            onClick={navigateFELeaderVoteResults}
           >
             결과 보기
           </Button>
@@ -34,17 +46,12 @@ export default function VotePartSelect() {
         <VoteSelectContainer>
           <VoteSelect
             type={SELECT_TYPE.Category}
-            mainText="BACK-END
-          파트장 투표"
-            onClick={() => navigate("/vote-leader", { state: "BE" })}
+            mainText="BACK-END 파트장 투표"
+            onClick={navigateBELeaderVote}
           />
           <Button
             addClass="margin:3.2rem;"
-            onClick={() =>
-              navigate("/vote-results", {
-                state: { type: "leader", part: "BE" },
-              })
-            }
+            onClick={navigateBELeaderVoteResults}
           >
             결과 보기
           </Button>
@@ -59,7 +66,7 @@ const VotePartLeaderContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 5rem;
+  padding: 15rem 0;
   min-height: 100vh;
   min-width: 375px;
 `;

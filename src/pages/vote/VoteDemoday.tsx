@@ -16,6 +16,9 @@ const VoteDemoday = () => {
     { mainText: "레디", subText: "레퍼런스 아카이빙 구독 서비스" },
     { mainText: "셰어마인드", subText: "연애상담 마켓플레이스" },
   ]; //API 연결
+  const navigateDemodayVoteResults = () => {
+    navigate("/vote-results", { state: "demoday" });
+  };
 
   return (
     <VoteDemodayContainer>
@@ -32,10 +35,7 @@ const VoteDemoday = () => {
       </DemodayContainer>
       <VoteDemodayButtonContainer $isMobile={isMobile}>
         <Button addClass="margin:3.2rem;">투표하기</Button>
-        <Button
-          addClass="margin:3.2rem;"
-          onClick={() => navigate("/vote-results", { state: "demoday" })}
-        >
+        <Button addClass="margin:3.2rem;" onClick={navigateDemodayVoteResults}>
           결과보기
         </Button>
       </VoteDemodayButtonContainer>

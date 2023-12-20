@@ -8,6 +8,12 @@ import { styled } from "styled-components";
 export default function VoteCategory() {
   const { isMobile } = MediaQuery();
   const navigate = useNavigate();
+  const navigateSelectPart = () => {
+    navigate("/select-part");
+  };
+  const navigateSelectDemoday = () => {
+    navigate("/select-demoday");
+  };
   return (
     <VoteMainContainer>
       <PageMainText text="파트장 / 데모데이 투표" />
@@ -16,12 +22,12 @@ export default function VoteCategory() {
           type={SELECT_TYPE.Category}
           mainText="파트장 투표 바로가기"
           addClass={`margin-bottom:${isMobile ? "5rem" : 0};`}
-          onClick={() => navigate("/select-part")}
+          onClick={navigateSelectPart}
         />
         <VoteSelect
           type={SELECT_TYPE.Category}
           mainText="데모데이 투표 바로가기"
-          onClick={() => navigate("/select-demoday")}
+          onClick={navigateSelectDemoday}
         />
       </CategorySelectContainer>
     </VoteMainContainer>
@@ -33,6 +39,7 @@ const VoteMainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 15rem 0;
   min-height: 100vh;
   min-width: 375px;
 `;

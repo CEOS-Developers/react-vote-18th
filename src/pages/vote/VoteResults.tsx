@@ -10,6 +10,9 @@ import { useLocation } from "react-router-dom";
 const VoteResults = () => {
   const { isMobile } = MediaQuery();
   const navigate = useNavigate();
+  const navigateHome = () => {
+    navigate("/");
+  };
   const demodayResults = [
     {
       mainText: "LocalMood",
@@ -80,7 +83,7 @@ const VoteResults = () => {
         ))}
       </ResultsContainer>
       <div>
-        <Button addClass="margin:4.5rem;" onClick={() => navigate("/")}>
+        <Button addClass="margin:4.5rem;" onClick={navigateHome}>
           돌아가기
         </Button>
       </div>

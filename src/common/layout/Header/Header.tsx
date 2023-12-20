@@ -6,6 +6,12 @@ import useBlurWhenScroll from "@/common/hooks/useBlurWhenScroll";
 export default function Header() {
   const navigate = useNavigate();
   const { ref } = useBlurWhenScroll();
+  const navigateLogin = () => {
+    navigate("/login");
+  };
+  const navigateRegister = () => {
+    navigate("/register");
+  };
   return (
     <HeaderLayout ref={ref}>
       <HeaderText />
@@ -14,14 +20,14 @@ export default function Header() {
           width="9.6rem"
           bgColor={theme.colors.white}
           addClass="margin-right:2rem;"
-          onClick={() => navigate("/login")}
+          onClick={navigateLogin}
         >
           로그인
         </AuthButton>
         <AuthButton
           width="11.4rem"
           bgColor={theme.colors.mainColor}
-          onClick={() => navigate("/register")}
+          onClick={navigateRegister}
         >
           회원가입
         </AuthButton>
