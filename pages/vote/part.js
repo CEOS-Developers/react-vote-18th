@@ -59,6 +59,7 @@ export default function votePart() {
     },
   ];
 
+  const [isClicked, setIsClicked] = useState({});
   const router = useRouter();
   const { isFront } = router.query;
   const isFrontVote = isFront === "true";
