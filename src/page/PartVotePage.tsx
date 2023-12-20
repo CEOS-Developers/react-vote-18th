@@ -4,6 +4,8 @@ import BE from 'assets/images/BE.png';
 import { useState } from 'react';
 import { VotePageStatus } from 'utils/type';
 import { PartVoteFront, PartVoteBack } from 'components/PartVote';
+import { ReactComponent as BackBlack } from 'assets/images/back-black.svg';
+import { ReactComponent as BackWhite } from 'assets/images/back-white.svg';
 //나중에 뒤로가기 버튼으로 교체
 export const PartVote = () => {
   //FE, 아니면 partVote 컴포넌트
@@ -13,6 +15,13 @@ export const PartVote = () => {
     <PartPageWrapper>
       {leftStatus == 'default' ? (
         <VoteSelect isLeft={true}>
+          {rightStatus !== 'default' ? (
+            <BackBlackButton
+              onClick={() => {
+                setRightStatus('default');
+              }}
+            />
+          ) : null}
           <Img src={FE} />
           <PartText>FRONTEND</PartText>
           <SelectText
@@ -35,6 +44,13 @@ export const PartVote = () => {
       )}
       {rightStatus == 'default' ? (
         <VoteSelect isLeft={false}>
+          {leftStatus !== 'default' ? (
+            <BackWhiteButton
+              onClick={() => {
+                setLeftStatus('default');
+              }}
+            />
+          ) : null}
           <Img src={BE} />
           <PartText>BACKEND</PartText>
           <SelectText
@@ -73,6 +89,33 @@ const VoteSelect = styled.div<{ isLeft: boolean }>`
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
+`;
+const BackBlackButton = styled(BackBlack)`
+  position: absolute;
+  height: 2rem;
+  width: 2rem;
+  top: 2rem;
+  left: 2rem;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+const BackWhiteButton = styled(BackWhite)`
+  position: absolute;
+  height: 2rem;
+  width: 2rem;
+  top: 2rem;
+  left: 2rem;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 const PartText = styled.div`
   font-size: 3.75rem;

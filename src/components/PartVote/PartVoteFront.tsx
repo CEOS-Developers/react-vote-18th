@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FEMember } from 'utils/constant';
 import { PartVoteProps } from 'utils/type';
+import { ReactComponent as Vote } from 'assets/images/vote.svg';
 export const PartVoteFront = ({ status }: PartVoteProps) => {
   if (status === 'vote') {
     return (
@@ -8,6 +9,7 @@ export const PartVoteFront = ({ status }: PartVoteProps) => {
         {FEMember.map((value, index) => {
           return (
             <VoteItem key={index}>
+              <VoteIcon />
               <NameText>{value.name}</NameText>
               <TeamText>{value.team}</TeamText>
             </VoteItem>
@@ -31,6 +33,11 @@ const PartVoteFEWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const VoteIcon = styled(Vote)`
+  opacity: 0;
+  transition: opacity 0.2s;
+  margin-left: 20%;
+`;
 const VoteItem = styled.div`
   width: 100%;
   height: 4.375rem;
@@ -39,6 +46,9 @@ const VoteItem = styled.div`
   transition: background-color 0.2s;
   &:hover {
     background-color: rgba(255, 208, 24, 0.98);
+    ${VoteIcon} {
+      opacity: 1;
+    }
   }
   cursor: pointer;
 `;
@@ -48,7 +58,7 @@ const NameText = styled.div`
   font-weight: 600;
   line-height: 1.875rem;
   letter-spacing: -0.0375rem;
-  margin-left: 22%;
+  margin-left: 2%;
 `;
 const TeamText = styled.div`
   font-size: 1.25rem;
