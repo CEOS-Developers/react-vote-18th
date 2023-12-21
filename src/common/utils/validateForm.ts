@@ -4,6 +4,10 @@ export function validateForm(formData: FormState): [Record<string, string>] {
   const errorMessage: Record<string, string> = {};
   const { id, password, name, check_password } = formData;
 
+  if (!name?.trim()) {
+    errorMessage.name = "이름을 입력해주세요.";
+  }
+
   if (!id.trim()) {
     errorMessage.id = "아이디를 입력해주세요.";
   }
@@ -12,12 +16,8 @@ export function validateForm(formData: FormState): [Record<string, string>] {
     errorMessage.password = "비밀번호를 입력해주세요.";
   }
 
-  if (name && !name.trim()) {
-    errorMessage.name = "이름을 입력해주세요.";
-  }
-
-  if (check_password && !check_password.trim()) {
-    errorMessage.password = "비밀번호를 다시 입력해주세요.";
+  if (!check_password?.trim()) {
+    errorMessage.check_password = "비밀번호를 다시 입력해주세요.";
   }
 
   return [errorMessage];

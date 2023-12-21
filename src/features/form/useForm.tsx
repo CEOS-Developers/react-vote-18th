@@ -3,7 +3,7 @@ import { FORM_TYPE } from "./constant/form-type";
 import { FormState } from "./states/form-data-state";
 import { validateForm } from "@/common/utils/validateForm";
 
-const FIELD = ["id", "password", "name", "check_password"];
+const FIELD = ["name", "id", "password", "check_password"];
 
 export default function useForm({
   type,
@@ -54,13 +54,14 @@ export default function useForm({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowError(true);
-
     if (!hasAnyError()) {
       onSubmit(type === FORM_TYPE.LOGIN ? loginFormData : registerFormData);
     } else {
       for (const field of FIELD) {
-        alert(errorMessage[field]);
-        break;
+        if (errorMessage[field]) {
+          alert(errorMessage[field]);
+          break;
+        }
       }
     }
   };
