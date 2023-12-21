@@ -33,7 +33,7 @@ const BgColors = {
 const FontColors = {
   active: '#101010',
   default: '#101010',
-  inactive: 'b3b3b3',
+  inactive: '#b3b3b3',
   error: '#101010',
 };
 
@@ -41,7 +41,7 @@ const Input = ({
   width = 'auto',
   height = 'auto',
   status = 'default',
-  fontSize = '1.25rem',
+  fontSize = '1.125rem',
   fontWeight = '500',
   value,
   placeholder,

@@ -22,7 +22,7 @@ export const Button = ({
   width = 'auto',
   height = 'auto',
   status = 'active',
-  fontSize = '1.25rem',
+  fontSize = '1.125rem',
   fontWeight = '700',
   onClick,
   text,
