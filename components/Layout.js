@@ -8,7 +8,17 @@ export default function Layout({ children }) {
   return (
     <>
       <div className={styles.headBox}>
-        <Image src="/images/ceosIcon.svg" width={172} height={73} />
+        <Link href="/">
+          <a>
+            <Image
+              src="/images/ceosIcon.svg"
+              width={172}
+              height={73}
+              alt="Logo"
+            />
+          </a>
+        </Link>
+
         {isLogin ? null : (
           <div className={styles.loginBox}>
             <Link href="/login">
