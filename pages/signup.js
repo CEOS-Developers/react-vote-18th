@@ -21,8 +21,12 @@ export default function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    alert("회원가입 성공적으로 완료");
-    router.push("/");
+    if (formData.password !== formData.confirmPassword)
+      alert("비밀번호 확인 붍일치!");
+    else {
+      alert("회원가입 성공적으로 완료");
+      router.push("/login");
+    }
   };
   return (
     <div className={styles.signupContainer}>
