@@ -26,6 +26,7 @@
     border: 1px solid black;
 
 }
+
 .selectContainers{
     display: flex;
     justify-content: space-around;
@@ -38,7 +39,7 @@
     height: 44px;
     padding: 10px 20px;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 20px;
     background-color: #384084;
     border: 1px solid #fff;
     color: white;

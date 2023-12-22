@@ -1,9 +1,14 @@
 import HeadFunction from "../components/HeadFunction";
 import styles from "../styles/Login.module.css";
 import { useState } from "react";
+import { isLogin } from "../utils/atom";
+import { useRecoilState } from "recoil";
+import { useRouter } from "next/router";
 //로그인 페이지
 
 export default function Login() {
+  const router = useRouter();
+  const [isLoginState, setIsLoginState] = useRecoilState(isLogin);
   const [userInfo, setUserInfo] = useState({
     id: "",
     password: "",
@@ -16,6 +21,10 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userInfo);
+
+    alert("Login 성공");
+    router.push("/");
+    setIsLoginState(true);
   };
 
   return (
