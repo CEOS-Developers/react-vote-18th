@@ -1,6 +1,7 @@
 import { Button } from 'components/Common/Button';
 import Input from 'components/Common/Input';
 import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import styled from 'styled-components';
 
 interface InputStatus {
@@ -18,6 +19,23 @@ function LoginPage() {
   const onChange = (e: any) => {
     setInputStatsus({ ...inputStatus, [e.target.name]: e.target.value });
   };
+
+  const [cookies, setCookie, removeCookie] = useCookies([
+    'userEmail',
+    'userPassword',
+  ]);
+
+  useEffect(() => {
+    const savedEmail = cookies?.userEmail;
+    const savedPassword = cookies?.userPassword;
+    if (savedEmail && savedPassword) {
+      setInputStatsus({
+        ...inputStatus,
+        id: inputStatus?.id,
+        password: inputStatus?.password,
+      });
+    }
+  }, []);
   return (
     <LoginPageWrapper>
       <LoginWrapper>
