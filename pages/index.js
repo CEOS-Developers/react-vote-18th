@@ -4,8 +4,11 @@ import HeadFunction from "../components/HeadFunction";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { isLogin } from "../utils/atom";
+import { useRecoilValue } from "recoil";
 //예시 기본 홈페이지 -> 처음 접속하면 로그인이나 회원가입 받게하기
 export default function Home() {
+  const isLoginState = useRecoilValue(isLogin);
   const [isPart, setIsPart] = useState(false);
   const [isTeam, setIsTeam] = useState(false);
 
@@ -26,37 +29,57 @@ export default function Home() {
   const router = useRouter();
 
   const goToResult = () => {
-    router.push({
-      pathname: "/result",
-      query: {
-        isFront: false,
-        isTeam: true,
-      },
-    });
+    if (!isLoginState) {
+      alert("로그인을 해야 서비스 이용가능합니다!");
+      router.push("/login");
+    } else {
+      router.push({
+        pathname: "/result",
+        query: {
+          isFront: false,
+          isTeam: true,
+        },
+      });
+    }
   };
 
   const goToFront = () => {
-    router.push({
-      pathname: "/vote/part",
-      query: {
-        isFront: true,
-      },
-    });
+    if (!isLoginState) {
+      alert("로그인을 해야 서비스 이용가능합니다!");
+      router.push("/login");
+    } else {
+      router.push({
+        pathname: "/vote/part",
+        query: {
+          isFront: true,
+        },
+      });
+    }
   };
 
   const goToBack = () => {
-    router.push({
-      pathname: "/vote/part",
-      query: {
-        isFront: false,
-      },
-    });
+    if (!isLoginState) {
+      alert("로그인을 해야 서비스 이용가능합니다!");
+      router.push("/login");
+    } else {
+      router.push({
+        pathname: "/vote/part",
+        query: {
+          isFront: false,
+        },
+      });
+    }
   };
 
   const goToTeam = () => {
-    router.push({
-      pathname: "/vote/team",
-    });
+    if (!isLoginState) {
+      alert("로그인을 해야 서비스 이용가능합니다!");
+      router.push("/login");
+    } else {
+      router.push({
+        pathname: "/vote/team",
+      });
+    }
   };
 
   return (

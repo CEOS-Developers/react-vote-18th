@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
+import { isLogin } from "../utils/atom";
+import { useRecoilValue } from "recoil";
 
 export default function Layout({ children }) {
-  const [isLogin, setIsLogin] = useState(false);
+  const isLoginState = useRecoilValue(isLogin);
   return (
     <>
       <div className={styles.headBox}>
@@ -19,7 +21,14 @@ export default function Layout({ children }) {
           </a>
         </Link>
 
-        {isLogin ? null : (
+        {isLoginState ? (
+          <div className={styles.loginBox}>
+            {/* 임시로 일단 로그아웃 버튼 만듬 */}
+            <button className={`${styles.buttons} ${styles.loginButton}`}>
+              로그아웃
+            </button>
+          </div>
+        ) : (
           <div className={styles.loginBox}>
             <Link href="/login">
               <button className={`${styles.buttons} ${styles.loginButton}`}>
