@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import TopBar from "../components/TopBar";
-
 interface CandItemProps {
   elected?: boolean;
 }
@@ -26,7 +24,7 @@ const Wrapper = styled.div<{ elected: boolean }>`
   justify-content: center;
   align-items: center;
 
-  width: ${(props) => (props.elected ? "27.3rem" : "34.3rem")};
+  width: ${(props) => (props.elected ? "27.3rem" : "30rem")};
   height: ${(props) => (props.elected ? "16.25rem" : "9.3rem")};
   flex-shrink: 0;
   gap: ${(props) => (props.elected ? "1.2rem" : "0.5rem")};

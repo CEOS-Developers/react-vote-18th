@@ -4,16 +4,25 @@ import { useNavigate } from "react-router-dom";
 
 const TopBar = () => {
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(false); //나중에 token 따라,,
 
   return (
     <Wrapper>
       <Logo onClick={() => navigate("/")}>CEOS</Logo>
       <InfoDiv>
-        <Team>GOTCHA</Team>
-        <Info>FE</Info>
-        <Info>김세오</Info>
-        <Btn onClick={() => navigate("/login")}>로그인</Btn>
-        <Btn onClick={() => navigate("/signup")}>회원가입</Btn>
+        {isLogin ? (
+          <>
+            <Team>GOTCHA</Team>
+            <Info>FE</Info>
+            <Info>김세오</Info>
+            <Btn onClick={() => navigate("/")}>로그아웃</Btn>
+          </>
+        ) : (
+          <>
+            <Btn onClick={() => navigate("/login")}>로그인</Btn>
+            <Btn onClick={() => navigate("/signup")}>회원가입</Btn>
+          </>
+        )}
       </InfoDiv>
     </Wrapper>
   );

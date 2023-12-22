@@ -4,6 +4,8 @@ import styled from "styled-components";
 import TopBar from "../components/TopBar";
 import TeamCandidate from "../components/TeamCandidate";
 
+const colors = ["#01D1A8", "#5ED8FF", "#3E4CF7", "#224C97"];
+
 const TeamResult = () => {
   return (
     <>
@@ -12,10 +14,9 @@ const TeamResult = () => {
         <Title>데모데이 투표 결과</Title>
         <TeamCandidate elected={true} />
         <MemDiv>
-          <TeamCandidate />
-          <TeamCandidate />
-          <TeamCandidate />
-          <TeamCandidate />
+          {colors.map((color, index) => (
+            <TeamCandidate key={index} color={color} />
+          ))}
         </MemDiv>
       </Wrapper>
     </>

@@ -13,8 +13,12 @@ const TeamCandidate = ({
   return (
     <>
       <Wrapper elected={elected}>
-        <Name elected={elected}>김세오</Name>
-        <TeamIntro elected={elected}>팀 CEOS</TeamIntro>
+        <Name elected={elected} color={color}>
+          GOTCHA
+        </Name>
+        <TeamIntro elected={elected} color={color}>
+          팀 CEOS
+        </TeamIntro>
       </Wrapper>
     </>
   );
@@ -28,7 +32,7 @@ const Wrapper = styled.div<{ elected: boolean }>`
   justify-content: center;
   align-items: center;
 
-  width: 34.3rem;
+  width: ${(props) => (props.elected ? "34rem" : "30rem")};
   height: 9.3rem;
   flex-shrink: 0;
   gap: 0.5rem;
@@ -38,8 +42,8 @@ const Wrapper = styled.div<{ elected: boolean }>`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
-const Font = styled.div<{ elected: boolean }>`
-  color: ${(props) => (props.elected ? "#fff" : "#d9d9d9")};
+const Font = styled.div<{ elected: boolean; color: string }>`
+  color: ${(props) => (props.elected ? "#fff" : props.color)};
   text-align: center;
   font-family: "Pretendard-regular";
   font-size: 2rem;
