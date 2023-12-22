@@ -3,10 +3,12 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
 import { isLogin } from "../utils/atom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
+import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
-  const isLoginState = useRecoilValue(isLogin);
+  const router = useRouter();
+  const [isLoginState, setIsLoginState] = useRecoilState(isLogin);
   return (
     <>
       <div className={styles.headBox}>
@@ -23,8 +25,14 @@ export default function Layout({ children }) {
 
         {isLoginState ? (
           <div className={styles.loginBox}>
-            {/* 임시로 일단 로그아웃 버튼 만듬 */}
-            <button className={`${styles.buttons} ${styles.loginButton}`}>
+            <button
+              className={`${styles.buttons} ${styles.loginButton}`}
+              onClick={() => {
+                alert("로그아웃 완료");
+                setIsLoginState(false);
+                router.push("/");
+              }}
+            >
               로그아웃
             </button>
           </div>
