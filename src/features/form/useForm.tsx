@@ -3,7 +3,7 @@ import { FORM_TYPE } from "./constant/form-type";
 import { FormState } from "./states/form-data-state";
 import { validateForm } from "@/common/utils/validateForm";
 
-const FIELD = ["name", "id", "password", "check_password"];
+const FIELD = ["username", "userid", "email", "password", "team", "devPart"];
 
 export default function useForm({
   type,
@@ -13,29 +13,35 @@ export default function useForm({
   onSubmit: (e: FormState) => void;
 }) {
   const [loginFormData, setLoginFormData] = useState<FormState>({
-    id: "",
+    email: "",
     password: "",
   });
   const [registerFormData, setRegisterFormData] = useState<FormState>({
-    name: "",
-    id: "",
+    username: "",
+    userid: "",
+    email: "",
     password: "",
-    check_password: "",
+    team: -1,
+    devPart: "",
   });
   const [showError, setShowError] = useState(false);
   const [errorMessage] = validateForm(
     type === FORM_TYPE.LOGIN ? loginFormData : registerFormData
   );
 
-  const handleNameChange = (text: string) => {
-    setRegisterFormData({ ...registerFormData, name: text });
+  const handleUserNameChange = (text: string) => {
+    setRegisterFormData({ ...registerFormData, username: text });
   };
 
-  const handleIdChange = (text: string) => {
+  const handleUserIdChange = (text: string) => {
+    setRegisterFormData({ ...registerFormData, userid: text });
+  };
+
+  const handleEmailChange = (text: string) => {
     if (type === FORM_TYPE.LOGIN) {
-      setLoginFormData({ ...loginFormData, id: text });
+      setLoginFormData({ ...loginFormData, email: text });
     } else {
-      setRegisterFormData({ ...registerFormData, id: text });
+      setRegisterFormData({ ...registerFormData, email: text });
     }
   };
 
@@ -45,10 +51,6 @@ export default function useForm({
     } else {
       setRegisterFormData({ ...registerFormData, password: text });
     }
-  };
-
-  const handleCheckPasswordChange = (text: string) => {
-    setRegisterFormData({ ...registerFormData, check_password: text });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -81,10 +83,10 @@ export default function useForm({
     showError,
     errorMessage,
     handlers: {
-      nameChange: handleNameChange,
-      idChange: handleIdChange,
+      userNameChange: handleUserNameChange,
+      userIdChange: handleUserIdChange,
+      emailChange: handleEmailChange,
       passwordChange: handlePasswordChange,
-      checkPasswordChange: handleCheckPasswordChange,
       submit: handleSubmit,
     },
   };

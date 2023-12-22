@@ -24,32 +24,32 @@ export default function FormLayout({ type, onSubmit }: FormProps) {
   return (
     <FormContainer $isMobile={isMobile} onSubmit={handlers.submit}>
       {type === FORM_TYPE.REGISTER && (
-        <FormInput
-          placeholder="이름"
-          errorMsg={getErrorMessage("name")}
-          onChange={handlers.nameChange}
-          addClass="margin-bottom:3.5rem"
-        />
+        <>
+          <FormInput
+            placeholder="유저이름"
+            errorMsg={getErrorMessage("username")}
+            onChange={handlers.userNameChange}
+            addClass="margin-bottom:3.5rem"
+          />
+          <FormInput
+            placeholder="아이디"
+            errorMsg={getErrorMessage("userid")}
+            onChange={handlers.userIdChange}
+            addClass="margin-bottom:3.5rem"
+          />
+        </>
       )}
       <FormInput
-        placeholder="아이디"
-        errorMsg={getErrorMessage("id")}
-        onChange={handlers.idChange}
+        placeholder="이메일"
+        errorMsg={getErrorMessage("email")}
+        onChange={handlers.emailChange}
         addClass="margin-bottom:3.5rem"
       />
       <FormInput
         placeholder="비밀번호"
         errorMsg={getErrorMessage("password")}
         onChange={handlers.passwordChange}
-        addClass="margin-bottom:3.5rem"
       />
-      {type === FORM_TYPE.REGISTER && (
-        <FormInput
-          placeholder="비밀번호 확인"
-          errorMsg={getErrorMessage("check_password")}
-          onChange={handlers.checkPasswordChange}
-        />
-      )}
       <FormButtonContainer>
         <AuthButton
           width="20.2rem"

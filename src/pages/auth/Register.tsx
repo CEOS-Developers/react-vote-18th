@@ -9,7 +9,6 @@ export default function Register() {
   const { isMobile } = MediaQuery();
   const registerFormSubmit = (e: FormState) => {
     console.log(e);
-    console.log("회원가입 제출");
   };
   return (
     <RegisterContainer $isMobile={isMobile}>
