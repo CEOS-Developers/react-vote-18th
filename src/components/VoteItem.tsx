@@ -28,8 +28,8 @@ const Container = styled.div<{ isSelected: boolean; isMember: boolean }>`
   justify-content: center;
   align-items: center;
 
-  width: ${(props) => (props.isMember ? "18rem" : "19rem")};
-  height: ${(props) => (props.isMember ? "4rem" : "8.75rem")};
+  width: ${(props) => (props.isMember ? "20rem" : "19rem")};
+  height: ${(props) => (props.isMember ? "4.5rem" : "8.75rem")};
   flex-shrink: 0;
 
   border-radius: ${(props) => (props.isMember ? "2.3rem" : "2.5rem")};
