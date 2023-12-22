@@ -6,6 +6,8 @@ import AuthButton from "@/common/ui/buttons/AuthButton/AuthButton";
 import theme from "@/styles/theme";
 import useForm from "@/features/form/useForm";
 import { FormState } from "@/features/form/states/form-data-state";
+import { Select } from "@/common/ui/selections/Select/Select";
+import { TEAM_OPTIONS } from "@/common/constants/options";
 
 interface FormProps {
   type: FORM_TYPE;
@@ -14,7 +16,7 @@ interface FormProps {
 
 export default function FormLayout({ type, onSubmit }: FormProps) {
   const { isMobile } = MediaQuery();
-  const { showError, errorMessage, handlers } = useForm({
+  const { formData, showError, errorMessage, handlers } = useForm({
     type,
     onSubmit,
   });
@@ -49,7 +51,26 @@ export default function FormLayout({ type, onSubmit }: FormProps) {
         placeholder="비밀번호"
         errorMsg={getErrorMessage("password")}
         onChange={handlers.passwordChange}
+        addClass="margin-bottom:3.5rem"
       />
+      {type === FORM_TYPE.REGISTER && (
+        <SelectContainer $isMobile={isMobile}>
+          <Select
+            options={TEAM_OPTIONS}
+            placeholder="선택"
+            label="팀 선택"
+            value={TEAM_OPTIONS.find((o) => o.value === formData.team)?.label}
+            onChange={handlers.teamChange}
+            addClass={isMobile ? "margin-bottom:5rem;" : undefined}
+          />
+          <Select
+            options={TEAM_OPTIONS}
+            placeholder="선택"
+            label="파트 선택"
+            onChange={handlers.teamChange}
+          />
+        </SelectContainer>
+      )}
       <FormButtonContainer>
         <AuthButton
           width="20.2rem"
@@ -69,6 +90,12 @@ const FormContainer = styled.form<{ $isMobile: boolean }>`
     props.$isMobile ? null : `2px solid ${props.theme.colors.mainColor}`};
   border-radius: 2rem;
   padding: ${(props) => (props.$isMobile ? null : "5.2rem 6rem")};
+`;
+
+const SelectContainer = styled.div<{ $isMobile: boolean }>`
+  display: flex;
+  flex-direction: ${(props) => (props.$isMobile ? "column" : null)};
+  justify-content: space-between;
 `;
 
 const FormButtonContainer = styled.div`

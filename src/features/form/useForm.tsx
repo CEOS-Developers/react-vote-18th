@@ -53,6 +53,10 @@ export default function useForm({
     }
   };
 
+  const handleTeamChange = (index: number) => {
+    setRegisterFormData({ ...registerFormData, team: index });
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowError(true);
@@ -87,6 +91,7 @@ export default function useForm({
       userIdChange: handleUserIdChange,
       emailChange: handleEmailChange,
       passwordChange: handlePasswordChange,
+      teamChange: handleTeamChange,
       submit: handleSubmit,
     },
   };

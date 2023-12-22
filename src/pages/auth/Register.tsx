@@ -24,7 +24,7 @@ const RegisterContainer = styled.div<{ $isMobile: boolean }>`
   display: flex;
   justify-content: center;
   align-items: ${(props) => (props.$isMobile ? null : "center")};
-  padding-top: ${(props) => (props.$isMobile ? "17rem" : "5rem")};
+  padding: 15rem 0;
   font-size: 3rem;
   min-height: 100vh;
   min-width: 375px;
