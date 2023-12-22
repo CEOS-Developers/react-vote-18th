@@ -1,9 +1,23 @@
 import { Button } from 'components/Common/Button';
 import Input from 'components/Common/Input';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+interface InputStatus {
+  id: string;
+  password: string;
+  saveChecked: boolean;
+}
 function LoginPage() {
+  const [inputStatus, setInputStatsus] = useState<InputStatus>({
+    id: '',
+    password: '',
+    saveChecked: false,
+  });
+
+  const onChange = (e: any) => {
+    setInputStatsus({ ...inputStatus, [e.target.name]: e.target.value });
+  };
   return (
     <LoginPageWrapper>
       <LoginWrapper>
@@ -11,18 +25,24 @@ function LoginPage() {
         <IdSection>
           <LoginIndexText>아이디(이메일)</LoginIndexText>
           <Input
+            name="id"
             placeholder="아이디를 입력해주세요."
             width={'90%'}
             height={'3.5rem'}
+            value={inputStatus.id}
+            onChange={onChange}
           />
         </IdSection>
         <PasswordSection>
           <LoginIndexText>비밀번호</LoginIndexText>
           <Input
+            name="password"
             placeholder="비밀번호를 입력해주세요."
             width={'90%'}
             type="password"
             height={'3.5rem'}
+            value={inputStatus.password}
+            onChange={onChange}
           />
         </PasswordSection>
 

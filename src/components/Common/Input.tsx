@@ -14,6 +14,7 @@ interface InputProps {
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   type?: string;
   padding?: string;
+  name?: string;
 }
 
 const BorderColors = {
@@ -50,6 +51,7 @@ const Input = ({
   onFocus,
   type = 'text',
   padding,
+  name,
 }: InputProps) => {
   const borderColor =
     BorderColors[status as 'active' | 'default' | 'inactive' | 'error'];
@@ -74,6 +76,7 @@ const Input = ({
       placeholder={placeholder}
       type={type}
       padding={padding}
+      name={name}
     />
   );
 };
