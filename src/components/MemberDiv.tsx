@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import MemberItem from "./VoteItem";
 
-const memberData = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+const memberData = ["김세오", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
 interface Props {
   setIsVoteSelected: (value: boolean) => void;
@@ -44,4 +44,9 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(2, max-content);
   gap: 1.3rem;
+
+  @media (max-width: 650px) {
+    grid-template-columns: repeat(1, max-content);
+    gap: 1.3rem;
+  }
 `;

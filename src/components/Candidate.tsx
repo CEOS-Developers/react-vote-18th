@@ -32,6 +32,10 @@ const Wrapper = styled.div<{ elected: boolean }>`
   border-radius: 103px;
   background: ${(props) => (props.elected ? "#01D1A8" : "#f4f6f9")};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 650px) {
+    width: ${(props) => (props.elected ? "20rem" : "21rem")};
+  }
 `;
 
 const Font = styled.div<{ elected: boolean }>`
@@ -48,8 +52,14 @@ const Name = styled(Font)`
   font-size: ${(props) => (props.elected ? "3.75rem" : "3rem")};
   font-style: normal;
   font-weight: 900;
+
+  @media (max-width: 650px) {
+    font-size: ${(props) => (props.elected ? "2.8rem" : "2rem")};
+  }
 `;
 
 const TeamIntro = styled(Font)`
   font-size: ${(props) => (props.elected ? "2.8rem" : "2rem")};
+
+  font-size: ${(props) => (props.elected ? "2rem" : "1.2rem")};
 `;

@@ -48,4 +48,8 @@ const Container = styled.div`
 
   width: 65rem;
   gap: 4rem;
+
+  @media (max-width: 650px) {
+    width: 37.5rem;
+  }
 `;

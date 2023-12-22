@@ -35,11 +35,8 @@ const Container = styled.div<{ isSelected: boolean; isMember: boolean }>`
   border-radius: ${(props) => (props.isMember ? "2.3rem" : "2.5rem")};
 
   text-align: center;
-  font-family: "Pretendard-regular";
   font-size: ${(props) => (props.isMember ? "1.75rem" : "2.5rem")};
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
 
   color: ${(props) => (props.isSelected ? "#fff" : "#3e4cf7")};
   border: ${(props) => (props.isMember ? "4px" : "7px")} solid #3e4cf7;

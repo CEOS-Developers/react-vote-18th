@@ -40,6 +40,7 @@ const Wrapper = styled.div`
   height: 5rem;
   background-color: #f4f6f9;
   padding: 0 2.5rem;
+  gap: 1rem;
 `;
 
 const Logo = styled.div`
@@ -70,15 +71,23 @@ const Info = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const Team = styled(Info)`
   color: #abadaf;
+
+  @media (max-width: 650px) {
+    display: none;
+  }
 `;
 
 const Btn = styled(Info)`
-  width: 140px;
-  height: 50px;
+  width: 8.75rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,7 +95,7 @@ const Btn = styled(Info)`
   border: 3px solid #3e4cf7;
 
   color: #3e4cf7;
-  font-size: 23px;
+  font-size: 1.5rem;
 
   cursor: pointer;
 
@@ -95,5 +104,12 @@ const Btn = styled(Info)`
   &:hover {
     background-color: #3e4cf7;
     color: #fff;
+  }
+
+  @media (max-width: 650px) {
+    width: 6.25rem;
+    height: 3rem;
+
+    font-size: 1.25rem;
   }
 `;

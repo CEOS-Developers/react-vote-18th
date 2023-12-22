@@ -33,6 +33,11 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 7.25rem;
   padding-top: 10rem;
+
+  @media (max-width: 650px) {
+    flex-direction: column;
+    gap: 3rem;
+  }
 `;
 
 const Container = styled.div`
@@ -56,6 +61,14 @@ const Container = styled.div`
   cursor: pointer;
 
   transition: background-color 0.3s, color 0.3s;
+
+  @media (max-width: 650px) {
+    width: 18rem;
+    height: 18rem;
+    border-radius: 3.4rem;
+
+    font-size: 2.5rem;
+  }
 `;
 
 const Part = styled(Container)`

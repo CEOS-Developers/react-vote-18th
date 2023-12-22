@@ -49,4 +49,9 @@ const MemDiv = styled.div`
   display: flex;
   margin-top: 3.75rem;
   gap: 3.75rem;
+
+  @media (max-width: 650px) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 `;

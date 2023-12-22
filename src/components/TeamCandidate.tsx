@@ -40,6 +40,10 @@ const Wrapper = styled.div<{ elected: boolean }>`
   border-radius: 103px;
   background: ${(props) => (props.elected ? "#ffc466" : "#f4f6f9")};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 650px) {
+    width: ${(props) => (props.elected ? "22rem" : "21rem")};
+  }
 `;
 
 const Font = styled.div<{ elected: boolean; color: string }>`
@@ -50,14 +54,20 @@ const Font = styled.div<{ elected: boolean; color: string }>`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @media (max-width: 650px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Name = styled(Font)`
   font-size: 3rem;
   font-style: normal;
   font-weight: 900;
+
+  @media (max-width: 650px) {
+    font-size: 2.5rem;
+  }
 `;
 
-const TeamIntro = styled(Font)`
-  font-size: 2rem;
-`;
+const TeamIntro = styled(Font)``;

@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 10rem;
+  padding: 10rem 0 5rem;
 `;
 
 const Font = styled.div`
@@ -54,4 +54,9 @@ const MemDiv = styled.div`
   display: grid;
   grid-template-columns: repeat(2, max-content);
   gap: 1.875rem;
+
+  @media (max-width: 650px) {
+    grid-template-columns: repeat(1, max-content);
+    gap: 1.2rem;
+  }
 `;
