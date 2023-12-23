@@ -15,9 +15,19 @@ import axiosInstance from '..';
         }
  * @returns 
  */
-export const usePostIdToken = (data: JSON | null) => {
+
+interface UserJoinData {
+  loginId: string;
+  email: string;
+  pwd: string;
+  name: string;
+  partName: string;
+  teamName: string;
+}
+
+export const usePostJoin = (data: UserJoinData | null) => {
   const { mutate, isPending, error, isSuccess } = useMutation({
-    mutationKey: ['join'],
+    mutationKey: ['join', data],
     mutationFn: async (data) => {
       const res = await axiosInstance.post(`/api/users/join`, data);
       return res.data;
