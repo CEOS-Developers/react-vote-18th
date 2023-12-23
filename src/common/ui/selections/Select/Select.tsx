@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { styled } from "styled-components";
 import DownIcon from "@/common/icons/DownIcon";
 import MediaQuery from "@/styles/mediaQuery";
+import DropDown from "../../dropdown/DropDown";
 
 interface SelectProps {
   options: { value: number; label: string }[];
   placeholder: string;
   label: string;
   value?: string;
-  onChange?: (index: number) => void;
+  onChange?: (select: number) => void;
   addClass?: string;
 }
 
@@ -21,10 +22,14 @@ export function Select({
   addClass,
 }: SelectProps) {
   const { isMobile } = MediaQuery();
-  const [menuOpen, setMenuOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const handleMenuToggle = () => {
     setMenuOpen((prev) => !prev);
+  };
+  const handleSelect = (value: number) => {
+    setMenuOpen(false);
+    onChange && onChange(value);
   };
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -46,6 +51,9 @@ export function Select({
         <SelectValueText>{value || placeholder}</SelectValueText>
         <DownIcon />
       </SelectClickArea>
+      {menuOpen && (
+        <DropDown options={options} value={value} onSelect={handleSelect} />
+      )}
     </SelectWrapper>
   );
 }
@@ -54,6 +62,7 @@ const SelectWrapper = styled.div<{
   $isMobile: boolean;
   $addClass: string | undefined;
 }>`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: ${(props) => (props.$isMobile ? "100%" : "32rem")};
@@ -69,6 +78,7 @@ const SelectClickArea = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 2px solid gray;
+  cursor: pointer;
 `;
 
 const SelectValueText = styled.span`

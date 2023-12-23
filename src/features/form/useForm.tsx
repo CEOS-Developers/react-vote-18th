@@ -22,7 +22,7 @@ export default function useForm({
     email: "",
     password: "",
     team: -1,
-    devPart: "",
+    devPart: -1,
   });
   const [showError, setShowError] = useState(false);
   const [errorMessage] = validateForm(
@@ -53,8 +53,12 @@ export default function useForm({
     }
   };
 
-  const handleTeamChange = (index: number) => {
-    setRegisterFormData({ ...registerFormData, team: index });
+  const handleTeamChange = (select: number) => {
+    setRegisterFormData({ ...registerFormData, team: select });
+  };
+
+  const handleDevPartChange = (select: number) => {
+    setRegisterFormData({ ...registerFormData, devPart: select });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -92,6 +96,7 @@ export default function useForm({
       emailChange: handleEmailChange,
       passwordChange: handlePasswordChange,
       teamChange: handleTeamChange,
+      devPartChange: handleDevPartChange,
       submit: handleSubmit,
     },
   };

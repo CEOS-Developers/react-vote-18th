@@ -7,7 +7,7 @@ import theme from "@/styles/theme";
 import useForm from "@/features/form/useForm";
 import { FormState } from "@/features/form/states/form-data-state";
 import { Select } from "@/common/ui/selections/Select/Select";
-import { TEAM_OPTIONS } from "@/common/constants/options";
+import { PART_OPTIONS, TEAM_OPTIONS } from "@/common/constants/options";
 
 interface FormProps {
   type: FORM_TYPE;
@@ -64,10 +64,13 @@ export default function FormLayout({ type, onSubmit }: FormProps) {
             addClass={isMobile ? "margin-bottom:5rem;" : undefined}
           />
           <Select
-            options={TEAM_OPTIONS}
+            options={PART_OPTIONS}
             placeholder="선택"
             label="파트 선택"
-            onChange={handlers.teamChange}
+            value={
+              PART_OPTIONS.find((o) => o.value === formData.devPart)?.label
+            }
+            onChange={handlers.devPartChange}
           />
         </SelectContainer>
       )}

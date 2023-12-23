@@ -4,5 +4,5 @@ export interface FormState {
   email: string;
   password: string;
   team?: number;
-  devPart?: string;
+  devPart?: number;
 }

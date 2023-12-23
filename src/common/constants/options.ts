@@ -4,14 +4,14 @@ export type OptionType = {
 };
 
 export const TEAM_OPTIONS: OptionType[] = [
-  { value: 1, label: "LocalMood" },
-  { value: 2, label: "Reddigg" },
-  { value: 3, label: "셰어마인드" },
-  { value: 4, label: "Gotcha" },
-  { value: 5, label: "Sniff" },
+  { value: 0, label: "LocalMood" },
+  { value: 1, label: "Reddigg" },
+  { value: 2, label: "셰어마인드" },
+  { value: 3, label: "Gotcha" },
+  { value: 4, label: "Sniff" },
 ];
 
 export const PART_OPTIONS: OptionType[] = [
-  { value: 1, label: "FRONTEND" },
-  { value: 2, label: "BACKEND" },
+  { value: 0, label: "FRONTEND" },
+  { value: 1, label: "BACKEND" },
 ];
