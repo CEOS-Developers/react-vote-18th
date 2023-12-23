@@ -169,6 +169,7 @@ const SignupHeader = styled.div`
   font-size: 1.875rem;
   font-style: normal;
   font-weight: 800;
+  margin-bottom: 2rem;
   line-height: 30px;
   letter-spacing: -0.6px;
   color: #3e4cf7;
