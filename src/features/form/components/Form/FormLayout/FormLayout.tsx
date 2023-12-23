@@ -56,13 +56,14 @@ export default function FormLayout({ type, onSubmit }: FormProps) {
         onChange={handlers.passwordChange}
         addClass="margin-bottom:3.5rem"
       />
-      {"team" in formData && "devPart" in formData && (
+      {"teamId" in formData && "devPartId" in formData && (
         <SelectContainer $isMobile={isMobile}>
           <Select
             options={TEAM_OPTIONS}
             placeholder="선택"
             label="팀 선택"
-            value={TEAM_OPTIONS.find((o) => o.value === formData.team)?.label}
+            value={TEAM_OPTIONS.find((o) => o.value === formData.teamId)?.label}
+            errorMsg={getErrorMessage("teamId")}
             onChange={handlers.teamChange}
             addClass={isMobile ? "margin-bottom:5rem;" : undefined}
           />
@@ -71,8 +72,9 @@ export default function FormLayout({ type, onSubmit }: FormProps) {
             placeholder="선택"
             label="파트 선택"
             value={
-              PART_OPTIONS.find((o) => o.value === formData.devPart)?.label
+              PART_OPTIONS.find((o) => o.value === formData.devPartId)?.label
             }
+            errorMsg={getErrorMessage("devPartId")}
             onChange={handlers.devPartChange}
           />
         </SelectContainer>

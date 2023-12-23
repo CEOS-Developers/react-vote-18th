@@ -8,6 +8,6 @@ export interface RegisterFormState {
   userid: string;
   email: string;
   password: string;
-  team: number;
-  devPart: number;
+  teamId: number;
+  devPartId: number;
 }

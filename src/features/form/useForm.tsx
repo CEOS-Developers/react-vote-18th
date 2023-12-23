@@ -3,7 +3,14 @@ import { FORM_TYPE } from "./constant/form-type";
 import { validateForm } from "@/common/utils/validateForm";
 import { LoginFormState, RegisterFormState } from "./states/form-data-state";
 
-const FIELD = ["username", "userid", "email", "password", "team", "devPart"];
+const FIELD = [
+  "username",
+  "userid",
+  "email",
+  "password",
+  "teamId",
+  "devPartId",
+];
 
 export default function useForm({
   type,
@@ -21,8 +28,8 @@ export default function useForm({
     userid: "",
     email: "",
     password: "",
-    team: -1,
-    devPart: -1,
+    teamId: -1,
+    devPartId: -1,
   });
   const [showError, setShowError] = useState(false);
   const [errorMessage] = validateForm(
@@ -54,11 +61,11 @@ export default function useForm({
   };
 
   const handleTeamChange = (select: number) => {
-    setRegisterFormData({ ...registerFormData, team: select });
+    setRegisterFormData({ ...registerFormData, teamId: select });
   };
 
   const handleDevPartChange = (select: number) => {
-    setRegisterFormData({ ...registerFormData, devPart: select });
+    setRegisterFormData({ ...registerFormData, devPartId: select });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

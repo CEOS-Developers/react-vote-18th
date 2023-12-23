@@ -9,6 +9,7 @@ interface SelectProps {
   placeholder: string;
   label: string;
   value?: string;
+  errorMsg?: string;
   onChange?: (select: number) => void;
   addClass?: string;
 }
@@ -18,6 +19,7 @@ export function Select({
   placeholder,
   label,
   value,
+  errorMsg,
   onChange,
   addClass,
 }: SelectProps) {

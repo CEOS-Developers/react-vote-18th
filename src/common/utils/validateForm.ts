@@ -24,12 +24,12 @@ export function validateForm(
     errorMessage.password = "비밀번호를 입력해주세요.";
   }
 
-  if ("team" in formData && formData.team === -1) {
-    errorMessage.team = "팀을 선택해주세요.";
+  if ("teamId" in formData && formData.teamId === -1) {
+    errorMessage.teamId = "팀을 선택해주세요.";
   }
 
-  if ("devPart" in formData && formData.devPart === -1) {
-    errorMessage.team = "파트를 선택해주세요.";
+  if ("devPartId" in formData && formData.devPartId === -1) {
+    errorMessage.devPartId = "파트를 선택해주세요.";
   }
 
   return [errorMessage];
