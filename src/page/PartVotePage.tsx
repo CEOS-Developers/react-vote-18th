@@ -7,10 +7,12 @@ import { PartVoteFront, PartVoteBack } from 'components/PartVote';
 import { ReactComponent as BackBlack } from 'assets/images/back-black.svg';
 import { ReactComponent as BackWhite } from 'assets/images/back-white.svg';
 //나중에 뒤로가기 버튼으로 교체
-export const PartVote = () => {
+export const PartVotePage = () => {
   //FE, 아니면 partVote 컴포넌트
   const [leftStatus, setLeftStatus] = useState<VotePageStatus>('default');
   const [rightStatus, setRightStatus] = useState<VotePageStatus>('default');
+  const [selectedFEItem, setSelectedFEItem] = useState<number>(-1);
+  const [selectedBEItem, setSelectedBEItem] = useState<number>(-1);
   return (
     <PartPageWrapper>
       {leftStatus == 'default' ? (
@@ -40,7 +42,11 @@ export const PartVote = () => {
           </SelectText>
         </VoteSelect>
       ) : (
-        <PartVoteBack status={leftStatus} />
+        <PartVoteBack
+          status={leftStatus}
+          selectedItem={selectedBEItem}
+          setSelectedItem={setSelectedBEItem}
+        />
       )}
       {rightStatus == 'default' ? (
         <VoteSelect isLeft={false}>
@@ -69,7 +75,11 @@ export const PartVote = () => {
           </SelectText>
         </VoteSelect>
       ) : (
-        <PartVoteFront status={rightStatus} />
+        <PartVoteFront
+          status={rightStatus}
+          selectedItem={selectedFEItem}
+          setSelectedItem={setSelectedFEItem}
+        />
       )}
     </PartPageWrapper>
   );
