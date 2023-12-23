@@ -1,21 +1,26 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-import VoteItem from "./VoteItem";
+import VoteItem from './VoteItem';
 
-const teamData = ["1", "2", "3", "4", "5"];
+const teamData = ['GOTCHA', 'SNIFF', 'READY', 'LOCALMOOD', 'SHAREMIND'];
 
 interface Props {
   setIsVoteSelected: (value: boolean) => void;
+  selectedItem: string;
+  setSelectedItem: (value: string) => void;
 }
 
-const TeamDiv = ({ setIsVoteSelected }: Props) => {
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
-
+const TeamDiv = ({
+  setIsVoteSelected,
+  setSelectedItem,
+  selectedItem,
+}: Props) => {
   const handleItemClick = (item: string) => {
     setSelectedItem(item);
     setIsVoteSelected(true);
   };
+
   return (
     <Wrapper>
       <Container>

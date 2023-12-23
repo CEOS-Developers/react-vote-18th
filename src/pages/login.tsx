@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import TopBar from '../components/TopBar';
 import { usePostLogin } from '../apis/post/usePostLogin';
@@ -8,6 +9,8 @@ const Login = () => {
   const [idValue, setIdValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [isFilled, setIsFilled] = useState(false);
+
+  const navigate = useNavigate();
 
   //custom-hook
   const fetchData = usePostLogin();
@@ -18,6 +21,12 @@ const Login = () => {
       pwd: passwordValue,
     });
   };
+
+  //로그인 성공,실패에 따른 모달과 페이지 이동 (처리필요)
+  useEffect(() => {
+    console.log(fetchData);
+    navigate(`/main`);
+  }, [fetchData.isSuccess]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
