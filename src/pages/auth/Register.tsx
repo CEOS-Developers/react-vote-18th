@@ -3,12 +3,21 @@ import PageMainText from "@/common/ui/text/PageMainText/PageMainText";
 import MediaQuery from "@/styles/mediaQuery";
 import { styled } from "styled-components";
 import { FORM_TYPE } from "@/features/form/constant/form-type";
-import { FormState } from "@/features/form/states/form-data-state";
+import { usePostSignUp } from "@/features/auth/queries/usePostSignUp";
+import {
+  LoginFormState,
+  RegisterFormState,
+} from "@/features/form/states/form-data-state";
 
 export default function Register() {
+  const { mutate: postSignUp } = usePostSignUp();
   const { isMobile } = MediaQuery();
-  const registerFormSubmit = (e: FormState) => {
-    console.log(e);
+  const registerFormSubmit = (formData: LoginFormState | RegisterFormState) => {
+    if ("username" in formData) {
+      postSignUp(formData);
+    } else {
+      return;
+    }
   };
   return (
     <RegisterContainer $isMobile={isMobile}>

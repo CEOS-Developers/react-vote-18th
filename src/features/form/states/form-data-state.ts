@@ -1,8 +1,13 @@
-export interface FormState {
-  username?: string;
-  userid?: string;
+export interface LoginFormState {
   email: string;
   password: string;
-  team?: number;
-  devPart?: number;
+}
+
+export interface RegisterFormState {
+  username: string;
+  userid: string;
+  email: string;
+  password: string;
+  team: number;
+  devPart: number;
 }

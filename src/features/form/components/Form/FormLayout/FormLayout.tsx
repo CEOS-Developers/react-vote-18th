@@ -5,13 +5,16 @@ import FormInput from "../FormInput/FormInput";
 import AuthButton from "@/common/ui/buttons/AuthButton/AuthButton";
 import theme from "@/styles/theme";
 import useForm from "@/features/form/useForm";
-import { FormState } from "@/features/form/states/form-data-state";
 import { Select } from "@/common/ui/selections/Select/Select";
 import { PART_OPTIONS, TEAM_OPTIONS } from "@/common/constants/options";
+import {
+  LoginFormState,
+  RegisterFormState,
+} from "@/features/form/states/form-data-state";
 
 interface FormProps {
   type: FORM_TYPE;
-  onSubmit: (e: FormState) => void;
+  onSubmit: (formData: LoginFormState | RegisterFormState) => void;
 }
 
 export default function FormLayout({ type, onSubmit }: FormProps) {
@@ -53,7 +56,7 @@ export default function FormLayout({ type, onSubmit }: FormProps) {
         onChange={handlers.passwordChange}
         addClass="margin-bottom:3.5rem"
       />
-      {type === FORM_TYPE.REGISTER && (
+      {"team" in formData && "devPart" in formData && (
         <SelectContainer $isMobile={isMobile}>
           <Select
             options={TEAM_OPTIONS}

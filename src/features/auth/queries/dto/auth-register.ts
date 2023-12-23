@@ -1,8 +1,8 @@
-export interface SignUpRequest {
+export interface AuthRegisterRequest {
   username: string;
   userid: string;
   email: string;
   password: string;
   team: number;
-  devPart: string;
+  devPart: number;
 }

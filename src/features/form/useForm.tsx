@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { FORM_TYPE } from "./constant/form-type";
-import { FormState } from "./states/form-data-state";
 import { validateForm } from "@/common/utils/validateForm";
+import { LoginFormState, RegisterFormState } from "./states/form-data-state";
 
 const FIELD = ["username", "userid", "email", "password", "team", "devPart"];
 
@@ -10,13 +10,13 @@ export default function useForm({
   onSubmit,
 }: {
   type: FORM_TYPE;
-  onSubmit: (e: FormState) => void;
+  onSubmit: (e: LoginFormState | RegisterFormState) => void;
 }) {
-  const [loginFormData, setLoginFormData] = useState<FormState>({
+  const [loginFormData, setLoginFormData] = useState<LoginFormState>({
     email: "",
     password: "",
   });
-  const [registerFormData, setRegisterFormData] = useState<FormState>({
+  const [registerFormData, setRegisterFormData] = useState<RegisterFormState>({
     username: "",
     userid: "",
     email: "",
@@ -65,7 +65,9 @@ export default function useForm({
     e.preventDefault();
     setShowError(true);
     if (!hasAnyError()) {
-      onSubmit(type === FORM_TYPE.LOGIN ? loginFormData : registerFormData);
+      type === FORM_TYPE.LOGIN
+        ? onSubmit(loginFormData)
+        : onSubmit(registerFormData);
     } else {
       for (const field of FIELD) {
         if (errorMessage[field]) {

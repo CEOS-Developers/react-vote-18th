@@ -1,22 +1,35 @@
-import { FormState } from "@/features/form/states/form-data-state";
+import {
+  LoginFormState,
+  RegisterFormState,
+} from "@/features/form/states/form-data-state";
 
-export function validateForm(formData: FormState): [Record<string, string>] {
+export function validateForm(
+  formData: LoginFormState | RegisterFormState
+): [Record<string, string>] {
   const errorMessage: Record<string, string> = {};
-  const { username, userid, email, password, team, devPart } = formData;
 
-  if ("username" in formData && !username?.trim()) {
+  if ("username" in formData && !formData.username?.trim()) {
     errorMessage.username = "유저이름을 입력해주세요.";
   }
 
-  if ("userid" in formData && !userid?.trim()) {
+  if ("userid" in formData && !formData.userid?.trim()) {
     errorMessage.userid = "유저아이디를 입력해주세요.";
   }
-  if (!email.trim()) {
+
+  if (!formData.email.trim()) {
     errorMessage.email = "이메일을 입력해주세요.";
   }
 
-  if (!password.trim()) {
+  if (!formData.password.trim()) {
     errorMessage.password = "비밀번호를 입력해주세요.";
+  }
+
+  if ("team" in formData && formData.team === -1) {
+    errorMessage.team = "팀을 선택해주세요.";
+  }
+
+  if ("devPart" in formData && formData.devPart === -1) {
+    errorMessage.team = "파트를 선택해주세요.";
   }
 
   return [errorMessage];
