@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import TopBar from '../components/TopBar';
 import DropDownBox from '../components/DropDownBox';
@@ -18,19 +19,13 @@ const Signup = () => {
   const [passwordCheckValue, setPasswordCheckValue] = useState('');
   const [isFilled, setIsFilled] = useState(false);
 
+  const navigate = useNavigate();
+
   //custom-hook
   const fetchData = usePostJoin();
 
   const handleSubmit = () => {
-    fetchData.join({
-      loginId: idValue,
-      email: emailValue,
-      pwd: passwordValue,
-      name: nameValue,
-      partName: partValue,
-      teamName: teamValue,
-    });
-    console.log({
+    const res = fetchData.join({
       loginId: idValue,
       email: emailValue,
       pwd: passwordValue,
@@ -39,6 +34,12 @@ const Signup = () => {
       teamName: teamValue,
     });
   };
+
+  //회원가입 성공,실패에 따른 모달과 페이지 이동 (처리필요)
+  useEffect(() => {
+    console.log(fetchData);
+    navigate(`/`);
+  }, [fetchData.isSuccess]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

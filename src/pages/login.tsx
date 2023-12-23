@@ -1,22 +1,34 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-import TopBar from "../components/TopBar";
+import TopBar from '../components/TopBar';
+import { usePostLogin } from '../apis/post/usePostLogin';
 
 const Login = () => {
-  const [idValue, setIdValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
+  const [idValue, setIdValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
   const [isFilled, setIsFilled] = useState(false);
+
+  //custom-hook
+  const fetchData = usePostLogin();
+
+  const handleSubmit = () => {
+    fetchData.login({
+      loginId: idValue,
+      pwd: passwordValue,
+    });
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === "id") {
+    if (name === 'id') {
       setIdValue(value);
-    } else if (name === "password") {
+    } else if (name === 'password') {
       setPasswordValue(value);
     }
-    setIsFilled(idValue.trim() !== "" && passwordValue.trim() !== "");
+    setIsFilled(idValue.trim() !== '' && passwordValue.trim() !== '');
   };
+
   return (
     <>
       <TopBar />
@@ -37,7 +49,9 @@ const Login = () => {
               onChange={handleInputChange}
             />
           </InputDiv>
-          <LoginBtn isFilled={isFilled}>로그인</LoginBtn>
+          <LoginBtn isFilled={isFilled} onClick={handleSubmit}>
+            로그인
+          </LoginBtn>
         </Container>
       </Wrapper>
     </>
@@ -94,7 +108,7 @@ const Input = styled.input`
     color: #d9d9d9;
   }
 
-  font-family: "Pretendard-regular";
+  font-family: 'Pretendard-regular';
   font-size: 1.75rem;
   font-style: normal;
   font-weight: 400;
@@ -119,6 +133,6 @@ const LoginBtn = styled.div<{ isFilled: boolean }>`
   font-weight: 600;
   transition: border-color 0.3s, color 0.3s;
 
-  color: ${(props) => (props.isFilled ? "#01D1A8" : "#d9d9d9")};
-  border: 0.3rem solid ${(props) => (props.isFilled ? "#01D1A8" : "#d9d9d9")};
+  color: ${(props) => (props.isFilled ? '#01D1A8' : '#d9d9d9')};
+  border: 0.3rem solid ${(props) => (props.isFilled ? '#01D1A8' : '#d9d9d9')};
 `;
