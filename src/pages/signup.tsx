@@ -9,9 +9,11 @@ const team_options = ['GOTCHA', 'SNIFF', 'READY', 'LOCALMOOD', 'SHAREMIND'];
 const part_options = ['FRONTEND', 'BACKEND'];
 
 const Signup = () => {
-  const [emailValue, setEmailValue] = useState('mmm');
+  const [emailValue, setEmailValue] = useState('');
   const [nameValue, setNameValue] = useState('');
   const [idValue, setIdValue] = useState('');
+  const [teamValue, setTeamValue] = useState('');
+  const [partValue, setPartValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordCheckValue, setPasswordCheckValue] = useState('');
   const [isFilled, setIsFilled] = useState(false);
@@ -25,10 +27,17 @@ const Signup = () => {
       email: emailValue,
       pwd: passwordValue,
       name: nameValue,
-      partName: 'FRONTEND',
-      teamName: 'SHAREMIND',
+      partName: partValue,
+      teamName: teamValue,
     });
-    console.log(fetchData);
+    console.log({
+      loginId: idValue,
+      email: emailValue,
+      pwd: passwordValue,
+      name: nameValue,
+      partName: partValue,
+      teamName: teamValue,
+    });
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +50,8 @@ const Signup = () => {
       setPasswordValue(value);
     } else if (name === 'passwordCheck') {
       setPasswordCheckValue(value);
+    } else if (name === 'email') {
+      setEmailValue(value);
     }
   };
 
@@ -72,6 +83,12 @@ const Signup = () => {
               onChange={handleInputChange}
             />
             <Input
+              name="email"
+              placeholder="이메일"
+              value={emailValue}
+              onChange={handleInputChange}
+            />
+            <Input
               name="password"
               placeholder="비밀번호"
               type="password"
@@ -88,8 +105,20 @@ const Signup = () => {
           </InputDiv>
           <TeamChoice>팀 명 / 파트</TeamChoice>
           <DropdownDiv>
-            <DropDownBox options={team_options} />
-            <DropDownBox options={part_options} />
+            <DropDownBox
+              options={team_options}
+              value={teamValue}
+              onChangeValue={(selectedValue) => {
+                setTeamValue(selectedValue);
+              }}
+            />
+            <DropDownBox
+              options={part_options}
+              value={partValue}
+              onChangeValue={(selectedValue) => {
+                setPartValue(selectedValue);
+              }}
+            />
           </DropdownDiv>
           <SignupBtn isFilled={isFilled} onClick={handleSubmit}>
             가입하기
