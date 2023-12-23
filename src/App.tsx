@@ -5,23 +5,28 @@ import { theme } from './style/theme';
 import Main from './pages/main';
 import Signup from './pages/signup';
 import Login from './pages/login';
-import TeamVote from './pages/TeamVote';
-import MemberVote from './pages/MemberVote';
+import TeamVote from './pages/teamvote';
+import MemberVote from './pages/membervote';
 import TeamResult from './pages/TeamResult';
 import MemberResult from './pages/MemberResult';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+  const queryClient = new QueryClient();
+
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/main" element={<Main />} />
-          <Route path="/teamvote" element={<TeamVote />} />
-          <Route path="/membervote" element={<MemberVote />} />
-        </Routes>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/main" element={<Main />} />
+            <Route path="/teamvote" element={<TeamVote />} />
+            <Route path="/membervote" element={<MemberVote />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }

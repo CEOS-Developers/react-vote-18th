@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-import TopBar from "../components/TopBar";
-import TeamCandidate from "../components/TeamCandidate";
+import TopBar from '../components/TopBar';
+import TeamCandidate from '../components/TeamCandidate';
+import { useGetTeamResult } from '../apis/get/useGetTeamResult';
 
-const colors = ["#01D1A8", "#5ED8FF", "#3E4CF7", "#224C97"];
+const colors = ['#01D1A8', '#5ED8FF', '#3E4CF7', '#224C97'];
 
 const TeamResult = () => {
+  //custom-hook
+  const fetchData = useGetTeamResult();
+
   return (
     <>
       <TopBar />
@@ -35,7 +39,7 @@ const Wrapper = styled.div`
 
 const Font = styled.div`
   text-align: center;
-  font-family: "Pretendard-regular";
+  font-family: 'Pretendard-regular';
   font-size: 2.5rem;
   font-style: normal;
   font-weight: 700;

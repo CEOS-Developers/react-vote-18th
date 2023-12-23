@@ -20,7 +20,6 @@ axiosInstance.interceptors.response.use(
   (response) => {
     //응답데이터 콘솔찍기
     console.log(response);
-
     return response;
   },
   (error) => {

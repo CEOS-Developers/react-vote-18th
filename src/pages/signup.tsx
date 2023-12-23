@@ -3,16 +3,33 @@ import styled from 'styled-components';
 
 import TopBar from '../components/TopBar';
 import DropDownBox from '../components/DropDownBox';
+import { usePostJoin } from '../apis/post/usePostJoin';
 
-const team_options = ['GOTCHA', 'SNIFF', '레디', '로컬무드', '셰어마인드'];
+const team_options = ['GOTCHA', 'SNIFF', 'READY', 'LOCALMOOD', 'SHAREMIND'];
 const part_options = ['FRONTEND', 'BACKEND'];
 
 const Signup = () => {
+  const [emailValue, setEmailValue] = useState('nana@naver.com');
   const [nameValue, setNameValue] = useState('');
   const [idValue, setIdValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordCheckValue, setPasswordCheckValue] = useState('');
   const [isFilled, setIsFilled] = useState(false);
+
+  //custom-hook
+  const fetchData = usePostJoin({
+    loginId: idValue,
+    email: emailValue,
+    pwd: passwordValue,
+    name: nameValue,
+    partName: 'SHAREMIND',
+    teamName: 'FRONTEND',
+  });
+
+  const handleSubmit = () => {
+    fetchData.join();
+    console.log(fetchData);
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -74,7 +91,9 @@ const Signup = () => {
             <DropDownBox options={team_options} />
             <DropDownBox options={part_options} />
           </DropdownDiv>
-          <SignupBtn isFilled={isFilled}>가입하기</SignupBtn>
+          <SignupBtn isFilled={isFilled} onClick={handleSubmit}>
+            가입하기
+          </SignupBtn>
         </Container>
       </Wrapper>
     </>
