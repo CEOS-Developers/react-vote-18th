@@ -9,7 +9,7 @@ const team_options = ['GOTCHA', 'SNIFF', 'READY', 'LOCALMOOD', 'SHAREMIND'];
 const part_options = ['FRONTEND', 'BACKEND'];
 
 const Signup = () => {
-  const [emailValue, setEmailValue] = useState('nana@naver.com');
+  const [emailValue, setEmailValue] = useState('mmm');
   const [nameValue, setNameValue] = useState('');
   const [idValue, setIdValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -17,17 +17,17 @@ const Signup = () => {
   const [isFilled, setIsFilled] = useState(false);
 
   //custom-hook
-  const fetchData = usePostJoin({
-    loginId: idValue,
-    email: emailValue,
-    pwd: passwordValue,
-    name: nameValue,
-    partName: 'SHAREMIND',
-    teamName: 'FRONTEND',
-  });
+  const fetchData = usePostJoin();
 
   const handleSubmit = () => {
-    fetchData.join();
+    fetchData.join({
+      loginId: idValue,
+      email: emailValue,
+      pwd: passwordValue,
+      name: nameValue,
+      partName: 'FRONTEND',
+      teamName: 'SHAREMIND',
+    });
     console.log(fetchData);
   };
 

@@ -25,18 +25,11 @@ interface UserJoinData {
   teamName: string;
 }
 
-export const usePostJoin = (data: UserJoinData | null) => {
+export const usePostJoin = () => {
   const { mutate, isPending, error, isSuccess } = useMutation({
     mutationKey: ['join'],
-    mutationFn: async (data) => {
-      const res = await axiosInstance.post(`/api/users/join`, {
-        loginId: 'nana',
-        email: 'mama',
-        pwd: 'nana',
-        name: 'nanana',
-        partName: 'FRONTEND',
-        teamName: 'SHAREMIND',
-      });
+    mutationFn: async (data: UserJoinData) => {
+      const res = await axiosInstance.post(`/api/users/join`, data);
       return res.data;
     },
   });
@@ -46,6 +39,5 @@ export const usePostJoin = (data: UserJoinData | null) => {
     isPending,
     isSuccess,
     error,
-    data,
   };
 };
