@@ -9,7 +9,6 @@ export default function Register() {
   const { isMobile } = MediaQuery();
   const registerFormSubmit = (e: FormState) => {
     console.log(e);
-    console.log("회원가입 제출");
   };
   return (
     <RegisterContainer $isMobile={isMobile}>
@@ -25,7 +24,7 @@ const RegisterContainer = styled.div<{ $isMobile: boolean }>`
   display: flex;
   justify-content: center;
   align-items: ${(props) => (props.$isMobile ? null : "center")};
-  padding-top: ${(props) => (props.$isMobile ? "17rem" : "5rem")};
+  padding: 15rem 0;
   font-size: 3rem;
   min-height: 100vh;
   min-width: 375px;

@@ -4,12 +4,13 @@ import MediaQuery from "@/styles/mediaQuery";
 import { styled } from "styled-components";
 import { FORM_TYPE } from "@/features/form/constant/form-type";
 import { FormState } from "@/features/form/states/form-data-state";
+import { usePostLogin } from "@/features/auth/queries/usePostLogin";
 
 export default function Login() {
+  const { mutate: postLogin } = usePostLogin();
   const { isMobile } = MediaQuery();
   const loginFormSubmit = (e: FormState) => {
-    console.log(e);
-    console.log("로그인 제출");
+    postLogin(e);
   };
   return (
     <LoginContainer $isMobile={isMobile}>

@@ -1,6 +1,8 @@
 export interface FormState {
-  name?: string;
-  id: string;
+  username?: string;
+  userid?: string;
+  email: string;
   password: string;
-  check_password?: string;
+  team?: number;
+  devPart?: number;
 }
