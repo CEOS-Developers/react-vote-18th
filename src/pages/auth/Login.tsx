@@ -5,13 +5,19 @@ import { styled } from "styled-components";
 import { FORM_TYPE } from "@/features/form/constant/form-type";
 import { usePostLogin } from "@/features/auth/queries/usePostLogin";
 import { LoginFormState } from "@/features/form/states/form-data-state";
+import { useEffect } from "react";
 
 export default function Login() {
-  const { mutate: postLogin } = usePostLogin();
+  const { mutate: postLogin, data: token } = usePostLogin();
   const { isMobile } = MediaQuery();
   const loginFormSubmit = (e: LoginFormState) => {
     postLogin(e);
   };
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token);
+    }
+  }, [token]);
   return (
     <LoginContainer $isMobile={isMobile}>
       <LoginDetail>
