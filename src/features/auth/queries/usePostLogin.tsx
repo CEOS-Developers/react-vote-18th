@@ -7,7 +7,6 @@ async function postLogin(data: AuthLoginRequest) {
     "/app/auth/login",
     data
   );
-  console.log(data);
   return res.data.data.accessToken;
 }
 
