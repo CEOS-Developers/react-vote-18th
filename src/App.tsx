@@ -24,6 +24,8 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/teamvote" element={<TeamVote />} />
             <Route path="/membervote" element={<MemberVote />} />
+            <Route path="/teamresult" element={<TeamResult />} />
+            <Route path="/memberresult" element={<MemberResult />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
