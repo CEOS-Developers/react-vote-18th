@@ -2,6 +2,9 @@ import styles from "../styles/Result.module.css";
 import HeadFunction from "../components/HeadFunction";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getProjectResult } from "../api/getResult";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 export default function Result() {
   const peopleList = [
@@ -61,6 +64,22 @@ export default function Result() {
   const { isFront, isTeam } = router.query;
   const isFrontResult = isFront === "true";
   const isTeamResult = isTeam === "true";
+  const [projectResultList, setProjectResultList] = useState([]);
+
+  const { data: resultList } = useQuery(
+    ["resultList"],
+    () => getProjectResult(),
+    {
+      onSuccess: (data) => {
+        console.log("hi");
+        setProjectResultList(data);
+        console.log(data);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    },
+  );
 
   return (
     <div className={styles.resultContainer}>
@@ -73,18 +92,19 @@ export default function Result() {
           : "BE 파트장 투표 결과"}
       </h1>
       <div className={styles.resultList}>
-        {peopleList.map((list) => (
-          <div className={styles.resultBox}>
-            <div className={styles.numberBox}>{list.id}</div>
-            <div
-              style={{ display: "flex", alignItems: "baseline", width: 300 }}
-            >
-              <div className={styles.name}>{list.name}</div>
-              <div className={styles.teamName}>{list.team}</div>
+        {projectResultList &&
+          projectResultList.map((list) => (
+            <div className={styles.resultBox}>
+              <div className={styles.numberBox}>{list.id}</div>
+              <div
+                style={{ display: "flex", alignItems: "baseline", width: 300 }}
+              >
+                <div className={styles.name}>{list.name}</div>
+                <div className={styles.teamName}>{list.description}</div>
+              </div>
+              <div className={styles.voteNumber}>{list.count}</div>
             </div>
-            <div className={styles.voteNumber}>3</div>
-          </div>
-        ))}
+          ))}
       </div>
       <Link href="/">
         <button className={styles.returnButton}>돌아가기</button>
