@@ -28,28 +28,10 @@ export const usePostVoteTeam = () => {
       } else if (res.status === 201) {
         alert('투표 성공');
       }
+
       return res.data;
     },
   });
-
-  // const handleSuccess = () => {
-  //   alert('투표 성공!');
-  // };
-
-  // const handleError = (error: any) => {
-  //   alert('투표는 한번만 할 수 있습니다!');
-  //   console.log(error);
-  // };
-
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     handleSuccess();
-  //   }
-
-  //   if (error) {
-  //     handleError(error);
-  //   }
-  // }, [isSuccess, error]);
 
   return {
     voteTeam: mutate,
