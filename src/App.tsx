@@ -15,9 +15,10 @@ import VoteResults from "./pages/vote/VoteResults";
 import VoteDemoday from "./pages/vote/VoteDemoday";
 import { ProtectedRoute } from "./features/auth/components/ProtectedRoute/ProtectedRoute";
 import { Suspense } from "react";
+import { useGetMemberInfo } from "./features/member/queries/useGetMemberInfo";
 
 function App() {
-  const user = false;
+  const { user } = useGetMemberInfo();
   return (
     <Suspense fallback={null}>
       <Router>
