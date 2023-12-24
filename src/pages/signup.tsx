@@ -38,7 +38,6 @@ const Signup = () => {
   //회원가입 성공,실패에 따른 모달과 페이지 이동 (처리필요)
   useEffect(() => {
     console.log(fetchData);
-    navigate(`/`);
   }, [fetchData.isSuccess]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
