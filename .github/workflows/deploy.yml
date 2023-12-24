@@ -1,0 +1,62 @@
+name: Docker
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # 도커 이미지에 env 파일 포함
+      - name: Create .env file
+        run: |
+          echo "VITE_SERVER_API=${{ secrets.VITE_SERVER_API }}" >> ./.env
+
+      # 도커 메타
+      - name: Docker meta
+        id: docker_meta
+        uses: crazy-max/ghaction-docker-meta@v1
+        with:
+          images: brian990614/localmood-vote
+          tag-semver: |
+            {{version}}
+            {{major}}.{{minor}}
+
+      # 도커 빌드 관련 셋업
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      # 내 도커허브 로그인 
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 도커이미지 빌드하고 허브로 푸쉬
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.prod
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
+
+      # EC2에 Docker 이미지 배포 
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }} # EC2 인스턴스의 호스트 주소
+          username: ${{ secrets.EC2_USERNAME }} # EC2 인스턴스의 사용자 이름
+          key: ${{ secrets.EC2_SSH_KEY }} # EC2 인스턴스에 접속하기 위한 SSH 키
+          script: |
+            # Docker 이미지 가져오기
+
+            sudo docker pull brian990614/localmood-vote:main
+            sudo docker stop localmood-vote || true
+            sudo docker rm localmood-vote || true
+            sudo docker run -d --name localmood-vote -p 3000:3000 brian990614/localmood-vote:main
