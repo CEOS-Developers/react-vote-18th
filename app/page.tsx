@@ -47,7 +47,7 @@ const Home = async () => {
               <br /> 우승팀 투표
             </>
           </VoteBanner>
-          {!userInfo?.candidateVoted ? (
+          {!userInfo?.teamVoted ? (
             <HoveringLink
               to={userInfo?.teamVoted ? '/demovote/result' : '/demovote'}
               buttonStyle="w-[100px] h-[40px] mt-4 md:w-[200px]"
