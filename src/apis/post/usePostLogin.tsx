@@ -27,6 +27,8 @@ export const usePostLogin = () => {
       if (res.status === 201) {
         console.log('accessToken발급 성공');
         localStorage.setItem('accessToken', res.data.accessToken);
+        localStorage.setItem('partName', res.data.partName);
+        localStorage.setItem('teamName', res.data.teamName);
       }
 
       return res.data;
