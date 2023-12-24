@@ -11,6 +11,9 @@ const VoteLeader = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const part = location.state;
+  const voteLeaderSelectClicked = (mainText: string) => {
+    console.log(mainText);
+  };
   const leaders = [
     { mainText: "김현민", subText: "LocalMood" },
     { mainText: "김지원", subText: "LocalMood" },
@@ -41,6 +44,7 @@ const VoteLeader = () => {
             type={SELECT_TYPE.PartLeader}
             mainText={leader.mainText}
             subText={leader.subText}
+            onClick={voteLeaderSelectClicked}
           />
         ))}
       </LeaderContainer>

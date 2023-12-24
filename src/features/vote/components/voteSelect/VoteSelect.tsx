@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { SELECT_TYPE } from "../../constants/select-vote-type";
+import { useState } from "react";
 
 interface VoteSelectionProps {
   type: SELECT_TYPE;
   mainText: string;
   subText?: string;
-  onClick?: () => void;
+  onClick?: (mainText: string) => void;
   addClass?: string;
 }
 
@@ -16,8 +17,18 @@ export default function VoteSelect({
   onClick,
   addClass,
 }: VoteSelectionProps) {
+  const [clicked, setClicked] = useState(false);
+  const voteSelectClicked = () => {
+    onClick && onClick(mainText);
+    setClicked((prev) => !prev);
+  };
   return (
-    <VoteSelectWrapper $type={type} $addClass={addClass} onClick={onClick}>
+    <VoteSelectWrapper
+      $type={type}
+      $clicked={clicked}
+      $addClass={addClass}
+      onClick={voteSelectClicked}
+    >
       {type === SELECT_TYPE.PartLeader && <VoteSubText>{subText}</VoteSubText>}
       <VoteMainText $type={type}>{mainText}</VoteMainText>
       {type === SELECT_TYPE.Demoday && <VoteSubText>{subText}</VoteSubText>}
@@ -27,6 +38,7 @@ export default function VoteSelect({
 
 const VoteSelectWrapper = styled.div<{
   $type: SELECT_TYPE;
+  $clicked: boolean;
   $addClass: string | undefined;
 }>`
   display: flex;
@@ -53,7 +65,10 @@ const VoteSelectWrapper = styled.div<{
       : props.$type === SELECT_TYPE.PartLeader
       ? "11.7rem"
       : "14.5rem"};
-  ${(props) => props.$addClass}
+  background-color: ${(props) =>
+    props.$clicked && props.theme.colors.mainColor};
+  color: ${(props) => props.$clicked && props.theme.colors.white};
+  ${(props) => props.$addClass};
   &:hover {
     background-color: ${(props) => props.theme.colors.mainColor};
     color: ${(props) => props.theme.colors.white};
