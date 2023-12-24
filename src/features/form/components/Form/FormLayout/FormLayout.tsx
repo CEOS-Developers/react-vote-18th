@@ -86,7 +86,7 @@ export default function FormLayout({ type, onSubmit }: FormProps) {
           bgColor={theme.colors.mainColor}
           addClass="border-radius:1rem;"
         >
-          가입하기
+          {type === FORM_TYPE.LOGIN ? "로그인" : "가입하기"}
         </AuthButton>
       </FormButtonContainer>
     </FormContainer>
