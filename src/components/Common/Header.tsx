@@ -109,8 +109,8 @@ const HeaderRightButton = styled.div`
 const Text = styled.div`
   color: #b0b5bd;
   cursor: pointer;
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 400;
   line-height: 30px;
   letter-spacing: -0.4px;
   border: 2px solid #ffffff;
@@ -132,6 +132,6 @@ const UserName = styled.div`
 `;
 const Divider = styled.div`
   height: 1.5rem;
-  width: 2px;
+  width: 1px;
   background-color: rgba(0, 0, 0, 0.13);
 `;
