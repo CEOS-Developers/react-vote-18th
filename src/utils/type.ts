@@ -16,4 +16,11 @@ export type MemberArrayType = MemberType[];
 
 export interface PartVoteProps {
   status: VotePageStatus;
+  selectedItem: number;
+  setSelectedItem: React.Dispatch<React.SetStateAction<number>>;
+}
+export interface DemoVoteProps {
+  status: VotePageStatus;
+  selectedItem: number;
+  setSelectedItem: React.Dispatch<React.SetStateAction<number>>;
 }

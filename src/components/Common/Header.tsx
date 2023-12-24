@@ -3,7 +3,7 @@ import ceosLogo from 'assets/images/logo.png';
 import { ReactComponent as Votes } from 'assets/images/votes.svg';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { GreenBorder } from 'assets/images/GreenBorder';
+import { GreenBorder } from 'utils/GreenBorder';
 //로그아웃 or 회원가입 나중에 코드 리팩토링
 export const Header = () => {
   const navigate = useNavigate();

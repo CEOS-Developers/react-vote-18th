@@ -1,7 +1,7 @@
 import { Button } from 'components/Common/Button';
 import { Part, Team } from 'utils/constant';
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Input from 'components/Common/Input';
 import { InputStatus } from 'utils/type';
 import { useCustomSelect } from 'hooks/useCustomSelect';

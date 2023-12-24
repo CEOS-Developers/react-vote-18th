@@ -1,20 +1,20 @@
 import styled from 'styled-components';
-import { BEMember } from 'utils/constant';
+import { Team } from 'utils/constant';
 import { PartVoteProps } from 'utils/type';
 import { ReactComponent as Vote } from 'assets/images/vote.svg';
 import { fadeInAnimation } from 'style/Animation';
-export const PartVoteBack = ({
+export const DemoVote = ({
   status,
   selectedItem,
   setSelectedItem,
 }: PartVoteProps) => {
   if (status === 'vote') {
     return (
-      <PartVoteBEWrapper>
-        {BEMember.map((value, index) => {
+      <PartVoteFEWrapper>
+        {Object.entries(Team).map(([key, value], index) => {
           return (
             <VoteItem
-              key={index}
+              key={key}
               onClick={() => {
                 setSelectedItem(index);
               }}
@@ -23,20 +23,19 @@ export const PartVoteBack = ({
               {index === selectedItem ? (
                 <VoteIcon isSelected={index === selectedItem} />
               ) : null}
-              <NameText>{value.name}</NameText>
-              <TeamText>{value.team}</TeamText>
+              <TeamText>{value}</TeamText>
             </VoteItem>
           );
         })}
-      </PartVoteBEWrapper>
+      </PartVoteFEWrapper>
     );
   } else if (status === 'result') {
-    return <PartVoteBEWrapper>결과</PartVoteBEWrapper>;
+    return <PartVoteFEWrapper>결과</PartVoteFEWrapper>;
   } else {
     return <>error</>;
   }
 };
-const PartVoteBEWrapper = styled.div`
+const PartVoteFEWrapper = styled.div`
   width: 50%;
   height: 100%;
   background-color: #88b2ff;
@@ -57,7 +56,7 @@ const VoteItem = styled.div<{ isSelected: boolean }>`
   height: 4.375rem;
   display: flex;
   align-items: center;
-  transition: background-color 0.13s;
+  transition: background-color 0.2s;
   position: relative;
   background-color: ${(props) =>
     props.isSelected ? 'rgba(255, 208, 24, 0.98)' : 'none'};
@@ -66,19 +65,11 @@ const VoteItem = styled.div<{ isSelected: boolean }>`
   }
   cursor: pointer;
 `;
-const NameText = styled.div`
+const TeamText = styled.div`
   font-size: 1.75rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.875rem;
   letter-spacing: -0.0375rem;
   margin-left: 28%;
-`;
-const TeamText = styled.div`
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.875rem; /* 150% */
-  letter-spacing: -0.025rem;
-  margin-left: 3rem;
 `;

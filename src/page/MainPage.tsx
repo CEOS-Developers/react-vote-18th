@@ -18,7 +18,12 @@ function MainPage() {
           바로가기
         </Text>
       </VoteSelect>
-      <VoteSelect isLeft={false}>
+      <VoteSelect
+        isLeft={false}
+        onClick={() => {
+          navigate('/demoVote');
+        }}
+      >
         <Text>
           <StarIcon isLeft={false} />
           데모데이 투표

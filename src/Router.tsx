@@ -1,7 +1,8 @@
 import { Header } from 'components/Common/Header';
+import { DemoVotePage } from 'page/DemoVotePage';
 import LoginPage from 'page/LoginPage';
 import MainPage from 'page/MainPage';
-import { PartVote } from 'page/PartVotePage';
+import { PartVotePage } from 'page/PartVotePage';
 import SignupPage from 'page/SignupPage';
 import React from 'react';
 import { CookiesProvider } from 'react-cookie';
@@ -15,7 +16,8 @@ function Router() {
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/signup" element={<SignupPage />}></Route>
-          <Route path="/partVote" element={<PartVote />}></Route>
+          <Route path="/partVote" element={<PartVotePage />}></Route>
+          <Route path="/demoVote" element={<DemoVotePage />}></Route>
         </Routes>
       </BrowserRouter>
     </CookiesProvider>
