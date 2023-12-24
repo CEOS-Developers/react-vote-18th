@@ -42,7 +42,7 @@ const NavBar = () => {
         <Image
           src="/ceos-logo.png"
           fill
-          className="!relative !w-[100px] md:!w-[172px]"
+          className="!relative !w-[100px] md:!w-[172px] !shrink-0"
           alt="ceos logo"
         />
       </button>
