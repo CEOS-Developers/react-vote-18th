@@ -15,10 +15,20 @@ import axiosInstance from '..';
         }
  * @returns 
  */
-export const usePostIdToken = (data: JSON | null) => {
+
+interface UserJoinData {
+  loginId: string;
+  email: string;
+  pwd: string;
+  name: string;
+  partName: string;
+  teamName: string;
+}
+
+export const usePostJoin = () => {
   const { mutate, isPending, error, isSuccess } = useMutation({
     mutationKey: ['join'],
-    mutationFn: async (data) => {
+    mutationFn: async (data: UserJoinData) => {
       const res = await axiosInstance.post(`/api/users/join`, data);
       return res.data;
     },
@@ -29,6 +39,5 @@ export const usePostIdToken = (data: JSON | null) => {
     isPending,
     isSuccess,
     error,
-    data,
   };
 };

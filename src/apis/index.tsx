@@ -19,13 +19,10 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => {
     //응답데이터 콘솔찍기
-    console.log(response);
-
+    //console.log(response);
     return response;
   },
   (error) => {
-    console.log(error.response);
-
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 

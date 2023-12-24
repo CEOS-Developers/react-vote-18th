@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import { styled } from "styled-components";
+import React, { useState } from 'react';
+import { styled } from 'styled-components';
 
-import open from "../images/dropdown-open.svg";
-import close from "../images/dropdown-close.svg";
+import open from '../images/dropdown-open.svg';
+import close from '../images/dropdown-close.svg';
 
 //components
-import DropDown from "./DropDown";
+import DropDown from './DropDown';
 
 interface DropDownBoxProps {
   options: string[];
+  value: string;
+  onChangeValue: (selectedOption: string) => void;
 }
 
-const DropDownBox = ({ options }: DropDownBoxProps) => {
+const DropDownBox = ({ options, value, onChangeValue }: DropDownBoxProps) => {
   const [isDropdownView, setDropdownView] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
@@ -21,8 +23,10 @@ const DropDownBox = ({ options }: DropDownBoxProps) => {
 
   const handleSelect = (option: string) => {
     setSelectedOption(option);
+    onChangeValue(option);
     console.log(option);
   };
+
   return (
     <Wrapper>
       <Container onClick={handleClickContainer}>

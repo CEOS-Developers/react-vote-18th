@@ -1,37 +1,66 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-import TopBar from "../components/TopBar";
-import DropDownBox from "../components/DropDownBox";
+import TopBar from '../components/TopBar';
+import DropDownBox from '../components/DropDownBox';
+import { usePostJoin } from '../apis/post/usePostJoin';
 
-const team_options = ["GOTCHA", "SNIFF", "레디", "로컬무드", "셰어마인드"];
-const part_options = ["FRONTEND", "BACKEND"];
+const team_options = ['GOTCHA', 'SNIFF', 'READY', 'LOCALMOOD', 'SHAREMIND'];
+const part_options = ['FRONTEND', 'BACKEND'];
 
 const Signup = () => {
-  const [nameValue, setNameValue] = useState("");
-  const [idValue, setIdValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
-  const [passwordCheckValue, setPasswordCheckValue] = useState("");
+  const [emailValue, setEmailValue] = useState('');
+  const [nameValue, setNameValue] = useState('');
+  const [idValue, setIdValue] = useState('');
+  const [teamValue, setTeamValue] = useState('');
+  const [partValue, setPartValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [passwordCheckValue, setPasswordCheckValue] = useState('');
   const [isFilled, setIsFilled] = useState(false);
+
+  const navigate = useNavigate();
+
+  //custom-hook
+  const fetchData = usePostJoin();
+
+  const handleSubmit = () => {
+    const res = fetchData.join({
+      loginId: idValue,
+      email: emailValue,
+      pwd: passwordValue,
+      name: nameValue,
+      partName: partValue,
+      teamName: teamValue,
+    });
+  };
+
+  //회원가입 성공,실패에 따른 모달과 페이지 이동 (처리필요)
+  useEffect(() => {
+    console.log(fetchData);
+    navigate(`/`);
+  }, [fetchData.isSuccess]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === "name") {
+    if (name === 'name') {
       setNameValue(value);
-    } else if (name === "id") {
+    } else if (name === 'id') {
       setIdValue(value);
-    } else if (name === "password") {
+    } else if (name === 'password') {
       setPasswordValue(value);
-    } else if (name === "passwordCheck") {
+    } else if (name === 'passwordCheck') {
       setPasswordCheckValue(value);
+    } else if (name === 'email') {
+      setEmailValue(value);
     }
   };
 
   useEffect(() => {
     setIsFilled(
-      nameValue.trim() !== "" &&
-        idValue.trim() !== "" &&
-        passwordValue.trim() !== "" &&
+      nameValue.trim() !== '' &&
+        idValue.trim() !== '' &&
+        passwordValue.trim() !== '' &&
         passwordValue === passwordCheckValue
     );
   }, [passwordValue, passwordCheckValue]);
@@ -55,6 +84,12 @@ const Signup = () => {
               onChange={handleInputChange}
             />
             <Input
+              name="email"
+              placeholder="이메일"
+              value={emailValue}
+              onChange={handleInputChange}
+            />
+            <Input
               name="password"
               placeholder="비밀번호"
               type="password"
@@ -71,10 +106,24 @@ const Signup = () => {
           </InputDiv>
           <TeamChoice>팀 명 / 파트</TeamChoice>
           <DropdownDiv>
-            <DropDownBox options={team_options} />
-            <DropDownBox options={part_options} />
+            <DropDownBox
+              options={team_options}
+              value={teamValue}
+              onChangeValue={(selectedValue) => {
+                setTeamValue(selectedValue);
+              }}
+            />
+            <DropDownBox
+              options={part_options}
+              value={partValue}
+              onChangeValue={(selectedValue) => {
+                setPartValue(selectedValue);
+              }}
+            />
           </DropdownDiv>
-          <SignupBtn isFilled={isFilled}>가입하기</SignupBtn>
+          <SignupBtn isFilled={isFilled} onClick={handleSubmit}>
+            가입하기
+          </SignupBtn>
         </Container>
       </Wrapper>
     </>
@@ -131,7 +180,7 @@ const Input = styled.input`
     color: #d9d9d9;
   }
 
-  font-family: "Pretendard-regular";
+  font-family: 'Pretendard-regular';
   font-size: 1.75rem;
   font-style: normal;
   font-weight: 400;
@@ -174,6 +223,6 @@ const SignupBtn = styled.div<{ isFilled: boolean }>`
   font-weight: 600;
   transition: border-color 0.3s, color 0.3s;
 
-  color: ${(props) => (props.isFilled ? "#01D1A8" : "#d9d9d9")};
-  border: 0.3rem solid ${(props) => (props.isFilled ? "#01D1A8" : "#d9d9d9")};
+  color: ${(props) => (props.isFilled ? '#01D1A8' : '#d9d9d9')};
+  border: 0.3rem solid ${(props) => (props.isFilled ? '#01D1A8' : '#d9d9d9')};
 `;
