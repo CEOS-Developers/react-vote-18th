@@ -40,6 +40,7 @@ const Page = () => {
           teamName: selectedVoteItem.team,
         }),
         headers,
+        cache: 'no-cache',
       });
       setIsLoading(false);
       if (response.status === 201) {

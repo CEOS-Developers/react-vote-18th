@@ -53,6 +53,7 @@ const Page = () => {
           id: selectedVoteItem.id,
         }),
         headers,
+        cache: 'no-cache',
       });
       setIsLoading(false);
       if (res.ok) {

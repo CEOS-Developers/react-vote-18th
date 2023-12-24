@@ -21,6 +21,7 @@ const NavBar = () => {
       const res = await fetch('/api/logout', {
         method: 'POST',
         headers: serverReqHeaders,
+        cache: 'no-cache',
       });
       if (res.ok) {
         location.reload();

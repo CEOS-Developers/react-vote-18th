@@ -11,7 +11,8 @@ interface Candidate {
 
 const getPartLeaderResults = async (part: 'FE' | 'BE') => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/part-leader/results?part=${part}`
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/part-leader/results?part=${part}`,
+    { cache: 'no-cache' }
   );
   if (res.ok) {
     const results = await res.json();
@@ -20,7 +21,7 @@ const getPartLeaderResults = async (part: 'FE' | 'BE') => {
   return null;
 };
 
-const page = async () => {
+const page = async ({}) => {
   const userInfo = await getSession();
 
   const data = await getPartLeaderResults(userInfo?.part!);
