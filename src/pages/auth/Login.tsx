@@ -6,8 +6,12 @@ import { FORM_TYPE } from "@/features/form/constant/form-type";
 import { usePostLogin } from "@/features/auth/queries/usePostLogin";
 import { LoginFormState } from "@/features/form/states/form-data-state";
 import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const { mutate: postLogin, data: token } = usePostLogin();
   const { isMobile } = MediaQuery();
   const loginFormSubmit = (e: LoginFormState) => {
@@ -16,8 +20,11 @@ export default function Login() {
   useEffect(() => {
     if (token) {
       localStorage.setItem("token", token);
+      queryClient.invalidateQueries({
+        queryKey: ["getMemberInfo"],
+      });
     }
-  }, [token]);
+  }, [queryClient, token]);
   return (
     <LoginContainer $isMobile={isMobile}>
       <LoginDetail>

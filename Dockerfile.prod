@@ -11,7 +11,7 @@ COPY .yarnrc.yml                  ./
 COPY .yarn                        ./.yarn
 
 # Installs all node packages
-RUN yarn install --immutable
+RUN yarn
 
 # Copies everything over to Docker environment
 COPY . .
