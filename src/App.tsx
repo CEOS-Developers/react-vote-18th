@@ -17,7 +17,7 @@ import { ProtectedRoute } from "./features/auth/components/ProtectedRoute/Protec
 import { Suspense } from "react";
 
 function App() {
-  const user = true;
+  const user = false;
   return (
     <Suspense fallback={null}>
       <Router>
