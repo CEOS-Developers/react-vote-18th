@@ -125,6 +125,7 @@ const Name = styled.div`
   width: 150px;
   font-size: 2rem;
   text-align: center;
+  font-weight: 600;
 `;
 const Team = styled.div`
   font-size: 12px;
@@ -155,7 +156,6 @@ const RankItem = styled.div`
   }
   .name {
     font-size: 1.5rem;
-
     font-weight: 600;
   }
 `;

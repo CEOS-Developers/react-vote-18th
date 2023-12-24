@@ -3,6 +3,7 @@ import { BEMember } from 'utils/constant';
 import { PartVoteProps } from 'utils/type';
 import { ReactComponent as Vote } from 'assets/images/vote.svg';
 import { fadeInAnimation } from 'style/Animation';
+import VoteResultBack from 'components/VoteResult/VoteResultBack';
 export const PartVoteBack = ({
   status,
   selectedItem,
@@ -31,7 +32,11 @@ export const PartVoteBack = ({
       </PartVoteBEWrapper>
     );
   } else if (status === 'result') {
-    return <PartVoteBEWrapper>결과</PartVoteBEWrapper>;
+    return (
+      <PartVoteBEWrapper>
+        <VoteResultBack />
+      </PartVoteBEWrapper>
+    );
   } else {
     return <>error</>;
   }
