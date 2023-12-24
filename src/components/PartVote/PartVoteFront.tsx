@@ -3,6 +3,7 @@ import { FEMember } from 'utils/constant';
 import { PartVoteProps } from 'utils/type';
 import { ReactComponent as Vote } from 'assets/images/vote.svg';
 import { fadeInAnimation } from 'style/Animation';
+import VoteResultFront from 'components/VoteResult/VoteResultFront';
 export const PartVoteFront = ({
   status,
   selectedItem,
@@ -31,7 +32,11 @@ export const PartVoteFront = ({
       </PartVoteFEWrapper>
     );
   } else if (status === 'result') {
-    return <PartVoteFEWrapper>결과</PartVoteFEWrapper>;
+    return (
+      <PartVoteFEWrapper>
+        <VoteResultFront />
+      </PartVoteFEWrapper>
+    );
   } else {
     return <>error</>;
   }
