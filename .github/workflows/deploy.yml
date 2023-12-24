@@ -10,7 +10,7 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@v2
 
-      # 도커 이미지에 env 파일 포함
+      # 도커 이미지에 env 파일 포함 
       - name: Create .env file
         run: |
           echo "VITE_SERVER_API=${{ secrets.VITE_SERVER_API }}" >> ./.env
