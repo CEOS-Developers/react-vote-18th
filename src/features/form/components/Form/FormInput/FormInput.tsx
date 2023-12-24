@@ -24,6 +24,7 @@ export default function FormInput({
     <FormInputLayout $addClass={addClass}>
       <FormInputHolder
         placeholder={placeholder}
+        type={placeholder === "비밀번호" ? "password" : "text"}
         value={text}
         $errorMsg={errorMsg}
         onChange={handleInputChange}
