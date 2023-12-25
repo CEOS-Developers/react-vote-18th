@@ -17,7 +17,7 @@ export const useGetTeamResult = () => {
   });
 
   return {
-    teamResult: data || null,
+    teamResult: data || ['0', '1', '2', '3', '4'],
     isLoading,
     error,
   };

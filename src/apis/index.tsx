@@ -23,20 +23,10 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    const accessToken = localStorage.getItem('accessToken');
-    const refreshToken = localStorage.getItem('refreshToken');
+    //console.log(error.response);
+    //console.log(error.response.status);
 
-    //403에러처리
-    if (error.response && error.response.status === 403) {
-      console.log('403 Error: accessToken없음');
-    }
-
-    //401에러처리
-    if (error.response && error.response.status === 401) {
-      console.log('401 Error: accessToken만료');
-
-      //refreshToken으로 갱신
-    }
+    return error.response;
   }
 );
 

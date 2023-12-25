@@ -1,23 +1,38 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-import TopBar from "../components/TopBar";
-import MemberDiv from "../components/MemberDiv";
+import TopBar from '../components/TopBar';
+import MemberDiv from '../components/MemberDiv';
+import { useGetMember } from '../apis/get/useGetMember';
 
 const MemberVote = () => {
   const navigate = useNavigate();
   const [isVoteSelected, setIsVoteSelected] = useState(false);
+  const partName = localStorage.getItem('partName') || '';
+
+  //custom-hook
+  const fetchData = useGetMember(partName);
 
   return (
     <>
       <TopBar />
       <Wrapper>
-        <Title>프론트 파트장 투표</Title>
+        {partName === 'FRONTEND' ? (
+          <Title>프론트 파트장 투표</Title>
+        ) : partName === 'BACKEND' ? (
+          <Title>백엔드 파트장 투표</Title>
+        ) : partName === 'PRODUCT_PLANNER' ? (
+          <Title>기디 파트장 투표</Title>
+        ) : partName === 'DESIGNER' ? (
+          <Title>디자인 파트장 투표</Title>
+        ) : (
+          <Title>파트장 투표</Title> // Default title when partName is empty or has unexpected value
+        )}
         <MemberDiv setIsVoteSelected={setIsVoteSelected} />
         <VoteBtn
           isVoteSelected={isVoteSelected}
-          onClick={() => navigate("/memberresult")}
+          onClick={() => navigate('/memberresult')}
         >
           투표하기
         </VoteBtn>
@@ -38,7 +53,7 @@ const Wrapper = styled.div`
 
 const Font = styled.div`
   text-align: center;
-  font-family: "Pretendard-regular";
+  font-family: 'Pretendard-regular';
   font-size: 2.5rem;
   font-style: normal;
   font-weight: 700;
@@ -68,7 +83,7 @@ const VoteBtn = styled(Font)<{ isVoteSelected: boolean }>`
   font-size: 1.75rem;
   transition: border-color 0.3s, color 0.3s;
 
-  color: ${(props) => (props.isVoteSelected ? "#01D1A8" : "#d9d9d9")};
+  color: ${(props) => (props.isVoteSelected ? '#01D1A8' : '#d9d9d9')};
   border: 0.3rem solid
-    ${(props) => (props.isVoteSelected ? "#01D1A8" : "#d9d9d9")};
+    ${(props) => (props.isVoteSelected ? '#01D1A8' : '#d9d9d9')};
 `;

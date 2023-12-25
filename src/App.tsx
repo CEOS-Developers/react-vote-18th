@@ -19,11 +19,13 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/main" element={<Main />} />
+            <Route path="/" element={<Main />} />
             <Route path="/teamvote" element={<TeamVote />} />
             <Route path="/membervote" element={<MemberVote />} />
+            <Route path="/teamresult" element={<TeamResult />} />
+            <Route path="/memberresult" element={<MemberResult />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

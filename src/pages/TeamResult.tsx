@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import TopBar from '../components/TopBar';
@@ -9,17 +9,26 @@ const colors = ['#01D1A8', '#5ED8FF', '#3E4CF7', '#224C97'];
 
 const TeamResult = () => {
   //custom-hook
-  const fetchData = useGetTeamResult();
+  const fetchedData = useGetTeamResult().teamResult;
 
   return (
     <>
       <TopBar />
       <Wrapper>
         <Title>데모데이 투표 결과</Title>
-        <TeamCandidate elected={true} />
+        <TeamCandidate
+          elected={true}
+          teamName={fetchedData[0].team}
+          teamCount={fetchedData[0].count}
+        />
         <MemDiv>
           {colors.map((color, index) => (
-            <TeamCandidate key={index} color={color} />
+            <TeamCandidate
+              key={index}
+              color={color}
+              teamName={fetchedData[index + 1].team}
+              teamCount={fetchedData[index + 1].count}
+            />
           ))}
         </MemDiv>
       </Wrapper>

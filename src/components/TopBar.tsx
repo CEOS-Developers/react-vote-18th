@@ -1,26 +1,52 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const TopBar = () => {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false); //나중에 token 따라,,
+  const [isLogin, setIsLogin] = useState(false);
+  const [partName, setPartName] = useState('');
+  const [teamName, setTeamName] = useState('');
+
+  useEffect(() => {
+    if (localStorage.getItem('accessToken') !== null) {
+      setIsLogin(true);
+      setPartName(localStorage.getItem('partName') || '');
+      setTeamName(localStorage.getItem('teamName') || '');
+    } else {
+      setIsLogin(false);
+    }
+  }, [isLogin]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('teamName');
+    localStorage.removeItem('partName');
+    setIsLogin(false);
+    navigate('/');
+  };
 
   return (
     <Wrapper>
-      <Logo onClick={() => navigate("/")}>CEOS</Logo>
+      <Logo onClick={() => navigate('/')}>CEOS</Logo>
       <InfoDiv>
         {isLogin ? (
           <>
-            <Team>GOTCHA</Team>
-            <Info>FE</Info>
+            <Team>{teamName}</Team>
+            <Info>{partName}</Info>
             <Info>김세오</Info>
-            <Btn onClick={() => navigate("/")}>로그아웃</Btn>
+            <Btn
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              로그아웃
+            </Btn>
           </>
         ) : (
           <>
-            <Btn onClick={() => navigate("/login")}>로그인</Btn>
-            <Btn onClick={() => navigate("/signup")}>회원가입</Btn>
+            <Btn onClick={() => navigate('/login')}>로그인</Btn>
+            <Btn onClick={() => navigate('/signup')}>회원가입</Btn>
           </>
         )}
       </InfoDiv>
@@ -46,7 +72,7 @@ const Wrapper = styled.div`
 const Logo = styled.div`
   color: #3e4cf7;
   text-align: center;
-  font-family: "Pretendard-regular";
+  font-family: 'Pretendard-regular';
   font-size: 40px;
   font-style: normal;
   font-weight: 500;
@@ -66,7 +92,7 @@ const InfoDiv = styled.div`
 const Info = styled.div`
   color: #000;
   text-align: center;
-  font-family: "Pretendard-regular";
+  font-family: 'Pretendard-regular';
   font-size: 25px;
   font-style: normal;
   font-weight: 700;
