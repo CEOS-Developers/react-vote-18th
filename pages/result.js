@@ -2,7 +2,11 @@ import styles from "../styles/Result.module.css";
 import HeadFunction from "../components/HeadFunction";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getProjectResult } from "../api/getResult";
+import {
+  getProjectResult,
+  getFrontResult,
+  getBackResult,
+} from "../api/getResult";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
@@ -68,10 +72,14 @@ export default function Result() {
 
   const { data: resultList } = useQuery(
     ["resultList"],
-    () => getProjectResult(),
+    () =>
+      isFrontResult
+        ? getFrontResult()
+        : isTeamResult
+        ? getProjectResult()
+        : getBackResult(),
     {
       onSuccess: (data) => {
-        console.log("hi");
         setProjectResultList(data);
         console.log(data);
       },
