@@ -32,6 +32,9 @@ export const usePostVoteTeam = () => {
       } else if (res.status === 201) {
         alert('투표 성공');
         navigate(`/teamresult`);
+      } else if (res.status === 401) {
+        navigate('/login');
+        alert('접근오류! 로그인하세요');
       }
 
       return res.data;

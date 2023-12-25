@@ -34,7 +34,6 @@ const TopBar = () => {
           <>
             <Team>{teamName}</Team>
             <Info>{partName}</Info>
-            <Info>김세오</Info>
             <Btn
               onClick={() => {
                 handleLogout();

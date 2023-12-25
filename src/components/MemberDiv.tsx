@@ -1,21 +1,32 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-import MemberItem from "./VoteItem";
-
-const memberData = ["김세오", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+import MemberItem from './VoteItem';
 
 interface Props {
   setIsVoteSelected: (value: boolean) => void;
+  memberData: Array<string>;
+  selectedIdx: number;
+  setSelectedIdx: (value: number) => void;
 }
 
-const MemberDiv = ({ setIsVoteSelected }: Props) => {
+const MemberDiv = ({
+  setIsVoteSelected,
+  memberData,
+  selectedIdx,
+  setSelectedIdx,
+}: Props) => {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   const handleItemClick = (item: string) => {
     setSelectedItem(item);
-    setIsVoteSelected(true);
+    const foundIndex = memberData.findIndex((member) => member === item);
+    if (foundIndex !== -1) {
+      setSelectedIdx(foundIndex);
+      setIsVoteSelected(true);
+    }
   };
+
   return (
     <Wrapper>
       <Container>
