@@ -16,6 +16,9 @@ export default function Header() {
   const navigateRegister = () => {
     navigate("/register");
   };
+  const navigateHome = () => {
+    navigate("/");
+  };
   const logoutClicked = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       alert("로그아웃 되었습니다.");
@@ -29,7 +32,7 @@ export default function Header() {
   };
   return (
     <HeaderLayout ref={ref}>
-      <HeaderText />
+      <HeaderText onClick={navigateHome} />
       <HeaderBtn>
         {!user ? (
           <>
