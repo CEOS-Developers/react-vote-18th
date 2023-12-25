@@ -5,10 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import TopBar from '../components/TopBar';
 import MemberDiv from '../components/MemberDiv';
 import { useGetMember } from '../apis/get/useGetMember';
+import { usePostVoteMember } from '../apis/post/usePostVoteMember';
 
 const MemberVote = () => {
   const navigate = useNavigate();
   const [isVoteSelected, setIsVoteSelected] = useState(false);
+  const [id, setId] = useState(0);
+  const [memberData, setMemberData] = useState(['1', '2']);
+  const [idData, setIdData] = useState([1, 2]);
+  const [selectedIdx, setSelectedIdx] = useState(0);
   const partName = localStorage.getItem('partName') || '';
 
   interface DataItem {
@@ -17,15 +22,25 @@ const MemberVote = () => {
     count: number;
   }
 
-  //custom-hook
+  //custom-hook _ get
   const fetchData = useGetMember(partName);
-  const [memberData, setMemberData] = useState(['1', '2']);
 
   useEffect(() => {
     if (!fetchData.isLoading) {
       setMemberData(fetchData.member.map((item: DataItem) => item.name));
+      setIdData(fetchData.member.map((item: DataItem) => item.id));
     }
   }, [fetchData.isLoading]);
+
+  //custom-hook _ get
+  const postData = usePostVoteMember();
+
+  const handleSubmit = () => {
+    console.log(selectedIdx);
+    postData.voteMember({
+      candidateId: selectedIdx,
+    });
+  };
 
   return (
     <>
@@ -40,16 +55,15 @@ const MemberVote = () => {
         ) : partName === 'DESIGNER' ? (
           <Title>디자인 파트장 투표</Title>
         ) : (
-          <Title>파트장 투표</Title> // Default title when partName is empty or has unexpected value
+          <Title>파트장 투표</Title>
         )}
         <MemberDiv
           setIsVoteSelected={setIsVoteSelected}
           memberData={memberData}
+          selectedIdx={selectedIdx}
+          setSelectedIdx={setSelectedIdx}
         />
-        <VoteBtn
-          isVoteSelected={isVoteSelected}
-          onClick={() => navigate('/memberresult')}
-        >
+        <VoteBtn isVoteSelected={isVoteSelected} onClick={handleSubmit}>
           투표하기
         </VoteBtn>
       </Wrapper>
