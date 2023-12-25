@@ -1,15 +1,15 @@
 import { MemberArrayType } from './type';
 
 export const Part = {
-  frontend: '프론트엔드',
-  backend: '백엔드',
+  FRONTEND: '프론트엔드',
+  BACKEND: '백엔드',
 };
 export const Team = {
-  sharemind: '셰어마인드',
-  localmood: '로컬무드',
-  reddy: '레디',
-  sniff: '스니프',
-  gotcha: 'GOTCHA',
+  SHARE_MIND: '셰어마인드',
+  LOCAL_MOOD: '로컬무드',
+  REDI: '레디',
+  SNIFF: '스니프',
+  GOTCHA: 'GOTCHA',
 };
 export const FEMember: MemberArrayType = [
   { name: '김지원', team: '로컬무드' },
@@ -60,7 +60,7 @@ export const BgColors = {
   active: '#f7f7f7',
   default: '#ffffff',
   inactive: '#f2f2f2',
-  error: '#fbefef',
+  error: '#fff8f8',
 };
 
 export const InputFontColors = {
