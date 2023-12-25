@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BgColors, InputColors, InputFontColors } from 'utils/constant';
 import { InputStatus } from 'utils/type';
 
 interface InputProps {
@@ -17,27 +18,6 @@ interface InputProps {
   name?: string;
 }
 
-const BorderColors = {
-  active: '#3172ea',
-  default: '#cccccc',
-  inactive: '#f2f2f2',
-  error: '#db4242',
-};
-
-const BgColors = {
-  active: '#f6f6f6',
-  default: '#ffffff',
-  inactive: '#f2f2f2',
-  error: '#fbeaea',
-};
-
-const FontColors = {
-  active: '#101010',
-  default: '#101010',
-  inactive: '#b3b3b3',
-  error: '#101010',
-};
-
 const Input = ({
   width = 'auto',
   height = 'auto',
@@ -54,11 +34,11 @@ const Input = ({
   name,
 }: InputProps) => {
   const borderColor =
-    BorderColors[status as 'active' | 'default' | 'inactive' | 'error'];
+    InputColors[status as 'active' | 'default' | 'inactive' | 'error'];
   const bgColor =
     BgColors[status as 'active' | 'default' | 'inactive' | 'error'];
   const fontColor =
-    FontColors[status as 'active' | 'default' | 'inactive' | 'error'];
+    InputFontColors[status as 'active' | 'default' | 'inactive' | 'error'];
 
   return (
     <StyledInput

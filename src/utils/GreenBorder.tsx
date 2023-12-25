@@ -9,6 +9,7 @@ const borderArray: GreenBorderArrayType = [
   { top: '', right: '', bottom: '-2px', left: '-2px' },
   { top: '', right: '-2px', bottom: '-2px', left: '' },
 ];
+//헤더 로그인 회원가입 테두리 박스
 export const GreenBorder = ({ isHovered }: GreenBorderProps) => {
   return (
     <>

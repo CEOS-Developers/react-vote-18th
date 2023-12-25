@@ -35,4 +35,37 @@ export const BEMember: MemberArrayType = [
   { name: '이윤정', team: 'GOTCHA' },
   { name: '이종미', team: 'GOTCHA' },
 ];
+
 export const HeaderHeight = '4.375rem';
+//button colors
+export const ButtonColors = {
+  active: '#3172ea',
+  inactive: '#cccccc',
+};
+
+export const ButtonFontColors = {
+  active: '#ffffff',
+  inactive: '#999999',
+};
+
+//input colors
+export const InputColors = {
+  active: '#3172ea',
+  default: '#cccccc',
+  inactive: '#f2f2f2',
+  error: '#db4242',
+};
+
+export const BgColors = {
+  active: '#f7f7f7',
+  default: '#ffffff',
+  inactive: '#f2f2f2',
+  error: '#fbefef',
+};
+
+export const InputFontColors = {
+  active: '#101010',
+  default: '#101010',
+  inactive: '#b3b3b3',
+  error: '#101010',
+};
