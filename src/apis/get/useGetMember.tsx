@@ -14,7 +14,6 @@ export const useGetMember = (partName: string) => {
       const res = await axiosInstance.get(
         `/api/vote/candidates?part-name=${partName}`
       );
-      console.log(res.data);
       return res.data;
     },
   });

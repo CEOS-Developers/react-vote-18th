@@ -11,8 +11,21 @@ const MemberVote = () => {
   const [isVoteSelected, setIsVoteSelected] = useState(false);
   const partName = localStorage.getItem('partName') || '';
 
+  interface DataItem {
+    id: number;
+    name: string;
+    count: number;
+  }
+
   //custom-hook
   const fetchData = useGetMember(partName);
+  const [memberData, setMemberData] = useState(['1', '2']);
+
+  useEffect(() => {
+    if (!fetchData.isLoading) {
+      setMemberData(fetchData.member.map((item: DataItem) => item.name));
+    }
+  }, [fetchData.isLoading]);
 
   return (
     <>
@@ -29,7 +42,10 @@ const MemberVote = () => {
         ) : (
           <Title>파트장 투표</Title> // Default title when partName is empty or has unexpected value
         )}
-        <MemberDiv setIsVoteSelected={setIsVoteSelected} />
+        <MemberDiv
+          setIsVoteSelected={setIsVoteSelected}
+          memberData={memberData}
+        />
         <VoteBtn
           isVoteSelected={isVoteSelected}
           onClick={() => navigate('/memberresult')}
