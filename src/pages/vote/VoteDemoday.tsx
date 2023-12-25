@@ -5,6 +5,9 @@ import MediaQuery from "@/styles/mediaQuery";
 import { useNavigate } from "react-router-dom";
 import { SELECT_TYPE } from "@/features/vote/constants/select-vote-type";
 import { styled } from "styled-components";
+import React, { useState, useEffect } from "react";
+import useGetResults from "@/features/vote/queries/useGetResults";
+import usePatchVote from "@/features/vote/queries/usePatchVote";
 
 const VoteDemoday = () => {
   const { isMobile } = MediaQuery();
@@ -16,6 +19,27 @@ const VoteDemoday = () => {
     { mainText: "레디", subText: "레퍼런스 아카이빙 구독 서비스" },
     { mainText: "셰어마인드", subText: "연애상담 마켓플레이스" },
   ]; //API 연결
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    useGetResults("/app/team")
+      .then((resultData) => {
+        const data = resultData.data;
+        setData(data);
+      })
+      .catch((error) => {
+        console.error("데이터를 불러오는 중 에러 발생:", error);
+      });
+  }, []);
+
+  const handleVoteClick = async (teamId: number) => {
+    try {
+      await usePatchVote(teamId);
+    } catch (error) {
+      alert("투표는 한 번만 가능합니다.");
+    }
+  };
+
   const navigateDemodayVoteResults = () => {
     navigate("/vote-results", { state: "demoday" });
   };
@@ -24,12 +48,13 @@ const VoteDemoday = () => {
     <VoteDemodayContainer>
       <PageMainText text="데모데이 투표" addClass="margin-bottom:3.2rem;" />
       <DemodayContainer>
-        {demodays.map((demoday, index) => (
+        {data.map((demoday, index) => (
           <VoteSelect
             key={index}
             type={SELECT_TYPE.Demoday}
-            mainText={demoday.mainText}
-            subText={demoday.subText}
+            mainText={demoday.name}
+            subText={demoday.description}
+            onClick={() => handleVoteClick(demoday.id)}
           />
         ))}
       </DemodayContainer>
