@@ -1,19 +1,39 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-import TopBar from "../components/TopBar";
-import Candidate from "../components/Candidate";
+import TopBar from '../components/TopBar';
+import Candidate from '../components/Candidate';
+import { useGetMember } from '../apis/get/useGetMember';
 
 const MemberResult = () => {
+  const partName = localStorage.getItem('partName') || '';
+  const [memberData, setMemberData] = useState(['1', '2', '3']);
+
+  interface DataItem {
+    id: number;
+    name: string;
+    count: number;
+  }
+
+  //custom-hook
+  const fetchData = useGetMember(partName);
+
+  useEffect(() => {
+    if (!fetchData.isLoading) {
+      setMemberData(fetchData.member.map((item: DataItem) => item.name));
+      console.log(memberData);
+    }
+  }, [fetchData.isLoading, fetchData.member]);
+
   return (
     <>
       <TopBar />
       <Wrapper>
         <Title>프론트 파트장 투표 결과</Title>
-        <Candidate elected={true} />
+        <Candidate elected={true} memberName={memberData[0]} />
         <MemDiv>
-          <Candidate />
-          <Candidate />
+          <Candidate memberName={memberData[1]} />
+          <Candidate memberName={memberData[2]} />
         </MemDiv>
       </Wrapper>
     </>
@@ -32,7 +52,7 @@ const Wrapper = styled.div`
 
 const Font = styled.div`
   text-align: center;
-  font-family: "Pretendard-regular";
+  font-family: 'Pretendard-regular';
   font-size: 2.5rem;
   font-style: normal;
   font-weight: 700;

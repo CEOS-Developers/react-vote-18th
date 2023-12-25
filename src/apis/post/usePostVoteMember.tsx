@@ -23,8 +23,8 @@ export const usePostVoteMember = () => {
     mutationFn: async (data: MemberVoteData) => {
       const res = await axiosInstance.post(`/api/vote/leader`, data);
 
-      if (res.status === 400) {
-        alert('본인에게는 투표할 수 없습니다!');
+      if (res.status === 401) {
+        alert('로그인해주세요!');
       } else if (res.status === 500) {
         alert('투표는 한번만 할 수 있습니다!');
       } else if (res.status === 201) {

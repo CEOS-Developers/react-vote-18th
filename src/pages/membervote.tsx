@@ -10,7 +10,6 @@ import { usePostVoteMember } from '../apis/post/usePostVoteMember';
 const MemberVote = () => {
   const navigate = useNavigate();
   const [isVoteSelected, setIsVoteSelected] = useState(false);
-  const [id, setId] = useState(0);
   const [memberData, setMemberData] = useState(['1', '2']);
   const [idData, setIdData] = useState([1, 2]);
   const [selectedIdx, setSelectedIdx] = useState(0);
@@ -36,9 +35,8 @@ const MemberVote = () => {
   const postData = usePostVoteMember();
 
   const handleSubmit = () => {
-    console.log(selectedIdx);
     postData.voteMember({
-      candidateId: selectedIdx,
+      candidateId: idData[selectedIdx],
     });
   };
 
