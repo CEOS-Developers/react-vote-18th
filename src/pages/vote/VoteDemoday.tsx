@@ -27,6 +27,7 @@ const VoteDemoday = () => {
   const handleVoteClick = async (teamId: number) => {
     try {
       await usePatchTeamVote(teamId);
+      alert("투표되었습니다.");
     } catch (error) {
       alert("투표는 한 번만 가능합니다.");
     }
