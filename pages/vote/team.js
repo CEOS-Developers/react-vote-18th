@@ -5,34 +5,9 @@ import HeadFunction from "../../components/HeadFunction";
 import styles from "../../styles/Team.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getTeamList } from "../../api/getVote";
+import { useQuery } from "@tanstack/react-query";
 
-const teamList = [
-  {
-    id: 1,
-    name: "REDDI",
-    exp: "주식 관리 포트폴리오 서비스",
-  },
-  {
-    id: 2,
-    name: "gotcha",
-    exp: "주식 관리 포트폴리오 서비스",
-  },
-  {
-    id: 3,
-    name: "SNIFF",
-    exp: "주식 관리 포트폴리오 서비스",
-  },
-  {
-    id: 4,
-    name: "셰어마인드",
-    exp: "주식 관리 포트폴리오 서비스",
-  },
-  {
-    id: 5,
-    name: "로컬무드",
-    exp: "주식 관리 포트폴리오 서비스",
-  },
-];
 export default function VoteTeam() {
   const [isClicked, setIsClicked] = useState({});
 
@@ -47,6 +22,17 @@ export default function VoteTeam() {
       },
     });
   };
+
+  const [teamList, setTeamList] = useState([]);
+  const { data: voteList } = useQuery(["voteList"], () => getTeamList(), {
+    onSuccess: (data) => {
+      setTeamList(data);
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   return (
     <div className={styles.teamContainer}>
@@ -74,7 +60,7 @@ export default function VoteTeam() {
                 isClicked[list.id] ? styles.clickedText : ""
               }`}
             >
-              {list.exp}
+              {list.description}
             </div>
           </button>
         ))}
