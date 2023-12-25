@@ -5,27 +5,40 @@ import MediaQuery from "@/styles/mediaQuery";
 import { SELECT_TYPE } from "@/features/vote/constants/select-vote-type";
 import { styled } from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import useGetResults from "@/features/vote/queries/useGetResults";
+import usePatchMemVote from "@/features/vote/queries/usePatchMemVote";
 
 const VoteLeader = () => {
   const { isMobile } = MediaQuery();
   const navigate = useNavigate();
   const location = useLocation();
   const part = location.state;
-  const voteLeaderSelectClicked = (mainText: string) => {
-    console.log(mainText);
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const devPartId = part === "BE" ? 1 : 2;
+    const url = `/app/member?devPartId=${devPartId}`;
+
+    useGetResults(url)
+      .then((resultData) => {
+        const data = resultData.data;
+        setData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("데이터를 불러오는 중 에러 발생:", error);
+      });
+  }, []);
+
+  const handleVoteClick = async (memberId: number) => {
+    try {
+      await usePatchMemVote(memberId);
+      alert("투표되었습니다.");
+    } catch (error) {
+      alert("투표는 한 번만 가능합니다.");
+    }
   };
-  const leaders = [
-    { mainText: "김현민", subText: "LocalMood" },
-    { mainText: "김지원", subText: "LocalMood" },
-    { mainText: "노이진", subText: "Reddigg" },
-    { mainText: "신동현", subText: "Reddigg" },
-    { mainText: "정인영", subText: "셰어마인드" },
-    { mainText: "이규호", subText: "셰어마인드" },
-    { mainText: "변지혜", subText: "Gotcha" },
-    { mainText: "이은비", subText: "Gotcha" },
-    { mainText: "오대균", subText: "Sniff" },
-    { mainText: "송지석", subText: "Sniff" },
-  ]; //API 연결
 
   const navigateLeaderVoteResults = () => {
     navigate("/vote-results", { state: { type: "leader", part } });
@@ -38,13 +51,13 @@ const VoteLeader = () => {
         addClass="margin-bottom:3.2rem;"
       />
       <LeaderContainer $isMobile={isMobile}>
-        {leaders.map((leader, index) => (
+        {data.map((leader, index) => (
           <VoteSelect
             key={index}
             type={SELECT_TYPE.PartLeader}
-            mainText={leader.mainText}
-            subText={leader.subText}
-            onClick={voteLeaderSelectClicked}
+            mainText={leader.name}
+            subText={leader.teamName}
+            onClick={() => handleVoteClick(leader.id)}
           />
         ))}
       </LeaderContainer>

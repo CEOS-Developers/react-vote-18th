@@ -7,7 +7,7 @@ import { SELECT_TYPE } from "@/features/vote/constants/select-vote-type";
 import { styled } from "styled-components";
 import React, { useState, useEffect } from "react";
 import useGetResults from "@/features/vote/queries/useGetResults";
-import usePatchVote from "@/features/vote/queries/usePatchVote";
+import usePatchTeamVote from "@/features/vote/queries/usePatchTeamVote";
 
 const VoteDemoday = () => {
   const { isMobile } = MediaQuery();
@@ -34,7 +34,7 @@ const VoteDemoday = () => {
 
   const handleVoteClick = async (teamId: number) => {
     try {
-      await usePatchVote(teamId);
+      await usePatchTeamVote(teamId);
     } catch (error) {
       alert("투표는 한 번만 가능합니다.");
     }
