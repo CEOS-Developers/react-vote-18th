@@ -22,7 +22,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 492px;
   height: 85px;
   border-radius: 20px;
   border: 3px solid #384084;
@@ -58,8 +57,8 @@
 }
 
 .teamName {
-  width: fit-content;
   display: flex;
+  width: fit-content;
   color: #000;
   font-size: 20px;
   font-weight: 500;

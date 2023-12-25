@@ -94,13 +94,22 @@ export default function Result() {
       <div className={styles.resultList}>
         {projectResultList &&
           projectResultList.map((list) => (
-            <div className={styles.resultBox}>
+            <div
+              className={styles.resultBox}
+              style={{ width: isTeamResult ? 775 : 492 }}
+            >
               <div className={styles.numberBox}>{list.id}</div>
               <div
-                style={{ display: "flex", alignItems: "baseline", width: 300 }}
+                style={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  width: isTeamResult ? 560 : 300,
+                }}
               >
                 <div className={styles.name}>{list.name}</div>
-                <div className={styles.teamName}>{list.description}</div>
+                <div className={styles.teamName}>
+                  {isTeamResult ? list.description : list.projectName}
+                </div>
               </div>
               <div className={styles.voteNumber}>{list.count}</div>
             </div>
