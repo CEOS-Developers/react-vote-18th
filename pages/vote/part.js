@@ -5,6 +5,10 @@ import styles from "../../styles/Part.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+//로그인된 userData 사용
+import { userData } from "../../utils/atom";
+import { useRecoilState } from "recoil";
+
 export default function votePart() {
   const peopleList = [
     {
@@ -58,7 +62,6 @@ export default function votePart() {
       name: "김현민",
     },
   ];
-
   const [isClicked, setIsClicked] = useState({});
   const router = useRouter();
   const { isFront } = router.query;

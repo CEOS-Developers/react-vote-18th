@@ -31,8 +31,12 @@
   border-radius: 20px;
   color: white;
   font-size: 20px;
+
 }
 
+.buttons:hover {
+  cursor: pointer;
+}
 .loginButton {
   border: 1px solid #384084;
   color: #000;
