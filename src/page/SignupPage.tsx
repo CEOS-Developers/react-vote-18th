@@ -26,9 +26,6 @@ function SignupPage() {
   //버튼 있는 input
   const emailInput = useButtonInput('');
   const verifyCodeInput = useButtonInput('');
-  //select error msg, 그리고 mount 시 예외처리
-  const [selectErrMsg, setSelectErrMsg] = useState<string>('');
-  const [isMounted, setIsMounted] = useState<boolean>(false);
   // 최종 회원가입 버튼
   const [signupBottonStatus, setSignupBottonStatus] =
     useState<string>('inactive');
@@ -157,22 +154,8 @@ function SignupPage() {
     }
     return;
   };
-  useEffect(() => {
-    setIsMounted(true);
-    return () => {
-      setIsMounted(false);
-    };
-  }, []);
   //valid 요건 충족할 경우 submit 가능
   useEffect(() => {
-    //select 둘중 하나라도 선택안되있으면 에러메세지
-    if (partSelect.isValid && teamSelect.isValid) {
-      setSelectErrMsg('');
-    } else {
-      if (isMounted) {
-        setSelectErrMsg('파트와 팀을 선택해주세요.');
-      }
-    }
     if (
       idInput.isValid &&
       verifyCodeInput.isValid &&
@@ -293,6 +276,7 @@ function SignupPage() {
                 </option>
               ))}
             </Select>
+            <AlertText status={'error'}>{partSelect.message}</AlertText>
           </div>
           <div className="signup-select">
             <SignupText>팀 선택</SignupText>
@@ -311,9 +295,9 @@ function SignupPage() {
                 </option>
               ))}
             </Select>
+            <AlertText status={'error'}>{teamSelect.message}</AlertText>
           </div>
         </SignupSelectWrapper>
-        <AlertText status={'error'}>{selectErrMsg}</AlertText>
         <SignupText>이메일 인증</SignupText>
         <InputWrapper>
           <Input

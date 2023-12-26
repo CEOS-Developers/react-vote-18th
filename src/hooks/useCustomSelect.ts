@@ -9,6 +9,8 @@ export const useCustomSelect = (initValue: string, type: string) => {
   const [bdColor, setBdColor] = useState('#cccccc');
   //back ground color
   const [bgColor, setBgColor] = useState('#ffffff');
+  //error message
+  const [message, setMessage] = useState<string>('');
   const [isValid, setIsValid] = useState<boolean>(false);
   //api value를 key 값으로 설정, post 시 사용
   const findKeyByValue = (
@@ -41,6 +43,7 @@ export const useCustomSelect = (initValue: string, type: string) => {
   };
 
   const handleFocus = () => {
+    setMessage('');
     setBdColor('#3172ea');
   };
 
@@ -48,6 +51,8 @@ export const useCustomSelect = (initValue: string, type: string) => {
     if (selectValue === '') {
       setBgColor('#fff8f8');
       setBdColor('#db4242');
+      if (type === 'part') setMessage('파트를 선택해주세요.');
+      else setMessage('팀을 선택해주세요');
     } else {
       setBgColor('#ffffff');
       setBdColor('#cccccc');
@@ -63,5 +68,6 @@ export const useCustomSelect = (initValue: string, type: string) => {
     borderColor: bdColor,
     bgColor: bgColor,
     isValid,
+    message,
   };
 };
