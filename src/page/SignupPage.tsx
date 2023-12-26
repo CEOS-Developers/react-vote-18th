@@ -164,6 +164,8 @@ function SignupPage() {
       teamSelect.isValid
     ) {
       setSignupBottonStatus('active');
+    } else {
+      setSignupBottonStatus('inactive');
     }
   }, [
     idInput.isValid,
@@ -208,7 +210,7 @@ function SignupPage() {
         <Input
           type="password"
           height={'3.5rem'}
-          placeholder="비밀번호를 입력해주세요.(8자 이상,특수문자 포함 필수)"
+          placeholder="비밀번호를 입력해주세요."
           status={pwInput.status}
           onFocus={() => {
             pwInput.setStatus('active');
