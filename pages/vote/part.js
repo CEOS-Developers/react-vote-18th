@@ -4,7 +4,7 @@ import HeadFunction from "../../components/HeadFunction";
 import styles from "../../styles/Part.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getFrontList, getBackList } from "../../api/getVote";
+import { getFrontList, getBackList } from "../../api/voteAPI";
 import { useQuery } from "@tanstack/react-query";
 
 export default function votePart() {

@@ -5,7 +5,7 @@ import HeadFunction from "../../components/HeadFunction";
 import styles from "../../styles/Team.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getTeamList } from "../../api/getVote";
+import { getTeamList } from "../../api/voteAPI";
 import { useQuery } from "@tanstack/react-query";
 
 export default function VoteTeam() {
