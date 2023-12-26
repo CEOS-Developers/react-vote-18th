@@ -4,6 +4,8 @@ import HeadFunction from "../../components/HeadFunction";
 import styles from "../../styles/Part.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getFrontList, getBackList } from "../../api/voteAPI";
+import { useQuery } from "@tanstack/react-query";
 
 //로그인된 userData 사용
 import { userData } from "../../utils/atom";
@@ -67,7 +69,6 @@ export default function votePart() {
   const { isFront } = router.query;
   const isFrontVote = isFront === "true";
 
-  console.log(isFront);
   const goToResult = () => {
     router.push({
       pathname: "/result",
@@ -77,7 +78,21 @@ export default function votePart() {
       },
     });
   };
-  console.log(isFront);
+
+  const [partLeaderList, setPartLeaderList] = useState([]);
+  const { data: voteList } = useQuery(
+    ["voteList"],
+    () => (isFrontVote ? getFrontList() : getBackList()),
+    {
+      onSuccess: (data) => {
+        setPartLeaderList(data);
+        console.log(data);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    },
+  );
 
   return (
     <div className={styles.partContainer}>
@@ -86,31 +101,32 @@ export default function votePart() {
         {isFrontVote ? "FE 파트장 투표" : "BE 파트장 투표"}
       </h1>
       <div className={styles.partList}>
-        {peopleList.map((list) => (
-          <button
-            className={`${styles.partBox} ${
-              isClicked[list.id] ? styles.clicked : ""
-            }`}
-            onClick={() =>
-              setIsClicked({ ...isClicked, [list.id]: !isClicked[list.id] })
-            }
-          >
-            <div
-              className={`${styles.teamName} ${
-                isClicked[list.id] ? styles.clickedText : ""
+        {partLeaderList &&
+          partLeaderList.map((list) => (
+            <button
+              className={`${styles.partBox} ${
+                isClicked[list.id] ? styles.clicked : ""
               }`}
+              onClick={() =>
+                setIsClicked({ ...isClicked, [list.id]: !isClicked[list.id] })
+              }
             >
-              {list.team}
-            </div>
-            <div
-              className={`${styles.name} ${
-                isClicked[list.id] ? styles.clickedText : ""
-              }`}
-            >
-              {list.name}
-            </div>
-          </button>
-        ))}
+              <div
+                className={`${styles.teamName} ${
+                  isClicked[list.id] ? styles.clickedText : ""
+                }`}
+              >
+                {list.projectName}
+              </div>
+              <div
+                className={`${styles.name} ${
+                  isClicked[list.id] ? styles.clickedText : ""
+                }`}
+              >
+                {list.name}
+              </div>
+            </button>
+          ))}
       </div>
       <div style={{ display: "flex", marginTop: 101, marginBottom: 120 }}>
         <button className={styles.voteButton}>투표하기</button>
