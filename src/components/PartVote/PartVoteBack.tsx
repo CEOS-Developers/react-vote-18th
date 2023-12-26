@@ -3,6 +3,7 @@ import { BEMember } from 'utils/constant';
 import { PartVoteProps } from 'utils/type';
 import { ReactComponent as Vote } from 'assets/images/vote.svg';
 import { fadeInAnimation } from 'style/Animation';
+import VoteResultBack from 'components/VoteResult/VoteResultBack';
 export const PartVoteBack = ({
   status,
   selectedItem,
@@ -31,7 +32,11 @@ export const PartVoteBack = ({
       </PartVoteBEWrapper>
     );
   } else if (status === 'result') {
-    return <PartVoteBEWrapper>결과</PartVoteBEWrapper>;
+    return (
+      <PartVoteBEWrapper>
+        <VoteResultBack />
+      </PartVoteBEWrapper>
+    );
   } else {
     return <>error</>;
   }
@@ -49,7 +54,7 @@ const PartVoteBEWrapper = styled.div`
 const VoteIcon = styled(Vote)<{ isSelected: boolean }>`
   position: absolute;
   opacity: ${(props) => (props.isSelected ? '1' : '0')};
-  margin-left: 20%;
+  margin-left: 10%;
   ${(props) => (props.isSelected ? fadeInAnimation : '')};
 `;
 const VoteItem = styled.div<{ isSelected: boolean }>`
@@ -65,9 +70,10 @@ const VoteItem = styled.div<{ isSelected: boolean }>`
     background-color: rgba(255, 208, 24, 0.98);
   }
   cursor: pointer;
+  border-bottom: 0.5px solid #f1f3f5;
 `;
 const NameText = styled.div`
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.875rem;
@@ -77,7 +83,7 @@ const NameText = styled.div`
 const TeamText = styled.div`
   font-size: 1.25rem;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 300;
   line-height: 1.875rem; /* 150% */
   letter-spacing: -0.025rem;
   margin-left: 3rem;
