@@ -14,8 +14,8 @@ const VoteLeader = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const part = location.state;
-
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
+  const [voteMemberId, setVoteMemberId] = useState<number>(-1);
   useEffect(() => {
     const devPartId = part === "BE" ? 1 : 2;
     const url = `/app/member?devPartId=${devPartId}`;
@@ -23,13 +23,16 @@ const VoteLeader = () => {
     useGetResults(url)
       .then((resultData) => {
         const data = resultData.data;
-        setData(data);
-        console.log(data);
+        setData(data.filter((o) => o.isCandidate));
       })
       .catch((error) => {
         console.error("데이터를 불러오는 중 에러 발생:", error);
       });
   }, []);
+
+  const selectMemberClicked = (id: number) => {
+    setVoteMemberId(id);
+  };
 
   const handleVoteClick = async (memberId: number) => {
     try {
@@ -55,14 +58,21 @@ const VoteLeader = () => {
           <VoteSelect
             key={index}
             type={SELECT_TYPE.PartLeader}
+            id={leader.id}
+            selectedId={voteMemberId}
             mainText={leader.name}
             subText={leader.teamName}
-            onClick={() => handleVoteClick(leader.id)}
+            onClick={selectMemberClicked}
           />
         ))}
       </LeaderContainer>
       <VoteLeaderButtonContainer $isMobile={isMobile}>
-        <Button addClass="margin:3.2rem;">투표하기</Button>
+        <Button
+          addClass="margin:3.2rem;"
+          onClick={() => handleVoteClick(voteMemberId)}
+        >
+          투표하기
+        </Button>
         <Button addClass="margin:3.2rem;" onClick={navigateLeaderVoteResults}>
           결과보기
         </Button>

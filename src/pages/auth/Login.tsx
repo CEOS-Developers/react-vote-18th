@@ -10,10 +10,13 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export default function Login() {
   const queryClient = useQueryClient();
-  const { mutate: postLogin, data: token } = usePostLogin();
+  const { mutate: postLogin, data: token, error } = usePostLogin();
   const { isMobile } = MediaQuery();
   const loginFormSubmit = (e: LoginFormState) => {
     postLogin(e);
+    if (error) {
+      alert("문제가 발생하였습니다.");
+    }
   };
   useEffect(() => {
     if (token) {

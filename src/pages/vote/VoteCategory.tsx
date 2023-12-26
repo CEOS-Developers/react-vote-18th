@@ -20,12 +20,16 @@ export default function VoteCategory() {
       <CategorySelectContainer $isMobile={isMobile}>
         <VoteSelect
           type={SELECT_TYPE.Category}
+          id={1}
+          selectedId={0}
           mainText="파트장 투표 바로가기"
           addClass={`margin-bottom:${isMobile ? "5rem" : 0};`}
           onClick={navigateSelectPart}
         />
         <VoteSelect
           type={SELECT_TYPE.Category}
+          selectedId={0}
+          id={2}
           mainText="데모데이 투표 바로가기"
           onClick={navigateSelectDemoday}
         />

@@ -16,4 +16,5 @@ export interface VoteMemberDataItem {
   name: string;
   teamName: string;
   voteCnt: number;
+  isCandidate: boolean;
 }

@@ -32,6 +32,8 @@ export default function VotePartSelect() {
         <VoteSelectContainer>
           <VoteSelect
             type={SELECT_TYPE.Category}
+            id={1}
+            selectedId={0}
             mainText="FRONT-END
           파트장 투표"
             onClick={navigateFELeaderVote}
@@ -46,6 +48,8 @@ export default function VotePartSelect() {
         <VoteSelectContainer>
           <VoteSelect
             type={SELECT_TYPE.Category}
+            id={2}
+            selectedId={0}
             mainText="BACK-END 파트장 투표"
             onClick={navigateBELeaderVote}
           />

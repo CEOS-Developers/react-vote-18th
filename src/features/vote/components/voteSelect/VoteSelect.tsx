@@ -1,31 +1,32 @@
 import styled from "styled-components";
 import { SELECT_TYPE } from "../../constants/select-vote-type";
-import { useState } from "react";
 
 interface VoteSelectionProps {
   type: SELECT_TYPE;
+  id: number;
+  selectedId: number;
   mainText: string;
   subText?: string;
-  onClick?: (mainText: string) => void;
+  onClick?: (id: number) => void;
   addClass?: string;
 }
 
 export default function VoteSelect({
   type,
+  id,
+  selectedId,
   mainText,
   subText,
   onClick,
   addClass,
 }: VoteSelectionProps) {
-  const [clicked, setClicked] = useState(false);
   const voteSelectClicked = () => {
-    onClick && onClick(mainText);
-    setClicked((prev) => !prev);
+    onClick && onClick(id);
   };
   return (
     <VoteSelectWrapper
       $type={type}
-      $clicked={clicked}
+      $clicked={selectedId === id}
       $addClass={addClass}
       onClick={voteSelectClicked}
     >

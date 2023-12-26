@@ -12,7 +12,8 @@ import usePatchTeamVote from "@/features/vote/queries/usePatchTeamVote";
 const VoteDemoday = () => {
   const { isMobile } = MediaQuery();
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
+  const [voteDemodayId, setVoteDemodayId] = useState(-1);
   useEffect(() => {
     useGetResults("/app/team")
       .then((resultData) => {
@@ -23,6 +24,10 @@ const VoteDemoday = () => {
         console.error("데이터를 불러오는 중 에러 발생:", error);
       });
   }, []);
+
+  const selectDemodayClicked = (id: number) => {
+    setVoteDemodayId(id);
+  };
 
   const handleVoteClick = async (teamId: number) => {
     try {
@@ -45,14 +50,21 @@ const VoteDemoday = () => {
           <VoteSelect
             key={index}
             type={SELECT_TYPE.Demoday}
+            id={demoday.id}
+            selectedId={voteDemodayId}
             mainText={demoday.name}
             subText={demoday.description}
-            onClick={() => handleVoteClick(demoday.id)}
+            onClick={selectDemodayClicked}
           />
         ))}
       </DemodayContainer>
       <VoteDemodayButtonContainer $isMobile={isMobile}>
-        <Button addClass="margin:3.2rem;">투표하기</Button>
+        <Button
+          addClass="margin:3.2rem;"
+          onClick={() => handleVoteClick(voteDemodayId)}
+        >
+          투표하기
+        </Button>
         <Button addClass="margin:3.2rem;" onClick={navigateDemodayVoteResults}>
           결과보기
         </Button>
