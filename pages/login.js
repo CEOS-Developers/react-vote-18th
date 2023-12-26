@@ -23,6 +23,7 @@ export default function Login() {
     onSuccess: async (data) => {
       console.log(data);
       const accessToken = data.data.accessToken;
+      const refreshToken = data.data.refreshToken;
       console.log("accessToken:", accessToken);
       try {
         const userInfoResponse = await loginUserInfo({ accessToken });
@@ -34,6 +35,8 @@ export default function Login() {
           part: userInfoResponse.data.part,
           name: userInfoResponse.data.name,
           email: userInfoResponse.data.email,
+          accessToken: accessToken,
+          refreshToken: refreshToken,
         });
         setIsLoginState(true);
         router.push("/");

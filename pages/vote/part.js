@@ -4,8 +4,8 @@ import HeadFunction from "../../components/HeadFunction";
 import styles from "../../styles/Part.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getFrontList, getBackList } from "../../api/voteAPI";
-import { useQuery } from "@tanstack/react-query";
+import { getFrontList, getBackList, voteLeader } from "../../api/voteAPI";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 //로그인된 userData 사용
 import { userData } from "../../utils/atom";
@@ -35,6 +35,32 @@ export default function votePart() {
       onSuccess: (data) => {
         setPartLeaderList(data);
         console.log(data);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    },
+  );
+
+  const accessToken = userData.accessToken;
+  //console.log(accessToken);
+  const [partLeaderId, setPartLeaderId] = useState(0);
+  const voteCliked = (id) => () => {
+    setPartLeaderId(id);
+    voteLeaderMutation.mutate();
+  };
+  const voteLeaderMutation = useMutation(
+    () => voteLeader(partLeaderId, accessToken),
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        router.push({
+          pathname: "/result",
+          query: {
+            isFront: isFront,
+            isTeam: false,
+          },
+        });
       },
       onError: (error) => {
         console.log(error);
@@ -75,7 +101,9 @@ export default function votePart() {
           ))}
       </div>
       <div style={{ display: "flex", marginTop: 101, marginBottom: 120 }}>
-        <button className={styles.voteButton}>투표하기</button>
+        <button className={styles.voteButton} onClick={voteCliked(isClicked)}>
+          투표하기
+        </button>
         <button className={styles.resultButton} onClick={goToResult}>
           결과보기
         </button>
