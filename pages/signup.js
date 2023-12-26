@@ -34,7 +34,7 @@ export default function SignUp() {
       setIdVerified(true);
     },
     onError: (error) => {
-      alert("아이디를 다시 설정해주세요");
+      alert("사용중인 아이디입니다. 아이디를 다시 설정해주세요");
       setFormData((prevFormData) => ({ ...prevFormData, username: "" }));
     },
   });
@@ -52,7 +52,7 @@ export default function SignUp() {
       setEmailVerified(true);
     },
     onError: (error) => {
-      alert("이메일을 다시 설정해주세요");
+      alert("사용중인 이메일입니다. 이메일을 다시 설정해주세요");
       setFormData((prevFormData) => ({ ...prevFormData, email: "" }));
     },
   });

@@ -12,5 +12,6 @@ export const userData = atom({
     teamName: "teamName",
     part: "part",
     name: "name",
+    email: "email",
   },
 });

@@ -8,28 +8,40 @@ import { useMutation } from "@tanstack/react-query";
 //로그인 페이지
 
 //api
-import { signIn } from "../api/auth";
+import { signIn, loginUserInfo } from "../api/auth";
 
 export default function Login() {
   const router = useRouter();
   const [isLoginState, setIsLoginState] = useRecoilState(isLogin);
-  const [accessToken, setAccessToken] = useState("");
+
   const [userInfo, setUserInfo] = useState({
     username: "",
     password: "",
   });
-
-  const setUserData = useRecoilState(userData);
+  const [userDataState, setUserDataState] = useRecoilState(userData);
   const signInMutation = useMutation(signIn, {
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       console.log(data);
-      console.log(data.data.accessToken);
-      // console.log(data.accessToken);
-      setAccessToken(data.data.accessToken);
+      const accessToken = data.data.accessToken;
       console.log("accessToken:", accessToken);
-      //setUserData(data.user) -> 전역 데이터 저장하는 부분
-      alert("로그인에 성공하였습니다");
-      router.push("/");
+      try {
+        const userInfoResponse = await loginUserInfo({ accessToken });
+        console.log("response: ", userInfoResponse);
+        // userInfoResponse를 전역 상태에 저장
+        setUserDataState({
+          username: userInfoResponse.data.username,
+          teamName: userInfoResponse.data.teamName,
+          part: userInfoResponse.data.part,
+          name: userInfoResponse.data.name,
+          email: userInfoResponse.data.email,
+        });
+        setIsLoginState(true);
+        router.push("/");
+        alert("로그인에 성공하였습니다");
+      } catch (error) {
+        console.error("사용자 정보 불러오기 실패:", error);
+        alert("사용자 정보 불러오기에 실패하였습니다");
+      }
     },
     onError: (error) => {
       alert("로그인에 실패하였습니다");
@@ -47,8 +59,6 @@ export default function Login() {
       username: userInfo.username,
       password: userInfo.password,
     });
-    router.push("/");
-    setIsLoginState(true);
   };
 
   return (

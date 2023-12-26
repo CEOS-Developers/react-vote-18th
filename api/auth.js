@@ -8,6 +8,15 @@ export const signIn = async (userData) => {
   return response.data;
 };
 
+export const loginUserInfo = async (info) => {
+  const response = await client.get("/api/member/info", {
+    headers: {
+      Authorization: `Bearer ${info.accessToken}`,
+    },
+  });
+  return response.data;
+};
+
 export const signUp = async (userData) => {
   const response = await client.post("/api/auth/signup", {
     username: userData.username,
