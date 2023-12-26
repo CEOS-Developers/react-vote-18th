@@ -1,5 +1,13 @@
 import client from "./client";
 
+export const signIn = async (userData) => {
+  const response = await client.post("/api/auth/signin", {
+    username: userData.username,
+    password: userData.password,
+  });
+  return response.data;
+};
+
 export const signUp = async (userData) => {
   const response = await client.post("/api/auth/signup", {
     username: userData.username,

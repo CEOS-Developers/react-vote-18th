@@ -1,17 +1,39 @@
 import HeadFunction from "../components/HeadFunction";
 import styles from "../styles/Login.module.css";
 import { useState } from "react";
-import { isLogin } from "../utils/atom";
+import { isLogin, userData } from "../utils/atom";
 import { useRecoilState } from "recoil";
 import { useRouter } from "next/router";
+import { useMutation } from "@tanstack/react-query";
 //로그인 페이지
+
+//api
+import { signIn } from "../api/auth";
 
 export default function Login() {
   const router = useRouter();
   const [isLoginState, setIsLoginState] = useRecoilState(isLogin);
+  const [accessToken, setAccessToken] = useState("");
   const [userInfo, setUserInfo] = useState({
-    id: "",
+    username: "",
     password: "",
+  });
+
+  const setUserData = useRecoilState(userData);
+  const signInMutation = useMutation(signIn, {
+    onSuccess: (data) => {
+      console.log(data);
+      console.log(data.data.accessToken);
+      // console.log(data.accessToken);
+      setAccessToken(data.data.accessToken);
+      console.log("accessToken:", accessToken);
+      //setUserData(data.user) -> 전역 데이터 저장하는 부분
+      alert("로그인에 성공하였습니다");
+      router.push("/");
+    },
+    onError: (error) => {
+      alert("로그인에 실패하였습니다");
+    },
   });
 
   const handleChange = (e) => {
@@ -21,8 +43,10 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userInfo);
-
-    alert("Login 성공");
+    signInMutation.mutate({
+      username: userInfo.username,
+      password: userInfo.password,
+    });
     router.push("/");
     setIsLoginState(true);
   };
@@ -35,9 +59,9 @@ export default function Login() {
         <input
           className={styles.inputBox}
           type="text"
-          name="id"
+          name="username"
           placeholder="아이디"
-          value={userInfo.id}
+          value={userInfo.username}
           onChange={handleChange}
           required
         />
