@@ -4,7 +4,7 @@ export const Part = {
   FRONTEND: '프론트엔드',
   BACKEND: '백엔드',
 };
-export const Team = {
+export const Team: { [key: string]: string } = {
   SHARE_MIND: '셰어마인드',
   LOCAL_MOOD: '로컬무드',
   REDI: '레디',
