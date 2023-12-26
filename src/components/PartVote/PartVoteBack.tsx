@@ -1,30 +1,31 @@
 import styled from 'styled-components';
-import { BEMember } from 'utils/constant';
 import { PartVoteProps } from 'utils/type';
 import { ReactComponent as Vote } from 'assets/images/vote.svg';
 import { fadeInAnimation } from 'style/Animation';
+import { changeValueToTeam } from 'utils/changeUtils';
 export const PartVoteBack = ({
   status,
   selectedItem,
   setSelectedItem,
+  candidate,
 }: PartVoteProps) => {
   if (status === 'vote') {
     return (
       <PartVoteBEWrapper>
-        {BEMember.map((value, index) => {
+        {candidate.map((value, index) => {
           return (
             <VoteItem
               key={index}
               onClick={() => {
-                setSelectedItem(index);
+                setSelectedItem(value.candidateId);
               }}
-              isSelected={index === selectedItem}
+              isSelected={value.candidateId === selectedItem}
             >
-              {index === selectedItem ? (
-                <VoteIcon isSelected={index === selectedItem} />
+              {value.candidateId === selectedItem ? (
+                <VoteIcon isSelected={value.candidateId === selectedItem} />
               ) : null}
               <NameText>{value.name}</NameText>
-              <TeamText>{value.team}</TeamText>
+              <TeamText>{changeValueToTeam(value.team)}</TeamText>
             </VoteItem>
           );
         })}

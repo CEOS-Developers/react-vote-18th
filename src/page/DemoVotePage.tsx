@@ -1,27 +1,40 @@
 import styled from 'styled-components';
 import CEOS from 'assets/images/ceos.png';
-import { Team } from 'utils/constant';
-import { useState } from 'react';
-import { VotePageStatus } from 'utils/type';
+import { useEffect, useState } from 'react';
+import { DemoCandidateArrayType, VotePageStatus } from 'utils/type';
 import { DemoVote } from 'components/DemoVote/DemoVote';
+import { getDemoday } from 'api/get';
+import { changeDemoCandIdToName } from 'utils/changeUtils';
 export const DemoVotePage = () => {
   const [rightStatus, setRightStatus] = useState<VotePageStatus>('vote');
-  const [selectedDemoItem, setSelectedDemoItem] = useState<number>(-1);
+  const [selectedCandId, setSelectedCandId] = useState<number>(-1);
+  const [candidateDemo, setCandidateDemo] = useState<DemoCandidateArrayType>(
+    [],
+  );
+  useEffect(() => {
+    const fetchCandidateDemo = async () => {
+      const res: any = await getDemoday();
+      setCandidateDemo(res.data);
+    };
+
+    fetchCandidateDemo();
+  }, []);
   return (
     <DemoPageWrapper>
       <VoteSelect isLeft={true}>
         <Img src={CEOS} />
         <PartText>데모 데이</PartText>
-        {selectedDemoItem > -1 ? (
+        {selectedCandId > -1 ? (
           <>
             <SelectText hover={false}>
-              {Object.entries(Team)[selectedDemoItem][1]} 팀을 선택하셨습니다.
+              {changeDemoCandIdToName(selectedCandId, candidateDemo)} 팀을
+              선택하셨습니다.
             </SelectText>
             <SelectText
               onClick={() => {
                 //여기서 post
                 setRightStatus('result');
-                setSelectedDemoItem(-1);
+                setSelectedCandId(-1);
               }}
               hover={true}
             >
@@ -51,8 +64,9 @@ export const DemoVotePage = () => {
       </VoteSelect>
       <DemoVote
         status={rightStatus}
-        selectedItem={selectedDemoItem}
-        setSelectedItem={setSelectedDemoItem}
+        selectedItem={selectedCandId}
+        setSelectedItem={setSelectedCandId}
+        candidate={candidateDemo}
       />
     </DemoPageWrapper>
   );

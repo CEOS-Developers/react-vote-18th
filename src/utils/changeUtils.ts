@@ -1,5 +1,4 @@
-import { Team } from './constant';
-import { PartCandidateArrayType } from './type';
+import { DemoCandidateArrayType, PartCandidateArrayType } from './type';
 //Team valueg  UI를 위한 string으로 변경(ex. LOCAL_MOOD=>로컬무드)
 const teamNames: Record<string, string> = {
   SHARE_MIND: '셰어마인드',
@@ -19,6 +18,18 @@ export const changePartCandIdToName = (
   const result = candidates.find((candidate) => candidate.candidateId === id);
   if (result) {
     return result.name;
+  } else {
+    return undefined;
+  }
+};
+// demo의 candidateId를 통해 팀 이름으로 변환
+export const changeDemoCandIdToName = (
+  id: number,
+  candidates: DemoCandidateArrayType,
+) => {
+  const result = candidates.find((candidate) => candidate.candidateId === id);
+  if (result) {
+    return changeValueToTeam(result.team);
   } else {
     return undefined;
   }

@@ -1,42 +1,74 @@
 import styled from 'styled-components';
 import FE from 'assets/images/FE.png';
 import BE from 'assets/images/BE.png';
-import { useState } from 'react';
-import { VotePageStatus } from 'utils/type';
+import { useEffect, useState } from 'react';
+import { PartCandidateArrayType, VotePageStatus } from 'utils/type';
 import { PartVoteFront, PartVoteBack } from 'components/PartVote';
 import { ReactComponent as BackBlack } from 'assets/images/back-black.svg';
 import { ReactComponent as BackWhite } from 'assets/images/back-white.svg';
-import { FEMember, BEMember } from 'utils/constant';
-//나중에 뒤로가기 버튼으로 교체
+import { getPartLeader } from 'api/get';
+import { changePartCandIdToName } from 'utils/changeUtils';
+//left, right 반반씩 화면의 status로 구분함
 export const PartVotePage = () => {
-  //FE, 아니면 partVote 컴포넌트
   const [leftStatus, setLeftStatus] = useState<VotePageStatus>('default');
   const [rightStatus, setRightStatus] = useState<VotePageStatus>('default');
-  const [selectedFEItem, setSelectedFEItem] = useState<number>(-1);
-  const [selectedBEItem, setSelectedBEItem] = useState<number>(-1);
+  //선택된 candidateId state
+  const [selectedCandIdFE, setSelectedCandIdFE] = useState<number>(-1);
+  const [selectedCandIdBE, setSelectedCandIdBE] = useState<number>(-1);
+  //FE, BE 파트장후보 array
+  const [candidateFE, setCandidateFE] = useState<PartCandidateArrayType>([]);
+  const [candidateBE, setCandidateBE] = useState<PartCandidateArrayType>([]);
+  useEffect(() => {
+    const fetchCandidateFE = async () => {
+      const params = {
+        part: 'FRONTEND',
+      };
+      const res: any = await getPartLeader({ params });
+      setCandidateFE(res.data);
+    };
+    const fetchCandidateBE = async () => {
+      const params = {
+        part: 'BACKEND',
+      };
+      const res: any = await getPartLeader({ params });
+      setCandidateBE(res.data);
+    };
+    fetchCandidateFE();
+    fetchCandidateBE();
+  }, []);
   return (
     <PartPageWrapper>
       {leftStatus == 'default' ? (
+        // leftStatus 구분 삼항연산자
         <VoteSelect isLeft={true}>
           {rightStatus !== 'default' ? (
             <BackBlackButton
               onClick={() => {
                 setRightStatus('default');
+                setSelectedCandIdFE(-1);
               }}
             />
           ) : null}
           <Img src={FE} />
-          <PartText>FRONTEND</PartText>
-          {selectedFEItem > -1 ? (
+          <PartText
+            onClick={() => {
+              console.log(candidateFE, selectedCandIdFE);
+            }}
+          >
+            FRONTEND
+          </PartText>
+          {selectedCandIdFE > -1 ? (
+            // 아이템을 골랐을 시, 체크한 후보 이름을 띄우기 위한 삼항연산자
             <>
               <SelectText hover={false}>
-                {FEMember[selectedFEItem].name} 님을 선택하셨습니다.
+                {changePartCandIdToName(selectedCandIdFE, candidateFE)} 님을
+                선택하셨습니다.
               </SelectText>
               <SelectText
                 onClick={() => {
-                  //여기서 post
+                  //여기서 결과 확인 api
                   setRightStatus('result');
-                  setSelectedFEItem(-1);
+                  setSelectedCandIdFE(-1);
                 }}
                 hover={true}
               >
@@ -65,10 +97,12 @@ export const PartVotePage = () => {
           )}
         </VoteSelect>
       ) : (
+        // status가 default가 아니면 backend 투표 혹은 결과 확인
         <PartVoteBack
           status={leftStatus}
-          selectedItem={selectedBEItem}
-          setSelectedItem={setSelectedBEItem}
+          selectedItem={selectedCandIdBE}
+          setSelectedItem={setSelectedCandIdBE}
+          candidate={candidateBE}
         />
       )}
       {rightStatus == 'default' ? (
@@ -77,21 +111,23 @@ export const PartVotePage = () => {
             <BackWhiteButton
               onClick={() => {
                 setLeftStatus('default');
+                setSelectedCandIdBE(-1);
               }}
             />
           ) : null}
           <Img src={BE} />
           <PartText>BACKEND</PartText>
-          {selectedBEItem > -1 ? (
+          {selectedCandIdBE > -1 ? (
             <>
               <SelectText hover={false}>
-                {BEMember[selectedBEItem].name} 님을 선택하셨습니다.
+                {changePartCandIdToName(selectedCandIdBE, candidateBE)} 님을
+                선택하셨습니다.
               </SelectText>
               <SelectText
                 onClick={() => {
                   //여기서 post
                   setLeftStatus('result');
-                  setSelectedBEItem(-1);
+                  setSelectedCandIdBE(-1);
                 }}
                 hover={true}
               >
@@ -122,8 +158,9 @@ export const PartVotePage = () => {
       ) : (
         <PartVoteFront
           status={rightStatus}
-          selectedItem={selectedFEItem}
-          setSelectedItem={setSelectedFEItem}
+          selectedItem={selectedCandIdFE}
+          setSelectedItem={setSelectedCandIdFE}
+          candidate={candidateFE}
         />
       )}
     </PartPageWrapper>
