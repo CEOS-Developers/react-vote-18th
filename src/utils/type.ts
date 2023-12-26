@@ -14,10 +14,24 @@ export type MemberType = {
 };
 export type MemberArrayType = MemberType[];
 
+export type PartCandidateType = {
+  candidateId: number;
+  name: string;
+  team: string;
+};
+export type PartCandidateArrayType = PartCandidateType[];
+
+export type DemoCandidateType = {
+  candidateId: number;
+  team: string;
+};
+export type DemoCandidateArrayType = DemoCandidateType[];
+
 export interface PartVoteProps {
   status: VotePageStatus;
   selectedItem: number;
   setSelectedItem: React.Dispatch<React.SetStateAction<number>>;
+  candidate: PartCandidateArrayType;
 }
 export interface DemoVoteProps {
   status: VotePageStatus;
