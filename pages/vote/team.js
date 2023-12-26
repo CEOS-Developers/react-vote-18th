@@ -9,7 +9,7 @@ import { getTeamList } from "../../api/voteAPI";
 import { useQuery } from "@tanstack/react-query";
 
 export default function VoteTeam() {
-  const [isClicked, setIsClicked] = useState({});
+  const [isClicked, setIsClicked] = useState(0);
 
   const router = useRouter();
 
@@ -41,23 +41,22 @@ export default function VoteTeam() {
       <div className={styles.partList}>
         {teamList.map((list) => (
           <button
+            key={list.id}
             className={`${styles.teamBox} ${
-              isClicked[list.id] ? styles.clicked : ""
+              isClicked == list.id ? styles.clicked : ""
             }`}
-            onClick={() =>
-              setIsClicked({ ...isClicked, [list.id]: !isClicked[list.id] })
-            }
+            onClick={() => setIsClicked(list.id)}
           >
             <div
               className={`${styles.teamName} ${
-                isClicked[list.id] ? styles.clickedText : ""
+                isClicked == list.id ? styles.clickedText : ""
               }`}
             >
               {list.name}
             </div>
             <div
               className={`${styles.teamExp} ${
-                isClicked[list.id] ? styles.clickedText : ""
+                isClicked == list.id ? styles.clickedText : ""
               }`}
             >
               {list.description}

@@ -28,7 +28,7 @@ export const voteLeader = async (info) => {
       Authorization: `Bearer ${info.accessToken}`,
     },
   });
-  //console.log(response.data);
+  console.log(response.data);
   return response.data.data;
 };
 
