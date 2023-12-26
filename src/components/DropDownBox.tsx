@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { styled } from 'styled-components';
+import React, { useState, useRef, useEffect } from "react";
+import { styled } from "styled-components";
 
-import open from '../images/dropdown-open.svg';
-import close from '../images/dropdown-close.svg';
+import open from "../images/dropdown-open.svg";
+import close from "../images/dropdown-close.svg";
 
 //components
-import DropDown from './DropDown';
+import DropDown from "./DropDown";
 
 interface DropDownBoxProps {
   options: string[];
@@ -15,7 +15,8 @@ interface DropDownBoxProps {
 
 const DropDownBox = ({ options, value, onChangeValue }: DropDownBoxProps) => {
   const [isDropdownView, setDropdownView] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState("- - -");
+  const containerRef = useRef<HTMLLabelElement>(null);
 
   const handleClickContainer = () => {
     setDropdownView(!isDropdownView);
@@ -24,12 +25,27 @@ const DropDownBox = ({ options, value, onChangeValue }: DropDownBoxProps) => {
   const handleSelect = (option: string) => {
     setSelectedOption(option);
     onChangeValue(option);
-    console.log(option);
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      containerRef.current &&
+      !containerRef.current.contains(event.target as Node)
+    ) {
+      setDropdownView(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <Wrapper>
-      <Container onClick={handleClickContainer}>
+      <Container ref={containerRef} onClick={handleClickContainer}>
         <div>{selectedOption}</div>
         <Toggle src={isDropdownView ? close : open} />
       </Container>
