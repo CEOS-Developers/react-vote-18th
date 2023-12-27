@@ -10,6 +10,8 @@ import { getPartLeader } from 'api/get';
 import { changePartCandIdToName } from 'utils/changeUtils';
 import { instance } from 'api/axios';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { isLoginAtom } from 'recoil/atom';
 //left, right 반반씩 화면의 status로 구분함
 export const PartVotePage = () => {
   const [leftStatus, setLeftStatus] = useState<VotePageStatus>('default');
@@ -20,6 +22,8 @@ export const PartVotePage = () => {
   //FE, BE 파트장후보 array
   const [candidateFE, setCandidateFE] = useState<PartCandidateArrayType>([]);
   const [candidateBE, setCandidateBE] = useState<PartCandidateArrayType>([]);
+  const loginState = useRecoilValue(isLoginAtom);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchCandidateFE = async () => {
       const params = {
@@ -120,6 +124,11 @@ export const PartVotePage = () => {
             <>
               <SelectText
                 onClick={() => {
+                  if (!loginState) {
+                    alert('투표를 하기 위해서 로그인을 해주세요.');
+                    navigate('/login');
+                    return;
+                  }
                   setRightStatus('vote');
                 }}
                 hover={true}
@@ -178,6 +187,11 @@ export const PartVotePage = () => {
             <>
               <SelectText
                 onClick={() => {
+                  if (!loginState) {
+                    alert('투표를 하기 위해서 로그인을 해주세요.');
+                    navigate('/login');
+                    return;
+                  }
                   setLeftStatus('vote');
                 }}
                 hover={true}
