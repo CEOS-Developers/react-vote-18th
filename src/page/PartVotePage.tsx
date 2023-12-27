@@ -46,15 +46,11 @@ export const PartVotePage = () => {
   }, []);
   const voteFEAfterResult = async () => {
     try {
-      await instance.patch(
-        `/partLeader/${candidateFE[selectedCandIdFE].candidateId}`,
-        null,
-        {
-          headers: {
-            Authorization: localStorage.getItem('accessToken'),
-          },
+      await instance.patch(`/partLeader/${selectedCandIdFE}`, null, {
+        headers: {
+          Authorization: localStorage.getItem('accessToken'),
         },
-      );
+      });
       setRightStatus('result');
       setSelectedCandIdFE(-1);
     } catch (err) {
@@ -65,15 +61,11 @@ export const PartVotePage = () => {
   };
   const voteBEAfterResult = async () => {
     try {
-      await instance.patch(
-        `/partLeader/${candidateBE[selectedCandIdBE].candidateId}`,
-        null,
-        {
-          headers: {
-            Authorization: localStorage.getItem('accessToken'),
-          },
+      await instance.patch(`/partLeader/${selectedCandIdBE}`, null, {
+        headers: {
+          Authorization: localStorage.getItem('accessToken'),
         },
-      );
+      });
       setLeftStatus('result');
       setSelectedCandIdBE(-1);
     } catch (err) {
