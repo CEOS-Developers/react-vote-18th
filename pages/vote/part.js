@@ -52,7 +52,8 @@ export default function votePart() {
   };
   const voteLeaderMutation = useMutation(voteLeader, {
     onSuccess: (data) => {
-      console.log(data);
+      // console.log(data);
+      alert("파트장 투표가 완료되었습니다.");
       router.push({
         pathname: "/result",
         query: {
@@ -66,11 +67,11 @@ export default function votePart() {
     },
   });
 
-  useEffect(() => {
-    console.log(isClicked);
-    console.log(partLeaderId);
-    console.log(accessToken);
-  }, [isClicked, partLeaderId]);
+  // useEffect(() => {
+  //   console.log(isClicked);
+  //   console.log(partLeaderId);
+  //   console.log(accessToken);
+  // }, [isClicked, partLeaderId]);
   return (
     <div className={styles.partContainer}>
       <HeadFunction title="파트장 투표" />
