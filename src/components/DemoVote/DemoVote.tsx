@@ -6,12 +6,17 @@ import { changeValueToTeam } from 'utils/changeUtils';
 import { useEffect, useState } from 'react';
 import { getDemoday } from 'api/get';
 import VoteDemo from 'components/VoteResult/VoteDemo';
+import { useRecoilValue } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+import { isLoginAtom } from 'recoil/atom';
 export const DemoVote = ({
   status,
   selectedItem,
   setSelectedItem,
   candidate,
 }: DemoVoteProps) => {
+  const loginState = useRecoilValue(isLoginAtom);
+  const navigate = useNavigate();
   if (status === 'vote') {
     return (
       <PartVoteFEWrapper>
@@ -20,6 +25,11 @@ export const DemoVote = ({
             <VoteItem
               key={index}
               onClick={() => {
+                if (!loginState) {
+                  alert('투표를 하기 위해서 로그인을 해주세요.');
+                  navigate('/login');
+                  return;
+                }
                 setSelectedItem(value.candidateId);
               }}
               isSelected={value.candidateId === selectedItem}
