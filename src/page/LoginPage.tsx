@@ -168,24 +168,4 @@ const SaveIdInput = styled.input`
   margin-right: 0.4rem;
 `;
 
-const FindSth = styled.div`
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
-const FindID = styled.div`
-  font-size: 1rem;
-`;
-const FindPW = styled.div`
-  font-size: 1rem;
-`;
-
-const DivideLine = styled.div`
-  width: 1px;
-  height: 1rem;
-  background-color: #ccc;
-`;
-
 export default LoginPage;
