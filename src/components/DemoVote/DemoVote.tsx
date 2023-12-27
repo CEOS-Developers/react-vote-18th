@@ -1,29 +1,30 @@
 import styled from 'styled-components';
-import { Team } from 'utils/constant';
-import { PartVoteProps } from 'utils/type';
+import { DemoVoteProps } from 'utils/type';
 import { ReactComponent as Vote } from 'assets/images/vote.svg';
 import { fadeInAnimation } from 'style/Animation';
+import { changeValueToTeam } from 'utils/changeUtils';
 export const DemoVote = ({
   status,
   selectedItem,
   setSelectedItem,
-}: PartVoteProps) => {
+  candidate,
+}: DemoVoteProps) => {
   if (status === 'vote') {
     return (
       <PartVoteFEWrapper>
-        {Object.entries(Team).map(([key, value], index) => {
+        {candidate.map((value, index) => {
           return (
             <VoteItem
-              key={key}
+              key={index}
               onClick={() => {
-                setSelectedItem(index);
+                setSelectedItem(value.candidateId);
               }}
-              isSelected={index === selectedItem}
+              isSelected={value.candidateId === selectedItem}
             >
-              {index === selectedItem ? (
-                <VoteIcon isSelected={index === selectedItem} />
+              {value.candidateId === selectedItem ? (
+                <VoteIcon isSelected={value.candidateId === selectedItem} />
               ) : null}
-              <TeamText>{value}</TeamText>
+              <TeamText>{changeValueToTeam(value.team)}</TeamText>
             </VoteItem>
           );
         })}

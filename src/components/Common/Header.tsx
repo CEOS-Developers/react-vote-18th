@@ -10,7 +10,7 @@ export const Header = () => {
   //hover state
   const [loginHoverd, setLoginHoverd] = useState<boolean>(false);
   const [signupHoverd, setSignupHoverd] = useState<boolean>(false);
-  //로그인 여부, 추후 백 연결, header 로그인 or user 정보
+  //로그인 여부(recoil로 관리), 추후 백 연결, header 로그인 or user 정보
   const [isLogined, setIsLogined] = useState<boolean>(false);
   return (
     <HeaderWrapper>
@@ -24,7 +24,7 @@ export const Header = () => {
       </LogoWrapper>
       <LoginWrapper>
         {isLogined ? (
-          <UserName>✨Shareminde FE 이규호</UserName>
+          <UserName>✨Sharemind FE 이규호</UserName>
         ) : (
           <HeaderRightButton
             onMouseEnter={() => {
