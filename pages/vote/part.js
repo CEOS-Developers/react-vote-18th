@@ -11,7 +11,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { userData } from "../../utils/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-export default function votePart() {
+export default function VotePart() {
   const [isClicked, setIsClicked] = useState(0);
   const router = useRouter();
   const { isFront } = router.query;
