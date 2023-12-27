@@ -82,6 +82,7 @@ export default function votePart() {
         {partLeaderList &&
           partLeaderList.map((list) => (
             <button
+              key={list.id}
               className={`${styles.partBox} ${
                 isClicked == list.id ? styles.clicked : ""
               }`}
