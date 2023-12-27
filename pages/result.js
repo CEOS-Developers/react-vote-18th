@@ -103,6 +103,7 @@ export default function Result() {
         {projectResultList &&
           projectResultList.map((list, index) => (
             <div
+              key={list.id}
               className={styles.resultBox}
               style={{ width: isTeamResult ? 775 : 492 }}
             >
