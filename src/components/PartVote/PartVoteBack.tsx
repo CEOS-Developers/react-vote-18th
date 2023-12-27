@@ -82,7 +82,7 @@ const NameText = styled.div`
   margin-left: 28%;
 `;
 const TeamText = styled.div`
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 300;
   line-height: 1.875rem; /* 150% */
