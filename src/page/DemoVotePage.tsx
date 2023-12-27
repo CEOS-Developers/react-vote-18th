@@ -21,15 +21,11 @@ export const DemoVotePage = () => {
   }, []);
   const voteDemoAfterResult = async () => {
     try {
-      await instance.patch(
-        `/demoday/${candidateDemo[selectedCandId].candidateId}`,
-        null,
-        {
-          headers: {
-            Authorization: localStorage.getItem('accessToken'),
-          },
+      await instance.patch(`/demoday/${selectedCandId}`, null, {
+        headers: {
+          Authorization: localStorage.getItem('accessToken'),
         },
-      );
+      });
       setRightStatus('result');
       setSelectedCandId(-1);
     } catch (err) {

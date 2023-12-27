@@ -24,7 +24,6 @@ export const PartVotePage = () => {
   const [candidateBE, setCandidateBE] = useState<PartCandidateArrayType>([]);
   const loginState = useRecoilValue(isLoginAtom);
   const navigate = useNavigate();
-  const [isConfirmed, setIsConfirmed] = useState(false);
 
   useEffect(() => {
     const fetchCandidateFE = async () => {
