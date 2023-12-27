@@ -8,6 +8,8 @@ import { ReactComponent as BackBlack } from 'assets/images/back-black.svg';
 import { ReactComponent as BackWhite } from 'assets/images/back-white.svg';
 import { getPartLeader } from 'api/get';
 import { changePartCandIdToName } from 'utils/changeUtils';
+import { instance } from 'api/axios';
+import { useNavigate } from 'react-router-dom';
 //left, right 반반씩 화면의 status로 구분함
 export const PartVotePage = () => {
   const [leftStatus, setLeftStatus] = useState<VotePageStatus>('default');
@@ -36,10 +38,47 @@ export const PartVotePage = () => {
     fetchCandidateFE();
     fetchCandidateBE();
   }, []);
+  const voteFEAfterResult = async () => {
+    try {
+      await instance.patch(
+        `/partLeader/${candidateFE[selectedCandIdFE].candidateId}`,
+        null,
+        {
+          headers: {
+            Authorization: localStorage.getItem('accessToken'),
+          },
+        },
+      );
+      setRightStatus('result');
+      setSelectedCandIdFE(-1);
+    } catch (err) {
+      alert('이미 그전에 표를 행사하셨습니다. (취소 불가)');
+      setRightStatus('result');
+      setSelectedCandIdFE(-1);
+    }
+  };
+  const voteBEAfterResult = async () => {
+    try {
+      await instance.patch(
+        `/partLeader/${candidateBE[selectedCandIdBE].candidateId}`,
+        null,
+        {
+          headers: {
+            Authorization: localStorage.getItem('accessToken'),
+          },
+        },
+      );
+      setLeftStatus('result');
+      setSelectedCandIdBE(-1);
+    } catch (err) {
+      alert('이미 그전에 표를 행사하셨습니다. (취소 불가)');
+      setRightStatus('result');
+      setSelectedCandIdBE(-1);
+    }
+  };
   return (
     <PartPageWrapper>
       {leftStatus == 'default' ? (
-        // leftStatus 구분 삼항연산자
         <VoteSelect isLeft={true}>
           {rightStatus !== 'default' ? (
             <BackBlackButton
@@ -67,8 +106,9 @@ export const PartVotePage = () => {
               <SelectText
                 onClick={() => {
                   //여기서 결과 확인 api
-                  setRightStatus('result');
-                  setSelectedCandIdFE(-1);
+                  // setRightStatus('result');
+                  // setSelectedCandIdFE(-1);
+                  voteFEAfterResult();
                 }}
                 hover={true}
               >
@@ -126,8 +166,7 @@ export const PartVotePage = () => {
               <SelectText
                 onClick={() => {
                   //여기서 post
-                  setLeftStatus('result');
-                  setSelectedCandIdBE(-1);
+                  voteBEAfterResult();
                 }}
                 hover={true}
               >

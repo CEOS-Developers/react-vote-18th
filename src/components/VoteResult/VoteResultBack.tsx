@@ -1,79 +1,54 @@
-import React from 'react';
+import { getPartLeader } from 'api/get';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { PartCandidateArrayType } from 'utils/type';
 
 function VoteResultBack() {
+  const [candidateBE, setCandidateBE] = useState<PartCandidateArrayType>([]);
+  useEffect(() => {
+    const fetchCandidateBE = async () => {
+      const params = {
+        part: 'BACKEND',
+      };
+      const res: any = await getPartLeader({ params });
+      setCandidateBE(res.data);
+    };
+    fetchCandidateBE();
+  }, []);
   return (
     <>
       <TopRankBarList>
         <SecondBar>
           <SecondWho>
-            <Name>정인영</Name>
-            <Team>셰어마인드</Team>
-            <Vote>5표</Vote>
+            <Name>{candidateBE[1]?.name}</Name>
+            <Team>{candidateBE[1]?.team}</Team>
           </SecondWho>
           <Number>2</Number>
         </SecondBar>
         <FirstBar>
           <Number>1</Number>
           <FirstWho>
-            <Name>정인영</Name>
-            <Team>셰어마인드</Team>
-            <Vote>5표</Vote>
+            <Name style={{ color: 'gold' }}>{candidateBE[0]?.name}</Name>
+            <Team>{candidateBE[0]?.team}</Team>
           </FirstWho>
         </FirstBar>
         <ThirdBar>
           <Number>3</Number>
           <ThirdWho>
-            <Name>정인영</Name>
-            <Team>셰어마인드</Team>
-            <Vote>5표</Vote>
+            <Name>{candidateBE[2]?.name}</Name>
+            <Team>{candidateBE[2]?.team}</Team>
           </ThirdWho>
         </ThirdBar>
       </TopRankBarList>
 
       <RestRankList>
-        <RankItem>
-          <div className="rank">4</div>
-          <div className="name">정인영</div>
-          <div className="team">셰어마인드</div>
-          <div className="vote">2표</div>
-        </RankItem>
-        <RankItem>
-          <div className="rank">5</div>
-          <div className="name">정인영</div>
-          <div className="team">셰어마인드</div>
-          <div className="vote">2표</div>
-        </RankItem>
-        <RankItem>
-          <div className="rank">6</div>
-          <div className="name">정인영</div>
-          <div className="team">셰어마인드</div>
-          <div className="vote">2표</div>
-        </RankItem>
-        <RankItem>
-          <div className="rank">7</div>
-          <div className="name">정인영</div>
-          <div className="team">셰어마인드</div>
-          <div className="vote">2표</div>
-        </RankItem>{' '}
-        <RankItem>
-          <div className="rank">8</div>
-          <div className="name">정인영</div>
-          <div className="team">셰어마인드</div>
-          <div className="vote">2표</div>
-        </RankItem>{' '}
-        <RankItem>
-          <div className="rank">9</div>
-          <div className="name">정인영</div>
-          <div className="team">셰어마인드</div>
-          <div className="vote">2표</div>
-        </RankItem>{' '}
-        <RankItem>
-          <div className="rank">10</div>
-          <div className="name">정인영</div>
-          <div className="team">셰어마인드</div>
-          <div className="vote">2표</div>
-        </RankItem>
+        {candidateBE.slice(2).map((item, idx) => (
+          <RankItem key={item?.name}>
+            <div className="rank">{idx + 4}</div>
+            <div className="name">{item?.name}</div>
+            <div className="team">{item?.team}</div>
+          </RankItem>
+        ))}
       </RestRankList>
     </>
   );
