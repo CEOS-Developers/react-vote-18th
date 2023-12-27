@@ -47,26 +47,24 @@ export default function votePart() {
   const [partLeaderId, setPartLeaderId] = useState(0);
   const voteCliked = (id) => () => {
     setPartLeaderId(id);
+    console.log("id:", id);
     voteLeaderMutation.mutate({ partLeaderId: id, accessToken: accessToken });
   };
-  const voteLeaderMutation = useMutation(
-    () => voteLeader(partLeaderId, accessToken),
-    {
-      onSuccess: (data) => {
-        console.log(data);
-        router.push({
-          pathname: "/result",
-          query: {
-            isFront: isFront,
-            isTeam: false,
-          },
-        });
-      },
-      onError: (error) => {
-        console.log(error);
-      },
+  const voteLeaderMutation = useMutation(voteLeader, {
+    onSuccess: (data) => {
+      console.log(data);
+      router.push({
+        pathname: "/result",
+        query: {
+          isFront: isFront,
+          isTeam: false,
+        },
+      });
     },
-  );
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   useEffect(() => {
     console.log(isClicked);
