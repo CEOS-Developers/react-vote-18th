@@ -47,7 +47,8 @@ export default function VoteTeam() {
   };
   const voteTeamMutation = useMutation(voteTeam, {
     onSuccess: (data) => {
-      console.log(data);
+      // console.log(data);
+      alert("데모데이 투표가 완료되었습니다.");
       router.push({
         pathname: "/result",
         query: {
