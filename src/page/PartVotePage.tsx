@@ -71,6 +71,7 @@ export const PartVotePage = () => {
       setLeftStatus('result');
       setSelectedCandIdBE(-1);
     } catch (err) {
+      console.log(err);
       alert('이미 그전에 표를 행사하셨습니다. (취소 불가)');
       setLeftStatus('result');
       setSelectedCandIdBE(-1);

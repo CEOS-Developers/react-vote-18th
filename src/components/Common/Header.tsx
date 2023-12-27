@@ -40,7 +40,12 @@ export const Header = () => {
     if (localStorage.getItem('accessToken')) {
       setLoginState(true);
     }
-  }, []);
+  });
+  const deleteLocalStorage = () => {
+    setLoginState(false);
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+  };
   return (
     <HeaderWrapper>
       <LogoWrapper
@@ -83,7 +88,7 @@ export const Header = () => {
             }}
           >
             <GreenBorder isHovered={signupHoverd} />
-            <Text>로그아웃</Text>
+            <Text onClick={deleteLocalStorage}>로그아웃</Text>
           </HeaderRightButton>
         ) : (
           <HeaderRightButton

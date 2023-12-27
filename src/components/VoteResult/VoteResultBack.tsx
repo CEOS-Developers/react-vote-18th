@@ -42,7 +42,7 @@ function VoteResultBack() {
       </TopRankBarList>
 
       <RestRankList>
-        {candidateBE.slice(2).map((item, idx) => (
+        {candidateBE.slice(3).map((item, idx) => (
           <RankItem key={item?.name}>
             <div className="rank">{idx + 4}</div>
             <div className="name">{item?.name}</div>
