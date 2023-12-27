@@ -1,5 +1,5 @@
 // /vote/part 페이지
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HeadFunction from "../../components/HeadFunction";
 import styles from "../../styles/Part.module.css";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 //로그인된 userData 사용
 import { userData } from "../../utils/atom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 export default function votePart() {
   const [isClicked, setIsClicked] = useState(0);
@@ -42,12 +42,12 @@ export default function votePart() {
     },
   );
 
-  const accessToken = userData.accessToken;
-  //console.log(accessToken);
+  const user = useRecoilValue(userData);
+  const accessToken = user.accessToken;
   const [partLeaderId, setPartLeaderId] = useState(0);
   const voteCliked = (id) => () => {
     setPartLeaderId(id);
-    voteLeaderMutation.mutate();
+    voteLeaderMutation.mutate({ partLeaderId: id, accessToken: accessToken });
   };
   const voteLeaderMutation = useMutation(
     () => voteLeader(partLeaderId, accessToken),
@@ -68,6 +68,11 @@ export default function votePart() {
     },
   );
 
+  useEffect(() => {
+    console.log(isClicked);
+    console.log(partLeaderId);
+    console.log(accessToken);
+  }, [isClicked, partLeaderId]);
   return (
     <div className={styles.partContainer}>
       <HeadFunction title="파트장 투표" />
