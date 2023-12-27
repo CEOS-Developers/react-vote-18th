@@ -24,6 +24,8 @@ export const PartVotePage = () => {
   const [candidateBE, setCandidateBE] = useState<PartCandidateArrayType>([]);
   const loginState = useRecoilValue(isLoginAtom);
   const navigate = useNavigate();
+  const [isConfirmed, setIsConfirmed] = useState(false);
+
   useEffect(() => {
     const fetchCandidateFE = async () => {
       const params = {
@@ -113,7 +115,12 @@ export const PartVotePage = () => {
                   //여기서 결과 확인 api
                   // setRightStatus('result');
                   // setSelectedCandIdFE(-1);
-                  voteFEAfterResult();
+                  const result = window.confirm(
+                    '투표를 행사할 수 있는 권리는 한 번이며, 번복이 불가능합니다. \n이대로 진행하시겠습니까?',
+                  );
+                  if (result) {
+                    voteFEAfterResult();
+                  }
                 }}
                 hover={true}
               >
@@ -175,8 +182,15 @@ export const PartVotePage = () => {
               </SelectText>
               <SelectText
                 onClick={() => {
-                  //여기서 post
-                  voteBEAfterResult();
+                  //여기서 결과 확인 api
+                  // setRightStatus('result');
+                  // setSelectedCandIdFE(-1);
+                  const result = window.confirm(
+                    '투표를 행사할 수 있는 권리는 한 번이며, 번복이 불가능합니다. \n이대로 진행하시겠습니까?',
+                  );
+                  if (result) {
+                    voteBEAfterResult();
+                  }
                 }}
                 hover={true}
               >

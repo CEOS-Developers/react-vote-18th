@@ -51,8 +51,15 @@ export const DemoVotePage = () => {
             </SelectText>
             <SelectText
               onClick={() => {
-                //여기서 post
-                voteDemoAfterResult();
+                //여기서 결과 확인 api
+                // setRightStatus('result');
+                // setSelectedCandIdFE(-1);
+                const result = window.confirm(
+                  '투표를 행사할 수 있는 권리는 한 번이며, 번복이 불가능합니다.\n이대로 진행하시겠습니까?',
+                );
+                if (result) {
+                  voteDemoAfterResult();
+                }
               }}
               hover={true}
             >

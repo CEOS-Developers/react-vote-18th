@@ -4,7 +4,7 @@ import Input from 'components/Common/Input';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { isLoginAtom } from 'recoil/atom';
 import styled from 'styled-components';
 
@@ -51,6 +51,12 @@ function LoginPage() {
       setLoginState(true);
       localStorage.setItem('accessToken', res.data.accessToken);
       localStorage.setItem('refreshToken', res.data.refreshToken);
+      if (inputStatus.saveChecked) {
+        setCookie('userEmail', inputStatus.id, { path: '/' });
+      } else {
+        removeCookie('userEmail', { path: '/' });
+      }
+
       navigate('/');
     } catch (err) {
       alert(err);
@@ -86,14 +92,19 @@ function LoginPage() {
 
         <AdditionalSection>
           <SaveIdLabel htmlFor="saveid">
-            <SaveIdInput type="checkbox" id="saveid" />
+            <SaveIdInput
+              type="checkbox"
+              id="saveid"
+              checked={inputStatus.saveChecked}
+              onChange={(e) =>
+                setInputStatsus({
+                  ...inputStatus,
+                  saveChecked: e.target.checked,
+                })
+              }
+            />
             아이디 저장
           </SaveIdLabel>
-          <FindSth>
-            <FindID>아이디 찾기</FindID>
-            <DivideLine />
-            <FindPW>비밀번호 찾기</FindPW>
-          </FindSth>
         </AdditionalSection>
 
         <Button text="로그인" height="3.5rem" onClick={handleLogin} />

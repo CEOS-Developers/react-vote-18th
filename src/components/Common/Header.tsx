@@ -59,7 +59,11 @@ export const Header = () => {
       <LoginWrapper>
         {loginState ? (
           <UserName>
-            ✨{userInfo?.team} {userInfo?.part} {userInfo?.name}
+            ✨{userInfo?.name}
+            <span style={{ fontSize: '0.7rem' }}>
+              {' '}
+              {userInfo?.team} {userInfo?.part}{' '}
+            </span>
           </UserName>
         ) : (
           <HeaderRightButton
