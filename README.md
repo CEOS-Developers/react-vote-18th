@@ -1,46 +1,46 @@
-# react-vote-18th
+# Getting Started with Create React App
 
-## **서론**
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-안녕하세요! 프론트엔드 운영진 권가은입니다 👾 어느덧 마지막 스터디입니다.
+## Available Scripts
 
-이번 스터디는 각 팀의 백엔드 팀원들과 함께 진행하는 **합동 과제**입니다. 
-모던 웹에서 REST API가 주류로 떠오름에 따라 프론트엔드와 백엔드의 구분이 이전보다 명확해졌습니다. 주로 백엔드는 API 서버의 역할을, 프론트엔드는 이를 이용해 사용자에게 UI를 제공하는 역할로 웹이 분화되었습니다. 그 말은 곧, API 없이는 사용자에게 의미있는 서비스를 제공하기 힘들어진다는 것이겠죠. 여러분께서도 차후 팀 프로젝트를 진행하시면서 백엔드 개발자들과 API에 대해 소통할 일이 많아질 것입니다.
+In the project directory, you can run:
 
-따라서 이번 과제는 백엔드 개발자들이 전달해준 `API`를 사용해서 구현해보는 미션입니다. 투표 서비스를 개발해 보는 것인데요. 백엔드 개발자와 함께 클라이언트 사이드에서 API를 조금 더 효율적으로 사용할 수 있는 방법에 대해 고민해 보고, 논의해 보는 시간을 가져 보시기 바랍니다.
+### `npm start`
 
-이번 미션도 화이팅입니다! 🔥
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## **미션**
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-### **미션 목표**
+### `npm test`
 
-- REST API를 통한 서버와의 통신 방법을 이해합니다.
-- async/await, Promise등 JavaScript의 비동기 처리를 이해합니다.
-- API 문서를 통해 백엔드 개발자와 소통하는 방법을 익힙니다.
-- 팀 내의 프론트엔드 개발자와 적절한 역할 분담을 통해 개발 효율을 높이는 방법에 대해 고민합니다.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run build`
 
-### **기한**
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-2023년 12월 27일 수요일
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-### **필수 요건**
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- UI/UX에 대한 감각을 최대한 발휘해 디자인을 적용해 봅니다.
-- `HTTPS`를 통해 서버와 통신합니다.
-- 외의 사항은 [가이드 문서](https://moong23.notion.site/FE-BE-648429b295ac48098e6c999b13771930?pvs=4)를 참고해주세요.
+### `npm run eject`
 
-### **선택 사항**
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-- API Fetch는 어떤 방식을 사용하든 무방합니다 (Fetch API, axios 등)
-- `Promise.then()` 보단 `async/await`를 사용해 보세요. 더 최신 스펙이랍니다.
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## **링크 및 참고자료**
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-- [리액트 API 연동의 기본](https://react.vlpt.us/integrate-api/01-basic.html)
-- [자바스크립트 - 동기(Synchronous)? 비동기(asynchronous)?](https://ljtaek2.tistory.com/142)
-- [async와 await, 비동기를 동기코드 처럼](https://kamang-it.tistory.com/entry/JavaScript11async%EC%99%80-await-%EB%B9%84%EB%8F%99%EA%B8%B0%EB%A5%BC-%EB%8F%99%EA%B8%B0%EC%BD%94%EB%93%9C-%EC%B2%98%EB%9F%BC)
-- [REST API 제대로 알고 사용하기](https://meetup.toast.com/posts/92)
-- [axios란? (feat. Fetch API)](https://velog.io/@shin6403/React-axios%EB%9E%80-feat.-Fetch-API)
-- [Postman, 어렵지 않게 사용하기](https://gngsn.tistory.com/26)
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
