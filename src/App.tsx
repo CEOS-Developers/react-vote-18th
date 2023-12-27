@@ -1,4 +1,5 @@
 import React from 'react';
+import { RecoilRoot } from 'recoil';
 import Router from 'Router';
 import { GlobalStyles } from 'style/GlobalStyle';
 import styled from 'styled-components';
@@ -7,10 +8,12 @@ import { HeaderHeight } from 'utils/constant';
 function App() {
   return (
     <div className="App">
-      <GlobalStyles />
-      <AppWrapper>
-        <Router />
-      </AppWrapper>
+      <RecoilRoot>
+        <GlobalStyles />
+        <AppWrapper>
+          <Router />
+        </AppWrapper>
+      </RecoilRoot>
     </div>
   );
 }

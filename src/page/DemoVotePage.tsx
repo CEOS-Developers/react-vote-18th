@@ -16,7 +16,6 @@ export const DemoVotePage = () => {
       const res: any = await getDemoday();
       setCandidateDemo(res.data);
     };
-
     fetchCandidateDemo();
   }, []);
   return (

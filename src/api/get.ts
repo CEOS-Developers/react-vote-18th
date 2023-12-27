@@ -1,4 +1,4 @@
-import { getInstance } from './axios';
+import { getInstance, instance } from './axios';
 
 //파트장 후보 get
 export const getPartLeader = async (params: any) =>
