@@ -41,6 +41,10 @@ export default function SignUp() {
 
   const handleCheckUsername = (e) => {
     e.preventDefault();
+    if (!formData.username) {
+      alert("아이디를 입력해주세요.");
+      return;
+    }
     checkUsernameMutation.mutate(formData.username);
   };
 
@@ -75,6 +79,14 @@ export default function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+
+    // 비밀번호 입력 로직
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+    if (!passwordRegex.test(formData.password)) {
+      alert("비밀번호는 영어와 숫자의 조합으로 5자 이상이어야 합니다.");
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword)
       alert("비밀번호 확인 붍일치!");
     else if (!idVerified) {
@@ -116,6 +128,7 @@ export default function SignUp() {
             style={{ marginLeft: "10px" }}
             className={styles.buttons}
             onClick={handleCheckUsername}
+            disabled={!formData.username} //id 에 입력이 있을때만 인증 가능
           >
             인증
           </button>
@@ -124,7 +137,7 @@ export default function SignUp() {
           className={styles.inputBox}
           type="password"
           name="password"
-          placeholder="비밀번호"
+          placeholder="비밀번호 [ 영어와 숫자의 조합으로 5자 이상 ]"
           onChange={handleChange}
           value={formData.password}
           required
