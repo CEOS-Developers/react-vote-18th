@@ -101,12 +101,12 @@ export default function Result() {
       </h1>
       <div className={styles.resultList}>
         {projectResultList &&
-          projectResultList.map((list) => (
+          projectResultList.map((list, index) => (
             <div
               className={styles.resultBox}
               style={{ width: isTeamResult ? 775 : 492 }}
             >
-              <div className={styles.numberBox}>{list.id}</div>
+              <div className={styles.numberBox}>{index + 1}</div>
               <div
                 style={{
                   display: "flex",
