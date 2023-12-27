@@ -112,9 +112,9 @@ export default function Home() {
               </>
             </button>
           )}
-          {isPart ? (
+          {/* {isPart ? (
             <button className={styles.resultButton}>결과보기</button>
-          ) : null}
+          ) : null} */}
         </div>
 
         <div className={styles.partBox}>
@@ -135,9 +135,9 @@ export default function Home() {
               </>
             </button>
           )}
-          {isPart ? (
+          {/* {isPart ? (
             <button className={styles.resultButton}>결과보기</button>
-          ) : null}
+          ) : null} */}
         </div>
       </div>
       {isTeam ? (

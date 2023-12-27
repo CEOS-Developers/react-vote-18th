@@ -23,22 +23,31 @@ export const getTeamList = async () => {
 
 //partleader 투표
 export const voteLeader = async (info) => {
-  const response = await client.post(`/api/partleader`, info.id, {
-    headers: {
-      Authorization: `Bearer ${info.accessToken}`,
+  const response = await client.post(
+    `/api/partleader`,
+    { partLeaderId: info.partLeaderId },
+    {
+      headers: {
+        Authorization: `Bearer ${info.accessToken}`,
+      },
     },
-  });
-  //console.log(response.data);
+  );
+  console.log(response.data);
   return response.data.data;
 };
 
 //partleader 투표
 export const voteTeam = async (info) => {
-  const response = await client.post(`/api/project`, info.id, {
-    headers: {
-      Authorization: `Bearer ${info.accessToken}`,
+  const response = await client.post(
+    `/api/project`,
+    { projectId: info.projectId },
+
+    {
+      headers: {
+        Authorization: `Bearer ${info.accessToken}`,
+      },
     },
-  });
+  );
   //console.log(response.data);
   return response.data.data;
 };

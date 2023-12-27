@@ -13,5 +13,7 @@ export const userData = atom({
     part: "part",
     name: "name",
     email: "email",
+    accessToken: "accessToken",
+    refreshToken: "refreshToken",
   },
 });
