@@ -38,11 +38,16 @@ export const voteLeader = async (info) => {
 
 //partleader 투표
 export const voteTeam = async (info) => {
-  const response = await client.post(`/api/project`, info.projectId, {
-    headers: {
-      Authorization: `Bearer ${info.accessToken}`,
+  const response = await client.post(
+    `/api/project`,
+    { projectId: info.projectId },
+
+    {
+      headers: {
+        Authorization: `Bearer ${info.accessToken}`,
+      },
     },
-  });
+  );
   //console.log(response.data);
   return response.data.data;
 };
