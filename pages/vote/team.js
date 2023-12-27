@@ -13,6 +13,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 export default function VoteTeam() {
   const [isClicked, setIsClicked] = useState(0);
+  const [clickedTeamName, setClickedTeamName] = useState("");
 
   const router = useRouter();
 
@@ -39,9 +40,15 @@ export default function VoteTeam() {
 
   const user = useRecoilValue(userData);
   const accessToken = user.accessToken;
+  const userTeamName = user.teamName;
   const [projectId, setProjectId] = useState(0);
-  const voteCliked = (id) => () => {
+  const voteCliked = (id, name) => () => {
+    if (name === userTeamName) {
+      alert("본인이 속한 팀은 투표할 수 없습니다.");
+      return;
+    }
     setProjectId(id);
+    setClickedTeamName(name);
     console.log("id:", id);
     voteTeamMutation.mutate({ projectId: id, accessToken: accessToken });
   };
@@ -73,7 +80,12 @@ export default function VoteTeam() {
             className={`${styles.teamBox} ${
               isClicked == list.id ? styles.clicked : ""
             }`}
-            onClick={() => setIsClicked(list.id)}
+            onClick={() => {
+              setIsClicked(list.id);
+              setClickedTeamName(list.name);
+              if (user.teamName === list.name)
+                alert("본인이 속한 팀은 투표할 수 없습니다");
+            }}
           >
             <div
               className={`${styles.teamName} ${
@@ -93,7 +105,10 @@ export default function VoteTeam() {
         ))}
       </div>
       <div style={{ display: "flex", marginTop: 117 }}>
-        <button className={styles.voteButton} onClick={voteCliked(isClicked)}>
+        <button
+          className={styles.voteButton}
+          onClick={voteCliked(isClicked, clickedTeamName)}
+        >
           투표하기
         </button>
         <button className={styles.resultButton} onClick={goToResult}>
