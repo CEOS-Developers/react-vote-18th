@@ -8,6 +8,10 @@ import { ReactComponent as BackBlack } from 'assets/images/back-black.svg';
 import { ReactComponent as BackWhite } from 'assets/images/back-white.svg';
 import { getPartLeader } from 'api/get';
 import { changePartCandIdToName } from 'utils/changeUtils';
+import { instance } from 'api/axios';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { isLoginAtom } from 'recoil/atom';
 //left, right 반반씩 화면의 status로 구분함
 export const PartVotePage = () => {
   const [leftStatus, setLeftStatus] = useState<VotePageStatus>('default');
@@ -18,6 +22,10 @@ export const PartVotePage = () => {
   //FE, BE 파트장후보 array
   const [candidateFE, setCandidateFE] = useState<PartCandidateArrayType>([]);
   const [candidateBE, setCandidateBE] = useState<PartCandidateArrayType>([]);
+  const loginState = useRecoilValue(isLoginAtom);
+  const navigate = useNavigate();
+  const [isConfirmed, setIsConfirmed] = useState(false);
+
   useEffect(() => {
     const fetchCandidateFE = async () => {
       const params = {
@@ -36,10 +44,48 @@ export const PartVotePage = () => {
     fetchCandidateFE();
     fetchCandidateBE();
   }, []);
+  const voteFEAfterResult = async () => {
+    try {
+      await instance.patch(
+        `/partLeader/${candidateFE[selectedCandIdFE].candidateId}`,
+        null,
+        {
+          headers: {
+            Authorization: localStorage.getItem('accessToken'),
+          },
+        },
+      );
+      setRightStatus('result');
+      setSelectedCandIdFE(-1);
+    } catch (err) {
+      alert('이미 그전에 표를 행사하셨습니다. (취소 불가)');
+      setRightStatus('result');
+      setSelectedCandIdFE(-1);
+    }
+  };
+  const voteBEAfterResult = async () => {
+    try {
+      await instance.patch(
+        `/partLeader/${candidateBE[selectedCandIdBE].candidateId}`,
+        null,
+        {
+          headers: {
+            Authorization: localStorage.getItem('accessToken'),
+          },
+        },
+      );
+      setLeftStatus('result');
+      setSelectedCandIdBE(-1);
+    } catch (err) {
+      console.log(err);
+      alert('이미 그전에 표를 행사하셨습니다. (취소 불가)');
+      setLeftStatus('result');
+      setSelectedCandIdBE(-1);
+    }
+  };
   return (
     <PartPageWrapper>
       {leftStatus == 'default' ? (
-        // leftStatus 구분 삼항연산자
         <VoteSelect isLeft={true}>
           {rightStatus !== 'default' ? (
             <BackBlackButton
@@ -67,8 +113,14 @@ export const PartVotePage = () => {
               <SelectText
                 onClick={() => {
                   //여기서 결과 확인 api
-                  setRightStatus('result');
-                  setSelectedCandIdFE(-1);
+                  // setRightStatus('result');
+                  // setSelectedCandIdFE(-1);
+                  const result = window.confirm(
+                    '투표를 행사할 수 있는 권리는 한 번이며, 번복이 불가능합니다. \n이대로 진행하시겠습니까?',
+                  );
+                  if (result) {
+                    voteFEAfterResult();
+                  }
                 }}
                 hover={true}
               >
@@ -79,6 +131,11 @@ export const PartVotePage = () => {
             <>
               <SelectText
                 onClick={() => {
+                  if (!loginState) {
+                    alert('투표를 하기 위해서 로그인을 해주세요.');
+                    navigate('/login');
+                    return;
+                  }
                   setRightStatus('vote');
                 }}
                 hover={true}
@@ -125,9 +182,15 @@ export const PartVotePage = () => {
               </SelectText>
               <SelectText
                 onClick={() => {
-                  //여기서 post
-                  setLeftStatus('result');
-                  setSelectedCandIdBE(-1);
+                  //여기서 결과 확인 api
+                  // setRightStatus('result');
+                  // setSelectedCandIdFE(-1);
+                  const result = window.confirm(
+                    '투표를 행사할 수 있는 권리는 한 번이며, 번복이 불가능합니다. \n이대로 진행하시겠습니까?',
+                  );
+                  if (result) {
+                    voteBEAfterResult();
+                  }
                 }}
                 hover={true}
               >
@@ -138,6 +201,11 @@ export const PartVotePage = () => {
             <>
               <SelectText
                 onClick={() => {
+                  if (!loginState) {
+                    alert('투표를 하기 위해서 로그인을 해주세요.');
+                    navigate('/login');
+                    return;
+                  }
                   setLeftStatus('vote');
                 }}
                 hover={true}

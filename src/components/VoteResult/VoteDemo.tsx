@@ -1,51 +1,45 @@
-import { getPartLeader } from 'api/get';
+import { getDemoday } from 'api/get';
 import React, { useEffect, useState } from 'react';
+import { DemoCandidateArrayType } from 'utils/type';
 import styled from 'styled-components';
-import { PartCandidateArrayType } from 'utils/type';
-
-function VoteResultBack() {
-  const [candidateBE, setCandidateBE] = useState<PartCandidateArrayType>([]);
+function VoteDemo() {
+  const [candidateDemo, setCandidateDemo] = useState<DemoCandidateArrayType>(
+    [],
+  );
   useEffect(() => {
-    const fetchCandidateBE = async () => {
-      const params = {
-        part: 'BACKEND',
-      };
-      const res: any = await getPartLeader({ params });
-      setCandidateBE(res.data);
+    const fetchCandidateDemo = async () => {
+      const res: any = await getDemoday();
+      setCandidateDemo(res.data);
     };
-    fetchCandidateBE();
+    fetchCandidateDemo();
   }, []);
   return (
     <>
       <TopRankBarList>
         <SecondBar>
           <SecondWho>
-            <Name>{candidateBE[1]?.name}</Name>
-            <Team>{candidateBE[1]?.team}</Team>
+            <Team>{candidateDemo[1]?.team}</Team>
           </SecondWho>
           <Number>2</Number>
         </SecondBar>
         <FirstBar>
           <Number>1</Number>
           <FirstWho>
-            <Name style={{ color: 'gold' }}>{candidateBE[0]?.name}</Name>
-            <Team>{candidateBE[0]?.team}</Team>
+            <Team>{candidateDemo[0]?.team}</Team>
           </FirstWho>
         </FirstBar>
         <ThirdBar>
           <Number>3</Number>
           <ThirdWho>
-            <Name>{candidateBE[2]?.name}</Name>
-            <Team>{candidateBE[2]?.team}</Team>
+            <Team>{candidateDemo[2]?.team}</Team>
           </ThirdWho>
         </ThirdBar>
       </TopRankBarList>
 
       <RestRankList>
-        {candidateBE.slice(3).map((item, idx) => (
-          <RankItem key={item?.name}>
+        {candidateDemo.slice(2).map((item, idx) => (
+          <RankItem key={item?.team}>
             <div className="rank">{idx + 4}</div>
-            <div className="name">{item?.name}</div>
             <div className="team">{item?.team}</div>
           </RankItem>
         ))}
@@ -84,7 +78,7 @@ const Number = styled.div`
 
 const FirstWho = styled.div`
   position: absolute;
-  top: -5.2rem;
+  top: -2.2rem;
   left: 0px;
   display: flex;
   flex-direction: column;
@@ -96,14 +90,10 @@ const SecondWho = styled(FirstWho)``;
 
 const ThirdWho = styled(FirstWho)``;
 
-const Name = styled.div`
-  width: 150px;
-  font-size: 2rem;
-  text-align: center;
-  font-weight: 600;
-`;
 const Team = styled.div`
-  font-size: 12px;
+  width: 150px;
+  font-size: 1.5rem;
+  font-weight: 600;
   text-align: center;
 `;
 const Vote = styled.div`
@@ -121,19 +111,15 @@ const RankItem = styled.div`
   display: flex;
   align-items: center;
   gap: 50px;
-  .rank {
-    font-size: 1.5rem;
-    width: 4rem;
-  }
   .team {
-    font-size: 1rem;
-    font-weight: 300;
-    width: 5rem;
-  }
-  .name {
     font-size: 1.5rem;
     font-weight: 600;
-    width: 4rem;
+    width: 10rem;
+  }
+  .rank {
+    font-size: 1.5rem;
+    width: 6rem;
   }
 `;
-export default VoteResultBack;
+
+export default VoteDemo;

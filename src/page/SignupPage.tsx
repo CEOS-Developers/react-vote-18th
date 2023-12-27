@@ -52,6 +52,7 @@ function SignupPage() {
         alert('error');
       }
     } catch (error) {
+      console.log(error);
       return error;
     }
   };
@@ -86,6 +87,7 @@ function SignupPage() {
         alert('error');
       }
     } catch (error) {
+      console.log(error);
       return error;
     }
   };
@@ -119,6 +121,7 @@ function SignupPage() {
         }
       }
     } catch (error) {
+      console.log(error);
       return error;
     }
   };
@@ -150,6 +153,7 @@ function SignupPage() {
         alert('error');
       }
     } catch (error) {
+      console.log(error);
       return error;
     }
     return;

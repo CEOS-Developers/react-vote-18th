@@ -1,3 +1,4 @@
+import { Part } from './constant';
 export type InputStatus = 'active' | 'default' | 'inactive' | 'error';
 export type VotePageStatus = 'default' | 'vote' | 'result';
 export type GreenBorderType = {
@@ -7,6 +8,13 @@ export type GreenBorderType = {
   left: string;
 };
 export type GreenBorderArrayType = GreenBorderType[];
+
+//로그인 유저 정보
+export type UserInfoType = {
+  name: string;
+  team: string;
+  part: string;
+};
 
 // 파트장 후보 type
 export type PartCandidateType = {

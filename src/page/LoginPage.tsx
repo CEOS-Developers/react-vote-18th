@@ -1,7 +1,11 @@
+import { postLogin } from 'api/post';
 import { Button } from 'components/Common/Button';
 import Input from 'components/Common/Input';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { isLoginAtom } from 'recoil/atom';
 import styled from 'styled-components';
 
 interface InputStatus {
@@ -15,11 +19,11 @@ function LoginPage() {
     password: '',
     saveChecked: false,
   });
-
-  const onChange = (e: any) => {
+  const navigate = useNavigate();
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputStatsus({ ...inputStatus, [e.target.name]: e.target.value });
   };
-
+  const setLoginState = useSetRecoilState<boolean>(isLoginAtom);
   const [cookies, setCookie, removeCookie] = useCookies([
     'userEmail',
     'userPassword',
@@ -36,6 +40,29 @@ function LoginPage() {
       });
     }
   }, []);
+
+  const handleLogin = async () => {
+    const body = {
+      loginId: inputStatus.id,
+      password: inputStatus.password,
+    };
+    try {
+      const res: any = await postLogin(body);
+      setLoginState(true);
+      localStorage.setItem('accessToken', res.data.accessToken);
+      localStorage.setItem('refreshToken', res.data.refreshToken);
+      if (inputStatus.saveChecked) {
+        setCookie('userEmail', inputStatus.id, { path: '/' });
+      } else {
+        removeCookie('userEmail', { path: '/' });
+      }
+
+      navigate('/');
+    } catch (err) {
+      alert('아이디 혹은 비밀번호가 틀렸습니다.');
+      console.log(err);
+    }
+  };
   return (
     <LoginPageWrapper>
       <LoginWrapper>
@@ -66,17 +93,22 @@ function LoginPage() {
 
         <AdditionalSection>
           <SaveIdLabel htmlFor="saveid">
-            <SaveIdInput type="checkbox" id="saveid" />
+            <SaveIdInput
+              type="checkbox"
+              id="saveid"
+              checked={inputStatus.saveChecked}
+              onChange={(e) =>
+                setInputStatsus({
+                  ...inputStatus,
+                  saveChecked: e.target.checked,
+                })
+              }
+            />
             아이디 저장
           </SaveIdLabel>
-          <FindSth>
-            <FindID>아이디 찾기</FindID>
-            <DivideLine />
-            <FindPW>비밀번호 찾기</FindPW>
-          </FindSth>
         </AdditionalSection>
 
-        <Button text="로그인" height="3.5rem" />
+        <Button text="로그인" height="3.5rem" onClick={handleLogin} />
       </LoginWrapper>
     </LoginPageWrapper>
   );

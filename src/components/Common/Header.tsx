@@ -2,8 +2,12 @@ import styled from 'styled-components';
 import ceosLogo from 'assets/images/logo.png';
 import { ReactComponent as Votes } from 'assets/images/votes.svg';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GreenBorder } from 'utils/GreenBorder';
+import { useRecoilState } from 'recoil';
+import { isLoginAtom } from 'recoil/atom';
+import { instance } from 'api/axios';
+import { UserInfoType } from 'utils/type';
 //로그아웃 or 회원가입 나중에 코드 리팩토링
 export const Header = () => {
   const navigate = useNavigate();
@@ -11,7 +15,37 @@ export const Header = () => {
   const [loginHoverd, setLoginHoverd] = useState<boolean>(false);
   const [signupHoverd, setSignupHoverd] = useState<boolean>(false);
   //로그인 여부(recoil로 관리), 추후 백 연결, header 로그인 or user 정보
-  const [isLogined, setIsLogined] = useState<boolean>(false);
+  const [loginState, setLoginState] = useRecoilState<boolean>(isLoginAtom);
+  const [userInfo, setUserInfo] = useState<UserInfoType>();
+  const fetchUserData = async () => {
+    try {
+      const res = await instance.get('/user', {
+        headers: {
+          Authorization: localStorage.getItem('accessToken'),
+        },
+      });
+      setUserInfo(res.data);
+    } catch (err) {
+      const res2 = await instance.post('/auth', {
+        refreshToken: localStorage.getItem('refreshToken'),
+      });
+      localStorage.setItem('accessToken', res2.data.accessToken);
+      localStorage.setItem('refreshToken', res2.data.refreshToken);
+    }
+  };
+  useEffect(() => {
+    if (loginState) {
+      fetchUserData();
+    }
+    if (localStorage.getItem('accessToken')) {
+      setLoginState(true);
+    }
+  });
+  const deleteLocalStorage = () => {
+    setLoginState(false);
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+  };
   return (
     <HeaderWrapper>
       <LogoWrapper
@@ -23,8 +57,14 @@ export const Header = () => {
         <VotesLogo />
       </LogoWrapper>
       <LoginWrapper>
-        {isLogined ? (
-          <UserName>✨Sharemind FE 이규호</UserName>
+        {loginState ? (
+          <UserName>
+            ✨{userInfo?.name}
+            <span style={{ fontSize: '0.7rem' }}>
+              {' '}
+              {userInfo?.team} {userInfo?.part}{' '}
+            </span>
+          </UserName>
         ) : (
           <HeaderRightButton
             onMouseEnter={() => {
@@ -42,7 +82,7 @@ export const Header = () => {
           </HeaderRightButton>
         )}
         <Divider />
-        {isLogined ? (
+        {loginState ? (
           <HeaderRightButton
             onMouseEnter={() => {
               setSignupHoverd(true);
@@ -52,7 +92,7 @@ export const Header = () => {
             }}
           >
             <GreenBorder isHovered={signupHoverd} />
-            <Text>로그아웃</Text>
+            <Text onClick={deleteLocalStorage}>로그아웃</Text>
           </HeaderRightButton>
         ) : (
           <HeaderRightButton

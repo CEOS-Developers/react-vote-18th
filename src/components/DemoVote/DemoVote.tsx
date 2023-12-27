@@ -1,14 +1,22 @@
 import styled from 'styled-components';
-import { DemoVoteProps } from 'utils/type';
+import { DemoCandidateArrayType, DemoVoteProps } from 'utils/type';
 import { ReactComponent as Vote } from 'assets/images/vote.svg';
 import { fadeInAnimation } from 'style/Animation';
 import { changeValueToTeam } from 'utils/changeUtils';
+import { useEffect, useState } from 'react';
+import { getDemoday } from 'api/get';
+import VoteDemo from 'components/VoteResult/VoteDemo';
+import { useRecoilValue } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+import { isLoginAtom } from 'recoil/atom';
 export const DemoVote = ({
   status,
   selectedItem,
   setSelectedItem,
   candidate,
 }: DemoVoteProps) => {
+  const loginState = useRecoilValue(isLoginAtom);
+  const navigate = useNavigate();
   if (status === 'vote') {
     return (
       <PartVoteFEWrapper>
@@ -17,6 +25,11 @@ export const DemoVote = ({
             <VoteItem
               key={index}
               onClick={() => {
+                if (!loginState) {
+                  alert('투표를 하기 위해서 로그인을 해주세요.');
+                  navigate('/login');
+                  return;
+                }
                 setSelectedItem(value.candidateId);
               }}
               isSelected={value.candidateId === selectedItem}
@@ -31,7 +44,11 @@ export const DemoVote = ({
       </PartVoteFEWrapper>
     );
   } else if (status === 'result') {
-    return <PartVoteFEWrapper>결과</PartVoteFEWrapper>;
+    return (
+      <PartVoteFEWrapper>
+        <VoteDemo />
+      </PartVoteFEWrapper>
+    );
   } else {
     return <>error</>;
   }
@@ -49,7 +66,7 @@ const PartVoteFEWrapper = styled.div`
 const VoteIcon = styled(Vote)<{ isSelected: boolean }>`
   position: absolute;
   opacity: ${(props) => (props.isSelected ? '1' : '0')};
-  margin-left: 20%;
+  margin-left: 10%;
   ${(props) => (props.isSelected ? fadeInAnimation : '')};
 `;
 const VoteItem = styled.div<{ isSelected: boolean }>`

@@ -4,7 +4,7 @@ export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-export const getInstance = async (url: string, params?: any) => {
+export const getInstance = async (url: string, params?: any, header?: any) => {
   try {
     const data = await instance.get(url, params);
     return data;

@@ -5,6 +5,7 @@ import { DemoCandidateArrayType, VotePageStatus } from 'utils/type';
 import { DemoVote } from 'components/DemoVote/DemoVote';
 import { getDemoday } from 'api/get';
 import { changeDemoCandIdToName } from 'utils/changeUtils';
+import { instance } from 'api/axios';
 export const DemoVotePage = () => {
   const [rightStatus, setRightStatus] = useState<VotePageStatus>('vote');
   const [selectedCandId, setSelectedCandId] = useState<number>(-1);
@@ -16,9 +17,27 @@ export const DemoVotePage = () => {
       const res: any = await getDemoday();
       setCandidateDemo(res.data);
     };
-
     fetchCandidateDemo();
   }, []);
+  const voteDemoAfterResult = async () => {
+    try {
+      await instance.patch(
+        `/demoday/${candidateDemo[selectedCandId].candidateId}`,
+        null,
+        {
+          headers: {
+            Authorization: localStorage.getItem('accessToken'),
+          },
+        },
+      );
+      setRightStatus('result');
+      setSelectedCandId(-1);
+    } catch (err) {
+      alert('이미 그전에 표를 행사하셨습니다. (취소 불가)');
+      setRightStatus('result');
+      setSelectedCandId(-1);
+    }
+  };
   return (
     <DemoPageWrapper>
       <VoteSelect isLeft={true}>
@@ -32,9 +51,15 @@ export const DemoVotePage = () => {
             </SelectText>
             <SelectText
               onClick={() => {
-                //여기서 post
-                setRightStatus('result');
-                setSelectedCandId(-1);
+                //여기서 결과 확인 api
+                // setRightStatus('result');
+                // setSelectedCandIdFE(-1);
+                const result = window.confirm(
+                  '투표를 행사할 수 있는 권리는 한 번이며, 번복이 불가능합니다.\n이대로 진행하시겠습니까?',
+                );
+                if (result) {
+                  voteDemoAfterResult();
+                }
               }}
               hover={true}
             >
