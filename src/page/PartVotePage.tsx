@@ -72,7 +72,7 @@ export const PartVotePage = () => {
       setSelectedCandIdBE(-1);
     } catch (err) {
       alert('이미 그전에 표를 행사하셨습니다. (취소 불가)');
-      setRightStatus('result');
+      setLeftStatus('result');
       setSelectedCandIdBE(-1);
     }
   };

@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-import { DemoVoteProps } from 'utils/type';
+import { DemoCandidateArrayType, DemoVoteProps } from 'utils/type';
 import { ReactComponent as Vote } from 'assets/images/vote.svg';
 import { fadeInAnimation } from 'style/Animation';
 import { changeValueToTeam } from 'utils/changeUtils';
+import { useEffect, useState } from 'react';
+import { getDemoday } from 'api/get';
+import VoteDemo from 'components/VoteResult/VoteDemo';
 export const DemoVote = ({
   status,
   selectedItem,
@@ -31,7 +34,11 @@ export const DemoVote = ({
       </PartVoteFEWrapper>
     );
   } else if (status === 'result') {
-    return <PartVoteFEWrapper>결과</PartVoteFEWrapper>;
+    return (
+      <PartVoteFEWrapper>
+        <VoteDemo />
+      </PartVoteFEWrapper>
+    );
   } else {
     return <>error</>;
   }
@@ -49,7 +56,7 @@ const PartVoteFEWrapper = styled.div`
 const VoteIcon = styled(Vote)<{ isSelected: boolean }>`
   position: absolute;
   opacity: ${(props) => (props.isSelected ? '1' : '0')};
-  margin-left: 20%;
+  margin-left: 10%;
   ${(props) => (props.isSelected ? fadeInAnimation : '')};
 `;
 const VoteItem = styled.div<{ isSelected: boolean }>`

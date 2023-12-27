@@ -40,7 +40,7 @@ export const Header = () => {
     if (localStorage.getItem('accessToken')) {
       setLoginState(true);
     }
-  });
+  }, []);
   return (
     <HeaderWrapper>
       <LogoWrapper
