@@ -89,6 +89,8 @@ export default function Result() {
     },
   );
 
+  const maxVoteCount = Math.max(...projectResultList.map((list) => list.count));
+
   return (
     <div className={styles.resultContainer}>
       <HeadFunction title="투표 결과" />
@@ -101,28 +103,43 @@ export default function Result() {
       </h1>
       <div className={styles.resultList}>
         {projectResultList &&
-          projectResultList.map((list, index) => (
-            <div
-              key={list.id}
-              className={styles.resultBox}
-              style={{ width: isTeamResult ? 775 : 492 }}
-            >
-              <div className={styles.numberBox}>{index + 1}</div>
+          projectResultList.map((list, index) => {
+            const isMax = list.count === maxVoteCount;
+            return (
               <div
-                style={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  width: isTeamResult ? 560 : 300,
-                }}
+                key={list.id}
+                className={`${styles.resultBox} ${isMax ? styles.win1 : ""}`}
+                style={{ width: isTeamResult ? 775 : 492 }}
               >
-                <div className={styles.name}>{list.name}</div>
-                <div className={styles.teamName}>
-                  {isTeamResult ? list.description : list.projectName}
+                <div
+                  className={`${styles.numberBox} ${isMax ? styles.win2 : ""}`}
+                >
+                  {index + 1}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    width: isTeamResult ? 560 : 300,
+                  }}
+                >
+                  <div className={`${styles.name} ${isMax ? styles.win1 : ""}`}>
+                    {list.name}
+                  </div>
+                  <div
+                    className={`${styles.teamName} ${isMax ? styles.win1 : ""}`}
+                  >
+                    {isTeamResult ? list.description : list.projectName}
+                  </div>
+                </div>
+                <div
+                  className={`${styles.voteNumber} ${isMax ? styles.win1 : ""}`}
+                >
+                  {list.count}
                 </div>
               </div>
-              <div className={styles.voteNumber}>{list.count}</div>
-            </div>
-          ))}
+            );
+          })}
       </div>
       <Link href="/">
         <button className={styles.returnButton}>돌아가기</button>

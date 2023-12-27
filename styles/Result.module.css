@@ -73,6 +73,16 @@
   font-weight: 600;
 }
 
+.win1 {
+  background-color: #384084;
+  color: #fff;
+}
+
+.win2 {
+  color: #384084;
+  background-color: #fff;
+}
+
 .returnButton {
   width: 291px;
   height: 82px;
