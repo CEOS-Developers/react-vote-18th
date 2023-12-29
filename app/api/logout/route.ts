@@ -1,0 +1,25 @@
+import { cookies } from 'next/headers';
+
+export async function POST(request: Request) {
+  const clientReqHeaders = request.headers;
+
+  const serverReqHeaders = new Headers();
+  serverReqHeaders.set('AUTHORIZATION', clientReqHeaders.get('AUTHORIZATION')!);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/users/logout`,
+    {
+      method: 'POST',
+      headers: serverReqHeaders,
+      cache: 'no-cache',
+    }
+  );
+  cookies().delete('user_info');
+  if (res.ok) {
+    return new Response('Logout Success', {
+      status: 200,
+    });
+  } else
+    return new Response('Logout Failed', {
+      status: 400,
+    });
+}
