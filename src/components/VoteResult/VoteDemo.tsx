@@ -25,7 +25,7 @@ function VoteDemo() {
         <FirstBar>
           <Number>1</Number>
           <FirstWho>
-            <Team>{candidateDemo[0]?.team}</Team>
+            <Team style={{ color: 'gold' }}>{candidateDemo[0]?.team}</Team>
           </FirstWho>
         </FirstBar>
         <ThirdBar>
@@ -37,7 +37,7 @@ function VoteDemo() {
       </TopRankBarList>
 
       <RestRankList>
-        {candidateDemo.slice(2).map((item, idx) => (
+        {candidateDemo.slice(3).map((item, idx) => (
           <RankItem key={item?.team}>
             <div className="rank">{idx + 4}</div>
             <div className="team">{item?.team}</div>
